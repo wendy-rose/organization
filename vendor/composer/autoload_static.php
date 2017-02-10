@@ -9,6 +9,7 @@ class ComposerStaticInit72a85f69782724a9ddb9dfee0362af6f
     public static $files = array (
         '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'b9118ae149d0ad190a8abf45189312f2' => __DIR__ . '/..' . '/anerg2046/helper/src/helper.php',
         '1cfd2761b63b0a29ed23657ea394cb2d' => __DIR__ . '/..' . '/topthink/think-captcha/src/helper.php',
         'ddc3cd2a04224f9638c5d0de6a69c7e3' => __DIR__ . '/..' . '/topthink/think-migration/src/config.php',
         'cc56288302d9df745d97c934d6a6e5f0' => __DIR__ . '/..' . '/topthink/think-queue/src/common.php',
@@ -32,6 +33,11 @@ class ComposerStaticInit72a85f69782724a9ddb9dfee0362af6f
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'a' => 
+        array (
+            'anerg\\helper\\' => 13,
+            'anerg\\OAuth2\\' => 13,
         ),
         'W' => 
         array (
@@ -102,6 +108,14 @@ class ComposerStaticInit72a85f69782724a9ddb9dfee0362af6f
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'anerg\\helper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/anerg2046/helper/src',
+        ),
+        'anerg\\OAuth2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/anerg2046/sns_auth/src',
         ),
         'Workerman\\' => 
         array (
