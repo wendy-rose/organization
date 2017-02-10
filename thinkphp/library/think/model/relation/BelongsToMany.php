@@ -54,7 +54,7 @@ class BelongsToMany extends Relation
         $localKey   = $this->localKey;
         $middle     = $this->middle;
         if ($closure) {
-            call_user_func_array($closure, [ & $this->query]);
+            call_user_func_array($closure, [& $this->query]);
         }
         // 关联查询
         $pk                              = $this->parent->getPk();
@@ -174,8 +174,8 @@ class BelongsToMany extends Relation
         return $this->belongsToManyQuery($this->middle, $this->foreignKey, $this->localKey, [
             'pivot.' . $this->localKey => [
                 'exp',
-                '=' . $this->parent->getTable() . '.' . $this->parent->getPk(),
-            ],
+                '=' . $this->parent->getTable() . '.' . $this->parent->getPk()
+            ]
         ])->fetchSql()->count();
     }
 
@@ -271,7 +271,7 @@ class BelongsToMany extends Relation
      * @access public
      * @param mixed $data  数据 可以使用数组、关联模型对象 或者 关联对象的主键
      * @param array $pivot 中间表额外数据
-     * @return array|Pivot
+     * @return int
      * @throws Exception
      */
     public function attach($data, $pivot = [])
@@ -301,12 +301,7 @@ class BelongsToMany extends Relation
             $ids                    = (array) $id;
             foreach ($ids as $id) {
                 $pivot[$this->foreignKey] = $id;
-                $this->query->table($this->middle)->insert($pivot, true);
-                $result[] = new Pivot($pivot, $this->middle);
-            }
-            if (count($result) == 1) {
-                // 返回中间表模型对象
-                $result = $result[0];
+                $result                   = $this->query->table($this->middle)->insert($pivot, true);
             }
             return $result;
         } else {
