@@ -56,13 +56,13 @@ return [
     // +----------------------------------------------------------------------
 
     // 默认模块名
-    'default_module'         => 'user',
+    'default_module'         => 'index',
     // 禁止访问模块
     'deny_module_list'       => ['common'],
     // 默认控制器名
-    'default_controller'     => 'User',
+    'default_controller'     => 'Index',
     // 默认操作名
-    'default_action'         => 'login',
+    'default_action'         => 'index',
     // 默认验证器
     'default_validate'       => '',
     // 默认的空控制器名
@@ -215,7 +215,7 @@ return [
     // +----------------------------------------------------------------------
     'cookie'                 => [
         // cookie 名称前缀
-        'prefix'    => 'ibos',
+        'prefix'    => '',
         // cookie 保存时间
         'expire'    => 0,
         // cookie 保存路径
