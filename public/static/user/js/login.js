@@ -15,10 +15,10 @@ jQuery(function($) {
         }
     });
 
-    $('#email').completer({
-        separator: "@",
-        source: ["qq.com", "163.com", "162.com", "sina.com", "gmail.com", "aliyun.com", "mail.com"]
-    });
+    // $('#email').completer({
+    //     separator: "@",
+    //     source: ["qq.com", "163.com", "162.com", "sina.com", "gmail.com", "aliyun.com", "mail.com"]
+    // });
 
     $('#loginForm').bootstrapValidator({
         message: 'This value is not valid',
@@ -58,7 +58,11 @@ jQuery(function($) {
         var $form = $(e.target);
         var bv = $form.data('bootstrapValidator');
         $.post($form.attr('action'), $form.serialize(), function(result) {
-            console.log(result);
+            if(result.success){
+                window.location = "{:Url('home/index/index')}";
+            }else{
+                ShowTipAlwaysInTheMiddle(result.msg, 'danger');
+            }
         }, 'json');
     });
 });

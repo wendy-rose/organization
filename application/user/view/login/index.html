@@ -78,7 +78,7 @@
 
                                             <div class="clearfix">
                                                 <label class="inline">
-                                                    <input type="checkbox" class="ace"/>
+                                                    <input type="checkbox" class="ace" name="remember" value="1"/>
                                                     <span class="lbl"> 记住</span>
                                                 </label>
 
@@ -142,23 +142,23 @@
 
                                     <div class="space-6"></div>
                                     <p>
-                                        输入您的电子邮件和接收指令
+                                        输入您的电子邮件
                                     </p>
 
-                                    <form>
+                                    <form id="checkForm" class="form-horizontal">
                                         <fieldset>
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="email" class="form-control"
                                                                    placeholder="Email"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
-                                            </label>
-
-                                            <div class="clearfix">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="width-40" placeholder="验证码">
+                                                <button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
                                                     <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                    <span class="bigger-110">发送邮件</span>
+                                                    <span class="bigger-110">发送验证码</span>
                                                 </button>
                                             </div>
                                         </fieldset>

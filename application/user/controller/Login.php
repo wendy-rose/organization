@@ -18,7 +18,8 @@ class Login extends Base
     {
         $email = request()->post('email');
         $password = request()->post('password');
-        $existUser = User::existUser($email, $password);
+        $remember = request()->post('remember');
+        $existUser = User::existUser($email, $password, $remember);
         $lang = $existUser ? Lang::get('Login success') : Lang::get('Email or password is not fail');
         return $this->ajaxReturn($existUser, [], $lang);
     }
