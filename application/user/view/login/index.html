@@ -23,7 +23,8 @@
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="__STATIC__/lib/css/ace-ie.min.css"/>
     <![endif]-->
-    <link rel="stylesheet" href="__STATIC__/lib/css/easyform.css">
+    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="__STATIC__/lib/css/completer.min.css">
     <link rel="stylesheet" href="__STATIC__/user/css/login.css"/>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -55,29 +56,23 @@
 
                                     <div class="space-6"></div>
 
-                                    <form id="loginForm" action="" method="post">
+                                    <form id="loginForm" action="{:Url('user/login/checkout')}" method="post" class="form-horizontal">
                                         <fieldset>
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control" name="email"
-                                                                   id="email" data-easyform="email;"
-                                                                   data-message="邮箱格式不正确"
-                                                                   data-easytip="class:easy-blue;position:top;"
-                                                                   placeholder="邮箱"/>
+                                                                   id="email" placeholder="邮箱"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
-                                            </label>
+                                            </div>
 
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control" name="password"
-                                                                   id="password" data-easyform="length:6 16;"
-                                                                   data-message="密码必须为6—16位"
-                                                                   data-easytip="class:easy-blue;position:bottom;"
-                                                                   placeholder="密码(6-16位)"/>
+                                                                   id="password" placeholder="密码(6-16位)"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
-                                            </label>
+                                            </div>
 
                                             <div class="space"></div>
 
@@ -269,10 +264,11 @@
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
 <!-- Mainly scripts -->
-<script src="__STATIC__/lib/js//jquery-3.1.1.min.js"></script>
+<script src="__STATIC__/lib/js/jquery.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
-<script src="__STATIC__/lib/js/angular.min.js"></script>
-<script src="__STATIC__/lib/js/easyform.js"></script>
+<script src="__STATIC__/index/js/base.js"></script>
+<script src="__STATIC__/lib/js/bootstrapValidator.min.js"></script>
+<script src="__STATIC__/lib/js/completer.min.js"></script>
 <script src="__STATIC__/user/js/login.js"></script>
 </body>
 </html>
