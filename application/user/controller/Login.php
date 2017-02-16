@@ -5,6 +5,7 @@ namespace app\user\controller;
 use app\index\controller\Base;
 use app\user\model\User;
 use think\Lang;
+use think\Session;
 
 class Login extends Base
 {
@@ -21,13 +22,19 @@ class Login extends Base
         $remember = request()->post('remember');
         $existUser = User::existUser($email, $password, $remember);
         $lang = $existUser ? Lang::get('Login success') : Lang::get('Email or password is not fail');
-        return $this->ajaxReturn($existUser, [], $lang);
+        return $this->ajaxReturn($existUser, $lang);
+    }
+
+    public function logon()
+    {
+        Session::delete('userinfo');
+        return $this->ajaxReturn(true, Lang::get('Logon success'));
     }
 
     public function _empty()
     {
         if (request()->isAjax()){
-            $this->ajaxReturn(false, ['islogin' => false], Lang::get('Please login again'));
+            $this->ajaxReturn(false, Lang::get('Please login again'), ['islogin' => false]);
         }else{
             $this->error(Lang::get('Please login again'), url('user/login/index'));
         }

@@ -15,7 +15,7 @@ class Base extends Controller
      * @param array $extra
      * @return array
      */
-    public function ajaxReturn($success = true, $data = [], $msg = '', $extra = [])
+    public function ajaxReturn($success = true, $msg = '', $data = [], $extra = [])
     {
         $lang = empty($msg) ? Lang::get('Call success') : $msg;
         $result = ['success' => $success, 'data' => $data, 'msg' => $lang];

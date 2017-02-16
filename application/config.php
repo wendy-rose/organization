@@ -236,4 +236,15 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //邮件发送配置
+    'email' => [
+        'host' => 'smtp.163.com',
+        'username' => '18826252321@163.com',
+        'password' => 'abc18826252321',
+        'from' => '18826252321@163.com',
+        'fromname' => 'wendy',
+        'charset' => 'utf-8',
+        'wordwrap' => 50,
+    ],
 ];

@@ -56,7 +56,8 @@
 
                                     <div class="space-6"></div>
 
-                                    <form id="loginForm" action="{:Url('user/login/checkout')}" method="post" class="form-horizontal">
+                                    <form id="loginForm" action="{:Url('user/login/checkout')}" method="post"
+                                          class="form-horizontal">
                                         <fieldset>
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
@@ -145,20 +146,42 @@
                                         输入您的电子邮件
                                     </p>
 
-                                    <form id="checkForm" class="form-horizontal">
+                                    <form id="findPassword" class="form-horizontal" action="{:Url('user/info/back')}" method="post">
                                         <fieldset>
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="email" class="form-control"
-                                                                   placeholder="Email"/>
+                                                                   placeholder="邮件" id="checkEmail" name="email"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </div>
-                                            <div>
-                                                <input type="text" class="width-40" placeholder="验证码">
-                                                <button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
+                                            <div class="form-group">
+                                                <input type="text" class="width-40" placeholder="验证码" name="code">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger"
+                                                id="send">
                                                     <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                    <span class="bigger-110">发送验证码</span>
+                                                    <span class="bigger-110" id="sendMsg">发送验证码</span>
+                                                </button>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" class="form-control" placeholder="输入密码(6-16位)"
+                                                           name="pwd"/>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" class="form-control" placeholder="确认密码"
+                                                           name="repwd">
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                        class="width-35 btn btn-info btn-sm  center-block">
+                                                    <i class="ace-icon fa fa-key"></i>
+                                                    <span class="bigger-110">提交</span>
                                                 </button>
                                             </div>
                                         </fieldset>
@@ -266,9 +289,9 @@
 <!-- Mainly scripts -->
 <script src="__STATIC__/lib/js/jquery.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
-<script src="__STATIC__/index/js/base.js"></script>
 <script src="__STATIC__/lib/js/bootstrapValidator.min.js"></script>
-<script src="__STATIC__/lib/js/completer.min.js"></script>
+<script src="__STATIC__/lib/js/jquery.bootstrap-growl.min.js"></script>
+<script src="__STATIC__/index/js/base.js"></script>
 <script src="__STATIC__/user/js/login.js"></script>
 </body>
 </html>

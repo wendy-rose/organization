@@ -4,10 +4,10 @@ namespace app\user\controller;
 
 use think\Controller;
 
-class User extends Controller
+class Info extends Controller
 {
 
-    public function login()
+    public function back()
     {
         return $this->fetch();
     }
