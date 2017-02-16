@@ -28,5 +28,24 @@ class User extends Model
         }
     }
 
-    
+    public static function existEmail($emailAddress)
+    {
+        $email = static::get(['email' => $emailAddress])->value('email');
+        if (empty($email)){
+            return false;
+        }
+        return true;
+    }
+
+    public static function updatePassword($email, $password)
+    {
+        $user = new static();
+        $status = $user->save([
+            'password' => md5($password)
+        ], ['email' => $email,]);
+        if (false !== $status){
+            return true;
+        }
+        return false;
+    }
 }

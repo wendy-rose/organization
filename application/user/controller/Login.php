@@ -31,12 +31,4 @@ class Login extends Base
         return $this->ajaxReturn(true, Lang::get('Logon success'));
     }
 
-    public function _empty()
-    {
-        if (request()->isAjax()){
-            $this->ajaxReturn(false, Lang::get('Please login again'), ['islogin' => false]);
-        }else{
-            $this->error(Lang::get('Please login again'), url('user/login/index'));
-        }
-    }
 }

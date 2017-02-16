@@ -156,7 +156,10 @@
 														</span>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="width-40" placeholder="验证码" name="code">
+                                                <span class="input-icon input-icon-right width-127">
+                                                   <input type="text" class="width-127" placeholder="验证码" name="code">
+                                                    <i class="ace-icon fa fa-qrcode"></i>
+                                                </span>
                                                 <button type="button" class="width-35 pull-right btn btn-sm btn-danger"
                                                 id="send">
                                                     <i class="ace-icon fa fa-lightbulb-o"></i>
@@ -174,12 +177,12 @@
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="password" class="form-control" placeholder="确认密码"
                                                            name="repwd">
-                                                    <i class="ace-icon fa fa-lock"></i>
+                                                    <i class="ace-icon fa fa-retweet"></i>
                                                 </span>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit"
-                                                        class="width-35 btn btn-info btn-sm  center-block">
+                                                        class="width-30 btn btn-danger btn-sm col-center-block">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">提交</span>
                                                 </button>
@@ -208,37 +211,37 @@
                                     <div class="space-6"></div>
                                     <p>填写信息: </p>
 
-                                    <form>
+                                    <form id="registerFrom" class="form-horizontal" action="{:Url('user/info/register')}">
                                         <fieldset>
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="email" class="form-control" placeholder="邮箱"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
-                                            </label>
+                                            </div>
 
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control" placeholder="用户名"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
-                                            </label>
+                                            </div>
 
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control"
-                                                                   placeholder="密码"/>
+                                                                   placeholder="密码(6-16位)"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
-                                            </label>
+                                            </div>
 
-                                            <label class="block clearfix">
+                                            <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control"
                                                                    placeholder="确认密码"/>
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
-                                            </label>
+                                            </div>
 
                                             <label class="block">
                                                 <input type="checkbox" class="ace"/>

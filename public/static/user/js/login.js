@@ -79,7 +79,7 @@ jQuery(function($) {
                 if (result.success){
                     UI.tip(result.msg, 'success');
                     $('#sendMsg').html('已发送');
-                    $('#send').('disabled',"true");
+                    $('#send').attr('disabled',"true");
                 }else {
                     UI.tip(result.msg, 'error');
                 }
@@ -152,5 +152,21 @@ jQuery(function($) {
                 }
             }
         }
+    }).on('success.form.bv', function (e) {
+        e.preventDefault();
+        var $form = $(e.target);
+        var bv = $form.data('bootstrapValidator');
+        $.post($form.attr('action'), $form.serialize(), function(result) {
+            if(result.success){
+                if (!($('#login-box').is('.visible'))){
+                    $('.widget-box.visible').removeClass('visible');
+                    $('#login-box').addClass('visible');
+                    $('#email').val($('#checkEmail').val());
+                    $('#password').val($('#repwd').val());
+                }
+            }else{
+                UI.tip(result.msg, 'error');
+            }
+        }, 'json');
     });
 });

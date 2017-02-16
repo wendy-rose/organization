@@ -21,4 +21,13 @@ class Base extends Controller
         $result = ['success' => $success, 'data' => $data, 'msg' => $lang];
         return empty($extra) ? $result : array_merge($result, $extra);
     }
+
+    public function _empty()
+    {
+        if (request()->isAjax()){
+            $this->ajaxReturn(false, Lang::get('Please login again'), ['islogin' => false]);
+        }else{
+            $this->error(Lang::get('Please login again'), url('user/login/index'));
+        }
+    }
 }
