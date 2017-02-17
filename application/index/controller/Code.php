@@ -10,6 +10,10 @@ use think\Session;
 class Code extends Base
 {
 
+    /**
+     * 发送邮箱验证码
+     * @return array
+     */
     public function Send()
     {
         $address = input('post.email','','trim,strip_tags');
@@ -22,6 +26,10 @@ class Code extends Base
         return $this->ajaxReturn($status, $lang);
     }
 
+    /**
+     * 验证邮箱验证码
+     * @return array
+     */
     public function check()
     {
         $code = input('post.code', 'trim,strtolower');
@@ -30,5 +38,18 @@ class Code extends Base
         }else{
             return ['valid' => false];
         }
+    }
+
+    /**
+     * 验证图片验证码
+     * @return array
+     */
+    public function Captcha()
+    {
+        $captcha = input('post.captcha', 'trim,strtolower');
+        if (captcha_check($captcha)){
+            return ['valid' => true];
+        }
+        return ['valid' => false];
     }
 }

@@ -31,4 +31,8 @@ class Login extends Base
         return $this->ajaxReturn(true, Lang::get('Logon success'));
     }
 
+    public function callback()
+    {
+
+    }
 }

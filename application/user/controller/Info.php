@@ -10,6 +10,10 @@ use think\Session;
 class Info extends Base
 {
 
+    /**
+     * 找回密码
+     * @return array
+     */
     public function back()
     {
         $email = request()->post('email');
@@ -24,13 +28,31 @@ class Info extends Base
             return $this->ajaxReturn(false, Lang::get('Code is error'));
         }else{
             $result = User::updatePassword($email, $repwd);
+            //删除邮箱验证码
+            Session::delete('code');
             $lang = $result ? Lang::get('Update password success') : Lang::get('Update password fail');
             return $this->ajaxReturn($result, $lang);
         }
     }
 
-    public function logon()
+    /**
+     * 判断用户名是否已经存在
+     * @return array
+     */
+    public function ExsitName()
     {
-        echo '退出登录';
+        $username = input('post.username', 'trim,strip_tags');
+        return ['valid' => User::existUserName($username)];
     }
+
+    /**
+     * 判断邮箱是否存在
+     * @return array
+     */
+    public function ExsitEmail()
+    {
+        $email = input('post.email', 'trim,strip_tags');
+        return ['valid' => User::existEmail($email)];
+    }
+
 }

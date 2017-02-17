@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="__STATIC__/lib/css/ace-ie.min.css"/>
     <![endif]-->
     <link rel="stylesheet" href="__STATIC__/lib/css/bootstrapValidator.min.css">
-    <link rel="stylesheet" href="__STATIC__/lib/css/completer.min.css">
+    <link rel="stylesheet" href="__STATIC__/lib/css/xcConfirm.css">
     <link rel="stylesheet" href="__STATIC__/user/css/login.css"/>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -211,18 +211,20 @@
                                     <div class="space-6"></div>
                                     <p>填写信息: </p>
 
-                                    <form id="registerFrom" class="form-horizontal" action="{:Url('user/info/register')}">
+                                    <form id="registerFrom" class="form-horizontal" action="{:Url('user/register/index')}">
                                         <fieldset>
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱"/>
+															<input type="email" class="form-control" placeholder="邮箱"
+                                                            name="email" id="registerEmail"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </div>
 
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名"/>
+															<input type="text" class="form-control" placeholder="用户名"
+                                                            name="username" id="registerName"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </div>
@@ -230,7 +232,8 @@
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control"
-                                                                   placeholder="密码(6-16位)"/>
+                                                                   placeholder="密码(6-16位)" name="password"
+                                                            id="registerPwd"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </div>
@@ -238,28 +241,26 @@
                                             <div class="form-group">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control"
-                                                                   placeholder="确认密码"/>
+                                                                   placeholder="确认密码" name="repassword"
+                                                                   id="registerRepwd"/>
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                                             </div>
-
-                                            <label class="block">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl">
-															接受
-															<a href="#">用户协议</a>
-														</span>
-                                            </label>
-
+                                            <div class="form-group">
+                                                 <span class="input-icon input-icon-right width-127">
+                                                   <input type="text" class="width-127" placeholder="验证码" name="captcha">
+                                                    <i class="ace-icon fa fa-qrcode"></i>
+                                                </span>
+                                                <img class="img-responsive" id="imgCode" src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'"/>
+                                            </div>
                                             <div class="space-24"></div>
-
                                             <div class="clearfix">
                                                 <button type="reset" class="width-30 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
                                                     <span class="bigger-110">重置</span>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="submit"
                                                         class="width-65 pull-right btn btn-sm btn-success">
                                                     <span class="bigger-110">注册</span>
 
@@ -294,6 +295,7 @@
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrapValidator.min.js"></script>
 <script src="__STATIC__/lib/js/jquery.bootstrap-growl.min.js"></script>
+<script src="__STATIC__/lib/js/xcConfirm.js"></script>
 <script src="__STATIC__/index/js/base.js"></script>
 <script src="__STATIC__/user/js/login.js"></script>
 </body>

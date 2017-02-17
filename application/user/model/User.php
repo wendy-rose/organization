@@ -23,7 +23,9 @@ class User extends Model
             return false;
         }else{
             Session::set('userInfo', $user);
-            Cookie::set('remember', $user);
+            if (!empty($remember)){
+                Cookie::set('remember', $user);
+            }
             return true;
         }
     }
@@ -47,5 +49,25 @@ class User extends Model
             return true;
         }
         return false;
+    }
+
+    public static function existUserName($username)
+    {
+        $name = static::get(['username' => $username])->value('username');
+        if (empty($name)){
+            return false;
+        }
+        return true;
+    }
+
+    public static function addUser($userInfo = array())
+    {
+        $user = new static();
+        $result = $user->save(array(
+            'email' => $userInfo['email'],
+            'username' => $userInfo['username'],
+            'password' => md5($userInfo['password'])
+        ));
+        return $result;
     }
 }

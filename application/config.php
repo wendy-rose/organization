@@ -257,12 +257,12 @@ return [
         // 是否画混淆曲线
         'useCurve' => true,
         // 验证码图片高度
-        'imageH'   => 40,
+        'imageH'   => 35,
         // 验证码图片宽度
-        'imageW'   => 100,
+        'imageW'   => 110,
         // 验证码位数
         'length'   => 4,
         // 验证成功后是否重置
-        'reset'    => true
+        'reset'    => false
     ],
 ];
