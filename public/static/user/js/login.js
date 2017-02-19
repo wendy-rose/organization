@@ -271,7 +271,11 @@ jQuery(function($) {
         var bv = $form.data('bootstrapValidator');
         $.post($form.attr('action'), $form.serialize(), function(result) {
             if(result.success){
-                window.location = "{:Url('home/index/index')}";
+                if (!($('#login-box').is('.visible'))){
+                    $('.widget-box.visible').removeClass('visible');
+                    $('#login-box').addClass('visible');
+                }
+                UI.tip('注册成功，请登录');
             }else{
                 UI.tip(result.msg, 'error');
             }

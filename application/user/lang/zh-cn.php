@@ -10,4 +10,6 @@ return [
     'Code is error' => '验证码错误',
     'Update password success' => '更新密码成功',
     'update password fail' => '更新密码失败',
+    'Register success' => '注册成功',
+    'Register fail' => '注册失败',
 ];

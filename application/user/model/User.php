@@ -66,8 +66,9 @@ class User extends Model
         $result = $user->save(array(
             'email' => $userInfo['email'],
             'username' => $userInfo['username'],
-            'password' => md5($userInfo['password'])
+            'password' => md5($userInfo['password']),
+            'status' => 1
         ));
-        return $result;
+        return $result > 0 ? true  : false;
     }
 }
