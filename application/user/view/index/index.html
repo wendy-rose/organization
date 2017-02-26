@@ -69,18 +69,6 @@
                                 <small>江湖少侠</small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">个人</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">活动</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">社团</a>
-                            </div>
-                        </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
@@ -203,7 +191,7 @@
                         <div class="box-body no-padding">
                         <!--个人信息展示和修改-->
                             <div class="row">
-                            
+
                             </div><!-- /.row - inside box -->
                         </div><!-- /.box-body -->
                     </div><!-- /.box -->
@@ -212,9 +200,9 @@
                     <div class="nav-tabs-custom">
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                            <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                            <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+                            <li><a href="#revenue-chart" data-toggle="tab">记录</a></li>
+                            <li class="active"><a href="#sales-chart" data-toggle="tab">积分</a></li>
+                            <li class="pull-left header"><i class="fa fa-inbox"></i> 个人积分</li>
                         </ul>
                         <div class="tab-content no-padding">
                             <!-- Morris chart - Sales -->
@@ -224,64 +212,6 @@
                                  style="position: relative; height: 300px;"></div>
                         </div>
                     </div><!-- /.nav-tabs-custom -->
-
-                    <!-- Calendar -->
-                    <div class="box box-warning">
-                        <div class="box-header">
-                            <i class="fa fa-calendar"></i>
-                            <div class="box-title">Calendar</div>
-
-                            <!-- tools box -->
-                            <div class="pull-right box-tools">
-                                <!-- button with a dropdown -->
-                                <div class="btn-group">
-                                    <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i
-                                            class="fa fa-bars"></i></button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Add new event</a></li>
-                                        <li><a href="#">Clear events</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">View calendar</a></li>
-                                    </ul>
-                                </div>
-                            </div><!-- /. tools -->
-                        </div><!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <!--The calendar -->
-                            <div id="calendar"></div>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
-
-                    <!-- quick email widget -->
-                    <div class="box box-info">
-                        <div class="box-header">
-                            <i class="fa fa-envelope"></i>
-                            <h3 class="box-title">Quick Email</h3>
-                            <!-- tools box -->
-                            <div class="pull-right box-tools">
-                                <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                                        title="Remove"><i class="fa fa-times"></i></button>
-                            </div><!-- /. tools -->
-                        </div>
-                        <div class="box-body">
-                            <form action="#" method="post">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="emailto" placeholder="Email to:"/>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="subject" placeholder="Subject"/>
-                                </div>
-                                <div>
-                                    <textarea class="textarea" placeholder="Message"
-                                              style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="box-footer clearfix">
-                            <button class="pull-right btn btn-default" id="sendEmail">Send <i
-                                    class="fa fa-arrow-circle-right"></i></button>
-                        </div>
-                    </div>
 
                 </section><!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -300,74 +230,16 @@
 
                             <i class="fa fa-map-marker"></i>
                             <h3 class="box-title">
-                                Visitors
+                                个人头像
                             </h3>
                         </div>
                         <div class="box-body no-padding">
-                            <div id="world-map" style="height: 300px;"></div>
-                            <div class="table-responsive">
-                                <!-- .table - Uses sparkline charts-->
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>Country</th>
-                                        <th>Visitors</th>
-                                        <th>Online</th>
-                                        <th>Page Views</th>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">USA</a></td>
-                                        <td>
-                                            <div id="sparkline-1"></div>
-                                        </td>
-                                        <td>209</td>
-                                        <td>239</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">India</a></td>
-                                        <td>
-                                            <div id="sparkline-2"></div>
-                                        </td>
-                                        <td>131</td>
-                                        <td>958</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Britain</a></td>
-                                        <td>
-                                            <div id="sparkline-3"></div>
-                                        </td>
-                                        <td>19</td>
-                                        <td>417</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Brazil</a></td>
-                                        <td>
-                                            <div id="sparkline-4"></div>
-                                        </td>
-                                        <td>109</td>
-                                        <td>476</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">China</a></td>
-                                        <td>
-                                            <div id="sparkline-5"></div>
-                                        </td>
-                                        <td>192</td>
-                                        <td>437</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Australia</a></td>
-                                        <td>
-                                            <div id="sparkline-6"></div>
-                                        </td>
-                                        <td>1709</td>
-                                        <td>947</td>
-                                    </tr>
-                                </table><!-- /.table -->
-                            </div>
+                            <div id="world-map" style="height: 300px;">
+                            	
+                            </div>        
                         </div><!-- /.box-body-->
                         <div class="box-footer">
-                            <button class="btn btn-info"><i class="fa fa-download"></i> Generate PDF</button>
-                            <button class="btn btn-warning"><i class="fa fa-bug"></i> Report Bug</button>
+                            <button class="btn btn-info"><i class="fa fa-upload"></i>上传头像</button>
                         </div>
                     </div>
                     <!-- /.box -->
