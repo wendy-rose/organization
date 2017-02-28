@@ -21,7 +21,8 @@
     <link href="__STATIC__/lib/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
-
+    <!--Dashboard style-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/user/css/dashboard.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -239,7 +240,12 @@
                             </div>        
                         </div><!-- /.box-body-->
                         <div class="box-footer">
-                            <button class="btn btn-info"><i class="fa fa-upload"></i>上传头像</button>
+                            <span class="btn btn-info btn-file">
+                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                            选择图片
+                            <input type="file" name="file" id="value">
+                            </span>
+                            <button class="btn btn-info pull-right"><i class="fa fa-upload"></i>上传头像</button>
                         </div>
                     </div>
                     <!-- /.box -->
