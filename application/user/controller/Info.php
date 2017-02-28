@@ -54,5 +54,15 @@ class Info extends Base
         $email = input('post.email', 'trim,strip_tags');
         return ['valid' => User::existEmail($email)];
     }
-
+    
+    public function Upload()
+    {
+        $file = request()->file('avatar');
+        $info = $file->validate(['size' => 2097152, 'ext' => 'jpg,png,gif'])->move(ROOT_PATH . 'public'. DS . 'uploads');
+        if ($info) {
+            return $this->ajaxReturn(true, '', ['url' => $info->getExtension()]);
+        }else{
+           return $this->ajaxReturn(false, $file->getError());
+        }
+    }
 }
