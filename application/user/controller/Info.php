@@ -60,9 +60,14 @@ class Info extends Base
         $file = request()->file('avatar');
         $info = $file->validate(['size' => 2097152, 'ext' => 'jpg,png,gif'])->move(ROOT_PATH . 'public'. DS . 'uploads');
         if ($info) {
-            return $this->ajaxReturn(true, '', ['url' => $info->getExtension()]);
+            return $this->ajaxReturn(true, '', ['url' => $info->getSaveName()]);
         }else{
            return $this->ajaxReturn(false, $file->getError());
         }
+    }
+
+    public function Avatar()
+    {
+        
     }
 }

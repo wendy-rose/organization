@@ -19,6 +19,8 @@
     <link href="__STATIC__/lib/css/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="__STATIC__/lib/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css"/>
+    <!--Corpper-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/cropper.min.css">
     <!-- Theme style -->
     <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/user/css/user.css">
@@ -234,10 +236,21 @@
                             </h3>
                         </div>
                         <div class="box-body no-padding">
-                            <div id="world-map row" style="height: 300px;">
-                            	<div class="col-md-8" style="border: 1px solid red"></div>
-                                <div class="col-md-4" style="border: 1px solid black"></div>
-                            </div>        
+                        <form action="{:Url('user/info/avatar')}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="avatar_url">
+                        <input type="hidden" name="avatar_data">
+                            <div id="world-map row" style="height: 370px; margin-top: 15px">
+                            	<div class="col-md-8">
+                                    <div class="avatar-wrapper">
+                                    <img src="__STATIC__/lib/img/logo.png" id="test">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="avatar-preview preview-lg"></div>
+                                    <div class="avatar-preview preview-md"></div>
+                                </div>
+                            </div>  
+                        </form>      
                         </div><!-- /.box-body-->
                         <div class="box-footer">
                         <form action="{:Url('user/info/upload')}" enctype="multipart/form-data" method="post" id="upload">
@@ -450,9 +463,10 @@
 <script src="__STATIC__/lib/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="__STATIC__/lib/js/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-<!-- iCheck -->
-<!-- <script src="__STATIC__/lib/js/icheck.min.js" type="text/javascript"></script> -->
+<!--Jquery Form-->
 <script src="__STATIC__/lib/js/jquery.form.js" type="text/javascript"></script>
+<!--Corpper-->
+<script src="__STATIC__/lib/js/cropper.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
 <script src="__STATIC__/index/js/base.js" type="text/javascript"></script>
