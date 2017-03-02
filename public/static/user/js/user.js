@@ -1,7 +1,7 @@
 $(function(){
 	$('#avatar').on('change', function(){
 		$('#upload').ajaxSubmit(function(data){
-            $('#test').attr('src', data.data.url);
+            $('#test').attr('src', '/uploads/' + data.data.url);
 			$('#test').cropper({
 				spectRatio: 1,
 				preview: $('.avatar-preview').selector,
