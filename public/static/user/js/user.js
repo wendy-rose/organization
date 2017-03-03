@@ -1,8 +1,11 @@
 $(function(){
+	//上传图片
 	$('#avatar').on('change', function(){
 		$('#upload').ajaxSubmit(function(data){
-            $('#test').attr('src', '/uploads/' + data.data.url);
-			$('#test').cropper({
+			$('#avatar_url').val('/uploads/' + data.data.url);
+			var image = $('#image');
+            image.attr('src', '/uploads/' + data.data.url);
+			image.cropper({
 				spectRatio: 1,
 				preview: $('.avatar-preview').selector,
 				crop: function(e){
@@ -16,6 +19,13 @@ $(function(){
                     $("input[name=avatar_data]").val(json);
 				}
 			});
+		});
+	});
+
+	//裁剪上传
+	$('#uploadAvatar').click(function() {
+		$('formAvatar').ajaxSubmit(function(data){
+			
 		});
 	});
 });

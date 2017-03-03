@@ -4,6 +4,7 @@ namespace app\user\controller;
 
 use app\index\controller\Base;
 use app\user\model\User;
+use think\Image;
 use think\Lang;
 use think\Session;
 
@@ -68,6 +69,9 @@ class Info extends Base
 
     public function Avatar()
     {
-        
+        $avatar_url = request()->post('avatar_url');
+        $avatar_data = request()->post('avatar_data');
+        $avatar_data = json_decode($avatar_data, true);
+        $image = Image::open($avatar_url);
     }
 }

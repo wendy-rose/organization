@@ -236,13 +236,13 @@
                             </h3>
                         </div>
                         <div class="box-body no-padding">
-                        <form action="{:Url('user/info/avatar')}" method="post" enctype="multipart/form-data">
+                        <form action="{:Url('user/info/avatar')}" method="post" enctype="multipart/form-data" id="formAvatar">
                         <input type="hidden" name="avatar_url">
                         <input type="hidden" name="avatar_data">
                             <div id="world-map row" style="height: 370px; margin-top: 15px">
                             	<div class="col-md-8">
                                     <div class="avatar-wrapper">
-                                    <img src="/uploads/20170302\40f084b32cd9c23887159744daa61590.jpg" id="test">
+                                    <img src="" id="image">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -260,7 +260,7 @@
                                 <input type="file" name="avatar" id="avatar">
                             </span>
                         </form>
-                            <button class="btn btn-info pull-right" style="margin-top: -35px"><i class="fa fa-upload"></i>上传头像</button>
+                            <button class="btn btn-info pull-right" style="margin-top: -35px" id="uploadAvatar"><i class="fa fa-upload"></i>上传头像</button>
                         </div>
                     </div>
                     <!-- /.box -->

@@ -71,4 +71,9 @@ class User extends Model
         ));
         return $result > 0 ? true  : false;
     }
+
+    public function updateAvatar($avatar)
+    {
+        
+    }
 }
