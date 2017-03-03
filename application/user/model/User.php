@@ -9,6 +9,30 @@ use think\Session;
 class User extends Model
 {
 
+    private $uid;
+
+    private $email;
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (Session::has('userInfo')) {
+            $userInfo = Session::get('userInfo');
+            $this->uid = $userInfo['uid'];
+            $this->email = $userInfo['email'];
+        }
+    }
+
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     /**
      * 判断用户是否存在
      * @param string $email 邮箱
@@ -72,8 +96,15 @@ class User extends Model
         return $result > 0 ? true  : false;
     }
 
-    public function updateAvatar($avatar)
+    public static function updateAvatar($avatar, $uid)
     {
-        
+        $user = new static();
+        $status = $user->save([
+            'avatar' => $avatar
+        ], ['uid' => $uid,]);
+        if (false !== $status){
+            return true;
+        }
+        return false;
     }
 }

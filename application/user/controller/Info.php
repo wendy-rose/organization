@@ -72,6 +72,11 @@ class Info extends Base
         $avatar_url = request()->post('avatar_url');
         $avatar_data = request()->post('avatar_data');
         $avatar_data = json_decode($avatar_data, true);
-        $image = Image::open($avatar_url);
+        $uid = (new User())->getUid();
+        $image = Image::open(ROOT_PATH. 'public'. $avatar_url);
+        $imageName = explode('\\', $avatar_url);
+        $save_url = ROOT_PATH. 'public'. DS. 'avatar'. DS . $imageName[1];
+        $corp = $image->crop((int)$avatar_data['width'], (int)$avatar_data['height'], (int)$avatar_data['x'], (int)$avatar_data['y'])->save($save_url);
+
     }
 }
