@@ -1,18 +1,4 @@
-$(function () {
-    var UI = {};
-    UI.tip = function (msg, type) {
-        $.bootstrapGrowl(msg, {
-            ele : msg,
-            type : type,//'info', 'error', 'success'
-            offset : {from:'top', amount:20},
-            align : 'center',
-            width : 'auto',
-            delay : 4000,
-            allow_dismiss: false,
-            stackup_spacing: 10
-        });
-    }
-});
+
 // /tip是提示信息，type：'success'是成功信息，'danger'是失败信息,'info'是普通信息
 function ShowTip(tip, type) {
     var $tip = $('#tip');

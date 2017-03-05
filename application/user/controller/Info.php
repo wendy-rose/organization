@@ -71,12 +71,54 @@ class Info extends Base
     {
         $avatar_url = request()->post('avatar_url');
         $avatar_data = request()->post('avatar_data');
+        if (empty($avatar_url) && empty($avatar_data)) {
+            return $this->ajaxReturn(false, Lang::get('Select picture'));
+        }
         $avatar_data = json_decode($avatar_data, true);
-        $uid = (new User())->getUid();
+        $uid = User::getAttribute('userid');
         $image = Image::open(ROOT_PATH. 'public'. $avatar_url);
         $imageName = explode('\\', $avatar_url);
+        if (!is_dir(ROOT_PATH. 'public'. DS. 'avatar')) {
+            mkdir(ROOT_PATH. 'public'. DS. 'avatar', 777, true);
+        }
         $save_url = ROOT_PATH. 'public'. DS. 'avatar'. DS . $imageName[1];
-        $corp = $image->crop((int)$avatar_data['width'], (int)$avatar_data['height'], (int)$avatar_data['x'], (int)$avatar_data['y'])->save($save_url);
+        $image->crop((int)$avatar_data['width'], (int)$avatar_data['height'], (int)$avatar_data['x'], (int)$avatar_data['y'])->save($save_url);
+        User::updateAvatar('/avatar/'. $imageName[1], $uid);
+        return $this->ajaxReturn(true, Lang::get('Upload avatar success'), ['imgUrl' => '/avatar/'. $imageName[1]]);
+    }
 
+    public function edit()
+    {
+        $email = request()->post('email');
+        $password = request()->post('password');
+        $username = request()->post('username');
+        $captch = request()->post('captch');
+        $params = array();
+        $params['email'] = $email;
+        if (!empty($password)) {
+            if (strlen($password) <6 || strlen($password > 16)) {
+                return $this->ajaxReturn(false, Lang::get('Password length from six to sixteen'));
+            }else{
+                $params['password'] = md5($password);
+            }
+        }
+        if (empty($username)) {
+            return $this->ajaxReturn(false, Lang::get('Username is not empty'));
+        }else{
+            if (User::existUserName($username)) {
+                $params['username'] = $username;
+            }else{
+                return $this->ajaxReturn(false, Lang::get('Username is exist'));
+            }
+        }
+        if (empty($captch)) {
+            return $this->ajaxReturn(false, Lang::get('Captch is not empt'));
+        }else{
+            if (!captcha_check($captch)){
+                return $this->ajaxReturn(false, Lang::get('Captch is fail'));
+            }
+        }
+        $userInfo = User::updateUser($params);
+        return $this->ajaxReturn(true, Lang::get('Update user info success'), $userInfo);
     }
 }

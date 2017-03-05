@@ -27,8 +27,8 @@ class Login extends Base
 
     public function logon()
     {
-        Session::delete('userinfo');
-        return $this->ajaxReturn(true, Lang::get('Logon success'));
+        Session::delete('userInfo');
+        $this->redirect(url('user/login/index'));
     }
 
     public function callback()

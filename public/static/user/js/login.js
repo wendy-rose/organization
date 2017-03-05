@@ -1,5 +1,7 @@
 jQuery(function($) {
-
+     toastr.options = {
+        "timeOut": "1000"
+    };
     //切换找回密码，登录，注册页面
     $(document).on('click', '.toolbar a[data-target]', function(e) {
         e.preventDefault();
@@ -62,9 +64,9 @@ jQuery(function($) {
         var bv = $form.data('bootstrapValidator');
         $.post($form.attr('action'), $form.serialize(), function(result) {
             if(result.success){
-                window.location = "{:Url('home/index/index')}";
+                window.location = "/home/index/index";
             }else{
-                UI.tip(result.msg, 'error');
+                toastr.error(result.msg);
             }
         }, 'json');
     });
@@ -73,17 +75,17 @@ jQuery(function($) {
     $('#send').click(function (e) {
         emailAddress = $('#checkEmail').val();
         if (emailAddress == null){
-            UI.tip('邮箱不能为空', 'error');
+            toastr.error('邮箱不能为空');
         }else if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailAddress)) {
-            UI.tip('邮箱格式错误', 'error');
+            toastr.error('邮箱格式不正确');
         }else {
-            $.post("{:Url('index/code/send')}", {email:emailAddress}, function (result) {
+            $.post("/index/code/send", {email:emailAddress}, function (result) {
                 if (result.success){
-                    UI.tip(result.msg, 'success');
+                    toastr.success(result.msg);
                     $('#sendMsg').html('已发送');
                     $('#send').attr('disabled',"true");
                 }else {
-                    UI.tip(result.msg, 'error');
+                    toastr.error(result.msg);
                 }
             }, 'json');
         }
@@ -168,7 +170,7 @@ jQuery(function($) {
                     $('#password').val($('#repwd').val());
                 }
             }else{
-                UI.tip(result.msg, 'error');
+                toastr.error(result.msg);
             }
         }, 'json');
     });
@@ -192,7 +194,7 @@ jQuery(function($) {
                         message : '邮箱格式错误'
                     },
                     remote : {
-                        url : "{:Url('user/info/exsitemail')}",
+                        url : "/user/info/exsitemail",
                         message : '邮箱已经存在',
                         delay : 2000,
                         type : 'POST'
@@ -206,7 +208,7 @@ jQuery(function($) {
                         message : '用户名不能为空'
                     },
                     remote : {
-                        url : "{:Url('user/info/exsitename')}",
+                        url : "/user/info/exsitname",
                         message : '用户名已经存在',
                         delay : 2000,
                         type : 'POST'
@@ -249,14 +251,9 @@ jQuery(function($) {
                     notEmpty: {
                         message : '验证码不能为空'
                     },
-                    stringLength: {
-                        min: 4,
-                        max: 4,
-                        message: '验证码位数必须为4位'
-                    },
                     threshold : 4,
                     remote : {
-                        url : "{:Url('index/code/captcha')}",
+                        url : "/index/code/captcha",
                         message : '验证码错误',
                         delay : 2000,
                         type : 'POST'
@@ -271,13 +268,10 @@ jQuery(function($) {
         var bv = $form.data('bootstrapValidator');
         $.post($form.attr('action'), $form.serialize(), function(result) {
             if(result.success){
-                if (!($('#login-box').is('.visible'))){
-                    $('.widget-box.visible').removeClass('visible');
-                    $('#login-box').addClass('visible');
-                }
-                UI.tip('注册成功，请登录');
+                window.location = location;
+                toastr.success(result.msg);
             }else{
-                UI.tip(result.msg, 'error');
+                toastr.error(result.msg);
             }
         }, 'json');
     });

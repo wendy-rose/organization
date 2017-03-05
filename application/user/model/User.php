@@ -9,30 +9,6 @@ use think\Session;
 class User extends Model
 {
 
-    private $uid;
-
-    private $email;
-
-    public function __construct()
-    {
-        parent::__construct();
-        if (Session::has('userInfo')) {
-            $userInfo = Session::get('userInfo');
-            $this->uid = $userInfo['uid'];
-            $this->email = $userInfo['email'];
-        }
-    }
-
-    public function getUid()
-    {
-        return $this->uid;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     /**
      * 判断用户是否存在
      * @param string $email 邮箱
@@ -42,25 +18,36 @@ class User extends Model
      */
     public static function existUser($email, $password, $remember = '')
     {
-        $user = static::get(['email' => $email, 'password' => md5($password)]);
-        if (empty($user)){
+        $user  = collection(static::all(['email' => $email, 'password' => md5($password)]))->toArray();
+        if (empty($user[0])){
             return false;
         }else{
-            Session::set('userInfo', $user);
+            Session::set('userInfo', $user[0]);
             if (!empty($remember)){
-                Cookie::set('remember', $user);
+                Cookie::set('remember', $user[0]);
             }
+            self::updateMakeCredit(1, $user[0]['userid']);
+            CreditLog::addCreditLog(1, $user[0]['userid']);
             return true;
         }
     }
 
+    public static function getAttribute($attr)
+    {
+        if (Session::has('userInfo')) {
+            $user = Session::get('userInfo');
+            return isset($user[$attr]) ? $user[$attr] : null;
+        }
+        return null;
+    }
+
     public static function existEmail($emailAddress)
     {
-        $email = static::get(['email' => $emailAddress])->value('email');
+        $email = static::get(['email' => $emailAddress]);
         if (empty($email)){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static function updatePassword($email, $password)
@@ -77,11 +64,11 @@ class User extends Model
 
     public static function existUserName($username)
     {
-        $name = static::get(['username' => $username])->value('username');
+        $name = static::get(['username' => $username]);
         if (empty($name)){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static function addUser($userInfo = array())
@@ -101,10 +88,64 @@ class User extends Model
         $user = new static();
         $status = $user->save([
             'avatar' => $avatar
-        ], ['uid' => $uid,]);
+        ], ['userid' => $uid,]);
         if (false !== $status){
             return true;
         }
         return false;
+    }
+
+    public static function fetchUserByUid($uid)
+    {
+        $user = (new static())->get(['userid' => $uid])->toArray();
+        $creditType = Credit::getCreditByNumber($user['credit']);
+        $high = Credit::getHighByNumber($user['credit']);
+        $user['creditType'] = $creditType;
+        $user['ratio'] = $user['credit']. '/'. $high;
+        $user['sorce'] = intval(($user['credit']/$high) * 100). '%';
+        return $user;
+    }
+
+    public static function updateCredit($credit, $userid)
+    {
+        $user = new static();
+        $userInfo = $user->get(['userid' => $userid]);
+        $user->save(
+            ['credit' => $userInfo['credit'] + $credit],
+            ['userid' => $userid]
+        );
+    }
+
+    /**
+     * @param integer $type 1表示经验，2表示金钱，3表示贡献
+     * @param integer $userid 用户id
+     */
+    public static function updateMakeCredit($type,$userid)
+    {
+        $user = new static();
+        $where = ['userid' => $userid];
+        $userInfo = $user->get($where);
+        if($type == 1) {
+            $update = ['experience' => $userInfo['experience'] + 1];
+        }elseif ($type == 2) {
+            $update = ['money' => $userInfo['money'] + 2];
+        }else {
+            $update = ['donation' => $userInfo['donation'] + 3];
+        }
+        $user->update($update, $where);
+        $userInfomation = new static();
+        $info = $userInfomation->get($where);
+        $credit = $info['experience'] + $info['money'] + $info['donation'];
+        $userInfomation->update(['credit' => $credit], $where);
+    }
+
+    public static function updateUser($params)
+    {
+        $user = new static();
+        $user->update($params, ['email' => $params['email']]);
+        $userInfo = static::get(['email' => $params['email']])->toArray();
+        Session::set('userInfo', $userInfo);
+        Cookie::set('remember', $userInfo);
+        return $userInfo;
     }
 }

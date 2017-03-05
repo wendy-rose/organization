@@ -71,3 +71,34 @@
     float: none;
   }
 }
+
+.credit {
+  font-family: 'Kaushan Script', cursive;
+  font-weight: 500;
+  margin-top: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*.form-control-feedback {
+  left: 0;
+}*/
+
+#editUser input {
+  width: 50%;
+}
+
+#editUser input[name=captch] {
+  margin-left: 134px;
+}
+
+#editUser span {
+  margin-right: 130px;
+}
+
+#editUser img {
+  margin-right: 145px;
+}
+#imgCode:hover{
+  cursor: pointer;
+}
