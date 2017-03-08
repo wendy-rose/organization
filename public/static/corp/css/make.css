@@ -1,0 +1,21 @@
+.has-feedback .form-control-feedback{
+    left:0;
+}
+
+.box-body input[type=text] {
+	padding-left: 27px;
+}
+
+.inputDiv {
+	width: 50%;
+	border-radius: 15px;
+}
+
+.corpDiv {
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
+	margin: 0 auto;
+	border: 1px solid gainsboro;
+	cursor: pointer;
+}
