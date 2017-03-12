@@ -1,26 +1,37 @@
 $(function () {
+    toastr.options = {
+        "timeOut": "1000"
+    };
 
+	var uploadOption = {
+		action: '/corp/index/UploadCorp',
+		name: 'corpImg',
+		autoSubmit: true,
+		onComplete: function(file, response){
+			response = JSON.parse(response);
+			if (response.success) {
+				var image = $('<img src="' + response.thumb + '">');
+	            $('#corpPicture').empty().html(image);
+	            $('input[name=corppic]').val(response.thumb);
+			}else {
+				toastr.warning(response.msg);
+			}
+		}
+	};
+	var oAjaxUpload = new AjaxUpload('#corpPicture', uploadOption);
+
+	$('#uploadAttach').uploadify({
+		'buttonText':'添加附件',
+		'fileObjName':'uploadAttach',
+		'width':80,
+		'queueID':'queue',
+		'fileSizeLimit':'2048KB',
+		'method':'post',
+		'swf':'/static/lib/css/uploadify.swf',
+		'uploader':'/corp/index/UploadAttach',
+		'auto':true,
+		'onUploadSuccess':function(file, data, reponse){
+			
+		}
+	});
 });
-/**
- * 从 file 域获取 本地图片 url
- */
-function getFileUrl(sourceId) {
-    var url;
-    if (navigator.userAgent.indexOf("MSIE") >= 1) { // IE
-        url = document.getElementById(sourceId).value;
-    } else if (navigator.userAgent.indexOf("Firefox") > 0) { // Firefox
-        url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-    } else if (navigator.userAgent.indexOf("Chrome") > 0) { // Chrome
-        url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-    }
-    return url;
-}
-
-
-function uploadPic(id) {
-	console.log(11);
-	var url = getFileUrl(id);
-	console.log(url);
-	var image = $('<img src="' + url + '">');
-	$('#corpPicture').empty().html(image);
-}

@@ -14,20 +14,39 @@ class FileUpload extends Model implements Upload
         $this->file = $file;
     }
 
-    public function upload()
+    public function upload($validate = [])
     {
-        $info = $this->file->move(ROOT_PATH . 'public' . DS . 'uploads');
-        if ($info) {
-            return '/uploads/'. $info->getSaveName();
+        if (empty($validate)) {
+            $info = $this->file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        }else {
+            $info  = $this->file->validate($validate)->move(ROOT_PATH . 'public' . DS . 'uploads');
         }
-        return null;
+        if ($info) {
+            return $this->changeBackslash('/uploads/'. $info->getSaveName());
+        }
+        return $info->get;
     }
 
     public function thumb()
     {
         $image = Image::open($this->file);
-        $imagePath = DS. 'avatar'. DS. md5(time()). $image->type();
+        $imagePath = DS. 'avatar'. DS. md5(time()). '.'. $image->type();
         $image->thumb(120, 120)->save(ROOT_PATH. 'public'. $imagePath);
-        return $imagePath;
+        return $this->changeBackslash($imagePath);
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * 将上传地址\转换成/
+     * @param $str
+     * @return mixed
+     */
+    private function changeBackslash($str)
+    {
+        return str_replace('\\', '/', $str);
     }
 }

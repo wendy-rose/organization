@@ -25,3 +25,17 @@
 	height: 120px;
 	border-radius: 50%;
 }
+
+.attachContent {
+	border:1px solid lightgrey;
+	padding-top: 10px;
+}
+
+#uploadContent label {
+	margin-left: 2%;
+}
+
+#uploadContent span {
+	margin-right: 10%;
+	margin-top: -4%;
+}

@@ -9,6 +9,7 @@ class StringUtil
      * 生成随机长度字符串
      * @param int $len 长度
      * @param string $format 模式
+     * @return string
      */
     public static function getRandPw($len = 6 , $format = 'ALL')
     {
@@ -40,5 +41,15 @@ class StringUtil
             $code .= $chars[$keys[$i]];
         }
         return $code;
+    }
+
+    /**
+     * 将上传地址\转换成/
+     * @param $str
+     * @return mixed
+     */
+    public static function changeBackslash($str)
+    {
+        return str_replace('\\', '/', $str);
     }
 }
