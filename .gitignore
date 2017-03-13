@@ -4,3 +4,4 @@ composer.lock
 thinkphp
 public/uploads/*
 public/avatar/*
+public/attach/*
