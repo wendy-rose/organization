@@ -65,4 +65,11 @@ class Index extends Base
             ));
         }
     }
+
+    public function deleteAttach()
+    {
+        $attachid = request()->post('attachid');
+        Attach::deleteAttach($attachid);
+        return $this->ajaxReturn(true);
+    }
 }

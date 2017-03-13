@@ -18,4 +18,9 @@ class Attach extends Model
         $static->save();
         return $static->attachid;
     }
+
+    public static function deleteAttach($attachid)
+    {
+        static::where('attachid', '=', $attachid)->delete();
+    }
 }

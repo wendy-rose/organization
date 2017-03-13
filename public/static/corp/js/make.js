@@ -19,19 +19,59 @@ $(function () {
 		}
 	};
 	var oAjaxUpload = new AjaxUpload('#corpPicture', uploadOption);
-
+    var attachids = new Array();
+    var corppic = $('input[name=corppic]');
 	$('#uploadAttach').uploadify({
-		'buttonText':'添加附件',
-		'fileObjName':'uploadAttach',
-		'width':80,
-		'queueID':'queue',
-		'fileSizeLimit':'2048KB',
-		'method':'post',
-		'swf':'/static/lib/css/uploadify.swf',
-		'uploader':'/corp/index/UploadAttach',
-		'auto':true,
-		'onUploadSuccess':function(file, data, reponse){
-			
+	    buttonText:'添加附件',
+		fileObjName:'uploadAttach',
+		successTimeout: 0,
+		removeTimeout: 0,
+	    width:80,
+		queueID:'queue',
+		fileSizeLimit:'2048KB',
+		method:'post',
+		swf:'/static/lib/css/uploadify.swf',
+		uploader:'/corp/index/UploadAttach',
+		auto :true,
+		onUploadSuccess:function(file, data, reponse){
+			if (reponse) {
+				data = JSON.parse(data);
+				attachFile = data.data;
+				attachids.push(attachFile.attachid);
+				corppic.val(attachids.join(','));
+			   $('#uploadContent').append(uploadContent(attachFile));
+			}else {
+				console.log(reponse);
+			}
+		},
+	});
+    
+	function uploadContent(data) {
+		content = '<div id="attach'+ data.attachid + '" class="attachContent"><div>'+
+		'<img src="'+ data.icon +'"><label class="text-center"><a href="'+ data.path +'">'+ data.name +'</a></label></div>'+
+		'<span class="glyphicon glyphicon-trash pull-right" aria-hidden="true" onclick="deleteAttach('+ data.attachid +')"></span></div>';
+		return content;
+	}
+});
+
+Array.prototype.removeByValue = function(val){
+	for(var i=0; i<this.length; i++) {
+		if (this[i] == val) {
+			this.splice(i, 1);
+			break;
+		}
+	}
+};
+
+function deleteAttach(attachid) {
+	$.post('/corp/index/deleteAttach', {attachid: attachid}, function(data) {
+		if (data.success) {
+			attachids = $('input[name=corppic]').val();
+			attachIdsArr = attachids.split(",");
+			attachIdsArr.removeByValue(attachid);
+			attachidsStr = (attachIdsArr.length == 0) ? '' : attachIdsArr.join(',');
+			$('input[name=corppic]').val(attachidsStr);
+			$('#attach'+attachid).remove();
 		}
 	});
-});
+}
