@@ -14,7 +14,8 @@ class Index extends Base
     public function make()
     {
         if (request()->isAjax()) {
-
+            $fields = request()->post();
+            var_dump($fields);die;
         }else{
             return $this->fetch();
         }

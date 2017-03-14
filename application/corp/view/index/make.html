@@ -177,7 +177,7 @@
             </div>
             <!-- /.row -->
             <div style="width: 100%;" class="connectedSortable">
-                <div class="center-block box box-body no-padding" style="width: 50%; border: 1px solid black;">
+                <div class="center-block box-body no-padding" style="width: 50%;">
                     <form action="{:Url('corp/index/make')}" method="post" id="makeCorp" name="makeCorp">
                         <div class="form-group has-feedback center-block inputDiv">
                             <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
@@ -203,7 +203,7 @@
                             <p class="text-center" style="color: red;">请点击上传社团图标，宽高不超过120*120，大小不超过2M</p>
                         </div>
                         <div class="form-group center-block">
-                            <textarea class="form-control" rows="7" placeholder="社团简单描述"></textarea>
+                            <textarea class="form-control" rows="7" placeholder="社团简单描述" required="required"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="attach" id="attach">
@@ -213,11 +213,11 @@
                             </div>
                             <div id="queue"></div>
                         </div>
-                        <button type="submit" class=" btn btn-info center-block" id="editSubmit">
-                            <i class="fa fa-edit"></i>
-                                创建
-                        </button>
                     </form>
+                    <button class=" btn btn-info center-block" id="addCorp">
+                        <i class="fa fa-edit"></i>
+                            创建
+                    </button>
                 </div>
             </div>
         </section><!-- /.content -->

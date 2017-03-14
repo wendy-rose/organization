@@ -20,7 +20,7 @@ $(function () {
 	};
 	var oAjaxUpload = new AjaxUpload('#corpPicture', uploadOption);
     var attachids = new Array();
-    var corppic = $('input[name=corppic]');
+    var attach = $('input[name=attach]');
 	$('#uploadAttach').uploadify({
 	    buttonText:'添加附件',
 		fileObjName:'uploadAttach',
@@ -38,7 +38,7 @@ $(function () {
 				data = JSON.parse(data);
 				attachFile = data.data;
 				attachids.push(attachFile.attachid);
-				corppic.val(attachids.join(','));
+				attach.val(attachids.join(','));
 			   $('#uploadContent').append(uploadContent(attachFile));
 			}else {
 				console.log(reponse);
@@ -52,6 +52,13 @@ $(function () {
 		'<span class="glyphicon glyphicon-trash pull-right" aria-hidden="true" onclick="deleteAttach('+ data.attachid +')"></span></div>';
 		return content;
 	}
+
+    $('#addCorp').click(function() {
+    	$('#makeCorp').ajaxSubmit(function(reponse){
+    		console.log(reponse);
+    	});
+    });
+	
 });
 
 Array.prototype.removeByValue = function(val){
