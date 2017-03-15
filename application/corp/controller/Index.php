@@ -6,6 +6,7 @@ use app\index\controller\Base;
 use app\index\model\FileUpload;
 use app\index\util\AttachUtil;
 use app\index\util\StringUtil;
+use app\user\model\User;
 use think\File;
 
 class Index extends Base
@@ -15,7 +16,13 @@ class Index extends Base
     {
         if (request()->isAjax()) {
             $fields = request()->post();
-            var_dump($fields);die;
+            $userid = User::getAttribute('userid');
+            $result = $this->validate($fields, 'Corp');
+            if (true !== $result) {
+                $this->ajaxReturn(false, $result);
+            }else{
+                $fields['createuid'] = $userid;
+            }
         }else{
             return $this->fetch();
         }
