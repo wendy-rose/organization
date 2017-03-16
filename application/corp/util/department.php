@@ -5,6 +5,7 @@ class department
 {
 
     private $department;
+
     public static function createDepartment($cid)
     {
 
