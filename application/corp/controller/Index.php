@@ -80,4 +80,24 @@ class Index extends Base
         Attach::deleteAttach($attachid);
         return $this->ajaxReturn(true);
     }
+
+    public function getUserList()
+    {
+        $users = [];
+        for ($i=0;$i<10;$i++) {
+            $users[] = [
+                'id' => $i+1,
+                'username' => '小黄人',
+                'dept' => '数学辅导队',
+                'position' => '普通社员',
+                'phone' => '12345678901',
+                'email' => '1104777947@qq.com'
+            ];
+        }
+        $data['draw'] = !empty($_REQUEST['draw']) ?  $_REQUEST['draw'] : 1;
+        $data['recordsTotal'] = 20;
+        $data['recordsFiltered'] = 20;
+        $data['data'] = $users;
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);exit();
+    }
 }
