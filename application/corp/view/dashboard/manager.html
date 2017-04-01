@@ -196,7 +196,7 @@
                             <ul id="tree" class="ztree"></ul>
                         </div>
                         <div class="col-md-9">
-                            <div class="table-responsive" id="deptTreeUser">
+                            <div class="table-responsive" id="deptTreeUser" style="margin-top: -7px;">
                                 <table id="DataTable" class="display table table-striped table-bordered text-center">
                                     <thead>
                                         <tr>
@@ -212,7 +212,7 @@
                                 </table>
                             </div>
                             <!--新增编辑管理部门人员-->
-                            <div id="deptUser" style="border: 1px solid gainsboro" class="visible-md">
+                            <div id="deptUser" style="border: 1px solid gainsboro" class="hidden">
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <input type="hidden" name="userpic">
@@ -223,14 +223,14 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="username" class="col-md-2 control-label">姓名:</label>
+                                        <label for="username" class="col-md-2 control-label">姓名</label>
                                         <div class="col-md-4">
                                             <input type="text" name="username" id="username" class="form-control" required="required">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="dept" class="col-md-2 control-label">部门:</label>
+                                        <label for="dept" class="col-md-2 control-label">部门</label>
                                         <div class="col-md-4">
                                             <select class="form-control" required="required" name="dept" id="dept">
                                                 <option value="1">数学辅导队</option>
@@ -243,7 +243,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="position" class="col-md-2 control-label">职位:</label>
+                                        <label for="position" class="col-md-2 control-label">职位</label>
                                         <div class="col-md-4">
                                             <select class="form-control" required="required" name="position" id="position">
                                                 <option value="1">会长</option>
@@ -255,21 +255,21 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="phone" class="col-md-2 control-label">手机号:</label>
+                                        <label for="phone" class="col-md-2 control-label">手机号</label>
                                         <div class="col-md-4">
                                             <input type="text" name="phone" id="phone" class="form-control" required="required">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="email" class="col-md-2 control-label">邮箱:</label>
+                                        <label for="email" class="col-md-2 control-label">邮箱</label>
                                         <div class="col-md-4">
                                             <input type="email" name="email" id="email" class="form-control" required="required">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-2"></div>
-                                        <label for="remark" class="col-md-2 control-label">备注:</label>
+                                        <label for="remark" class="col-md-2 control-label">备注</label>
                                         <div class="col-md-4">
                                             <textarea class="form-control" rows="4" name="remark" id="remark"></textarea>
                                         </div>

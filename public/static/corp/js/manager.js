@@ -70,7 +70,6 @@ $(function(){
     var table = $('#DataTable').DataTable({
     	"processing": true,		//显示加载信息
         "serverSide": true,		//开启服务器模式
-        "searching": true,		//开启搜索功能
         "ordering": false,      //关闭排序
         "bLengthChange": false, //关闭可选长度
         "info": false, //关闭分页信息
@@ -118,7 +117,7 @@ $(function(){
 	        	"targets": 6, //改写哪一列
 	        	"serchable":false,
 	        	"render": function(data, type, row, meta){
-	        		return "<button class='btn btn-primary' onclick=edit("+row.id+")>修改</button>";
+	        		return "<button class='btn btn-primary' onclick=editUser("+row.id+")>修改</button>";
 	        	}
 	        }
 	    ]
@@ -143,12 +142,17 @@ $(function(){
 	var oAjaxUpload = new AjaxUpload('#userpic', uploadOption);
 
 	$('#addDeptUser').click(function(event) {
-		$('#deptUser').removeClass('visible-md');
-		$('#deptTreeUser').addClass('visible-md');
+		$('#deptUser').removeClass('hidden');
+		$('#deptTreeUser').addClass('hidden');
 	});
 
 	$('#addOrEditUser').click(function(event) {
-		$('#deptUser').addClass('visible-md');
-		$('#deptTreeUser').removeClass('visible-md');
+		$('#deptUser').addClass('hidden');
+		$('#deptTreeUser').removeClass('hidden');
 	});
 });
+function editUser(userid) {
+	$('#deptUser').removeClass('hidden');
+	$('#deptTreeUser').addClass('hidden');
+	//ajax显示社员信息
+}
