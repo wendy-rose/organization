@@ -7,28 +7,10 @@
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css"/>
-
-    <!-- text fonts -->
     <link rel="stylesheet" href="__STATIC__/lib/fonts/fonts.googleapis.com.css"/>
-
-    <!-- ace styles & button-->
-    <!-- <link rel="stylesheet" href="__STATIC__/lib/css/ace.min.css"/> -->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/awesome-bootstrap-checkbox.css">
     <link rel="stylesheet" href="__STATIC__/lib/css/button.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__STASTIC__/lib/css/ace-part2.min.css"/>
-    <![endif]-->
-    <!-- <link rel="stylesheet" href="__STATIC__/lib/css/ace-rtl.min.css"/> -->
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__STATIC__/lib/css/ace-ie.min.css"/>
-    <![endif]-->
     <link rel="stylesheet" href="__STATIC__/home/css/style.css"/>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="__STATIC__/lib/js/html5shiv.min.js"></script>
-    <script src="__STATIC__/lib/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,16 +74,38 @@
     <a class="carousel-control right" href="#myCarousel" 
         data-slide="next">&rsaquo;
     </a>
-</div>
+    </div>
+    <div>
+        <form action="#" method="post" class="form-horizontal" role="form">
+            <div class="checkbox checkbox-success checkbox-inline">
+                <input type="radio" name="status" value="1" id="radio1">
+                <label for="radio1">
+                    测试
+                </label>
+            </div>
+            <div class="checkbox checkbox-success checkbox-inline">
+                <input type="radio" name="status" value="1" id="radio2">
+                <label for="radio2">
+                    测试
+                </label>
+            </div>
+        </form>
+    </div>
     <div id="activity">     
     </div>
     <script id="actTemplate" type="text/x-jquery-tmpl">
-
+    
     </script>
 </div>
 <script src="__STATIC__/lib/js/jquery.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
 <script src="__STATIC__/lib/js/jquery.tmpl.min.js"></script>
 <script src="__STATIC__/index/js/base.js"></script>
+<script type="text/javascript">
+    function changeState(el) {
+        if (el.readOnly) el.checked=el.readOnly=false;
+        else if (!el.checked) el.readOnly=el.indeterminate=true;
+    }
+</script>
 </body>
 </html>
