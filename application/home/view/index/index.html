@@ -75,19 +75,61 @@
         data-slide="next">&rsaquo;
     </a>
     </div>
-    <div>
+    <div style="margin-top: 5px;">
         <form action="#" method="post" class="form-horizontal" role="form">
-            <div class="checkbox checkbox-success checkbox-inline">
-                <input type="radio" name="status" value="1" id="radio1">
-                <label for="radio1">
-                    测试
-                </label>
+            <div class="form-group" style="margin-left: -37%">
+                <label class="control-label">活动类型：</label>
+                 <div class="radio radio-info radio-inline">
+                    <input type="radio" name="status" value="-1" id="status-1" checked="checked">
+                    <label for="status-1">不限</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="status" value="1" id="status1">
+                    <label for="status1">体育竞技</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="status" value="2" id="status2">
+                    <label for="status2">专业竞赛</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="status" value="3" id="status3">
+                    <label for="status3">技能拓展</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="status" value="4" id="status4">
+                    <label for="status4">娱乐活动</label>
+                </div>
             </div>
-            <div class="checkbox checkbox-success checkbox-inline">
-                <input type="radio" name="status" value="1" id="radio2">
-                <label for="radio2">
-                    测试
-                </label>
+             <div class="form-group" style="margin-left: -51.5%">
+                <label class="control-label">活动时间：</label>
+                 <div class="radio radio-info radio-inline">
+                    <input type="radio" name="time" value="-1" id="time-1" checked="checked">
+                    <label for="time-1">不限</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="time" value="1" id="time1">
+                    <label for="time1">今天</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="time" value="2" id="time2">
+                    <label for="time2">昨天</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="time" value="3" id="time3">
+                    <label for="time3">本周</label>
+                </div>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" name="time" value="4" id="time4">
+                    <label for="time4">上周</label>
+                </div>
+            </div>
+            <div class="form-group has-feedback" style="margin-left: -8%;">
+                <label class="control-label col-md-2">搜索标题：</label>
+                <div class="col-md-3" style="margin-left: -203px;">
+                    <span class="glyphicon glyphicon-search form-control-feedback">
+                    </span>
+                    <input type="text" name="search" class="form-control" placeholder="输入标题">
+                </div>
             </div>
         </form>
     </div>
