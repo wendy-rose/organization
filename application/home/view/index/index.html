@@ -123,12 +123,16 @@
                     <label for="time4">上周</label>
                 </div>
             </div>
-            <div class="form-group has-feedback" style="margin-left: -8%;">
+            <div class="form-group has-feedback" style="margin-left: -8.3%;">
                 <label class="control-label col-md-2">搜索标题：</label>
-                <div class="col-md-3" style="margin-left: -203px;">
-                    <span class="glyphicon glyphicon-search form-control-feedback">
+                <div class="col-md-3 input-group" style="margin-left: -20px;">
+                   <!--  <span class="glyphicon glyphicon-search form-control-feedback" id="search">
+                    </span> -->
+                    <input type="text" name="title" class="form-control" placeholder="输入标题">
+                    <span class="input-group-btn">
+                        <button name='seach' type="button" id='search-btn' class="btn btn-default"><i
+                                        class="fa fa-search"></i></button>
                     </span>
-                    <input type="text" name="search" class="form-control" placeholder="输入标题">
                 </div>
             </div>
         </form>
@@ -148,6 +152,9 @@
         if (el.readOnly) el.checked=el.readOnly=false;
         else if (!el.checked) el.readOnly=el.indeterminate=true;
     }
+    $('#search-btn,input[name=status],input[name=time]').click(function(event) {
+        console.log('a');
+    });
 </script>
 </body>
 </html>
