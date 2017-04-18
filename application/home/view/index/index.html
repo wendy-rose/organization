@@ -126,8 +126,6 @@
             <div class="form-group has-feedback" style="margin-left: -8.3%;">
                 <label class="control-label col-md-2">搜索标题：</label>
                 <div class="col-md-3 input-group" style="margin-left: -20px;">
-                   <!--  <span class="glyphicon glyphicon-search form-control-feedback" id="search">
-                    </span> -->
                     <input type="text" name="title" class="form-control" placeholder="输入标题">
                     <span class="input-group-btn">
                         <button name='seach' type="button" id='search-btn' class="btn btn-default"><i
@@ -137,15 +135,33 @@
             </div>
         </form>
     </div>
-    <div id="activity">     
+    <div id="activity" style="margin-top: -10px;">
+        <ul class="list-group">
+           <li style="height: 100px;margin: 0px;padding: 0px;" class="list-group-item">
+              <img src="__STATIC__/lib/img/act.jpg" class="pull-left img-responsive img-rounded" style="height: 97px;width: 15%;" ondragstart="return false;">
+              <div class="pull-left" style="margin-left: 10px;width: 30%;">
+                  <p style="font-size: 16px;text-align: left;">趣味数学</p>
+                  <p style="font-size: 16px;text-align: left;">计算科学学院青协</p>
+                  <p style="font-size: 16px;text-align: left;">截止报名:2017-04-18</p>
+              </div>
+              <div class="pull-right" style="margin-right: 5%;">
+                  <button class="btn btn-info btn-sm">报名</button>
+                  <p>
+                      <i class="fa fa-heart"></i>
+                  </p>
+              </div>
+           </li>
+        </ul>    
     </div>
     <script id="actTemplate" type="text/x-jquery-tmpl">
     
     </script>
+    <div id="page" class="pull-right"></div>
 </div>
 <script src="__STATIC__/lib/js/jquery.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
 <script src="__STATIC__/lib/js/jquery.tmpl.min.js"></script>
+<script src="__STATIC__/lib/js/laypage.js"></script>
 <script src="__STATIC__/index/js/base.js"></script>
 <script type="text/javascript">
     function changeState(el) {
@@ -153,8 +169,28 @@
         else if (!el.checked) el.readOnly=el.indeterminate=true;
     }
     $('#search-btn,input[name=status],input[name=time]').click(function(event) {
-        console.log('a');
+        ajaxPage(1);
     });
+    function ajaxPage(curr) {
+        var status = $('input[name=status]:checked').val();
+        var time = $('input[name=time]:checked').val();
+        var title = $('input[name=title]').val();
+        $.getJSON('/corp/activity/index', 
+            {page: curr, status: status, time: time, title: title}, 
+            function(res) {
+                laypage({
+                    cont: 'page',
+                    pages: res.allpage,
+                    curr: res.nowpage,
+                    skin: '#5bc0de',
+                    jump: function(obj, first) {
+                        if (!first) {
+                           ajaxPage(obj.curr); 
+                        }
+                    }
+                });
+        });
+    }
 </script>
 </body>
 </html>
