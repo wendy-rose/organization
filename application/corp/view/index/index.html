@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>Community | Activity</title>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="__STATIC__/lib/fonts/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="__STATIC__/lib/css/button.css"/>
+    <link rel="stylesheet" href="__STATIC__/home/css/style.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header" style="margin-left: 10%;">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="__STATIC__/lib/img/logo1.png" ondragstart="return false;" style="margin-top: -15px;opacity: 0.95;"></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-left">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{:Url('home/index/index')}">活动</a>
+                </li>
+                <li>
+                    <a href="{:Url('corp/index/index')}">社团</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{:Url('user/index/index')}">管理</a></li>
+                        <li><a href="{:Url('user/login/logon')}">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right" style="margin-right: 10%;">
+            <img class="img-responsive img-circle pull-left" src="__STATIC__/lib/img/user.jpg" ondragstart="return false;" id="avatar">
+        </div>
+    </div>
+</nav>
+<div>
+	
+</div>
+<script src="__STATIC__/lib/js/jquery.min.js"></script>
+<script src="__STATIC__/lib/js/bootstrap.min.js"></script>
+<script src="__STATIC__/lib/js/jquery.tmpl.min.js"></script>
+<script src="__STATIC__/lib/js/laypage.js"></script>
+<script src="__STATIC__/index/js/base.js"></script>
+<script type="text/javascript">
+    function changeState(el) {
+        if (el.readOnly) el.checked=el.readOnly=false;
+        else if (!el.checked) el.readOnly=el.indeterminate=true;
+    }
+    $('#search-btn,input[name=status],input[name=time]').click(function(event) {
+        ajaxPage(1);
+    });
+    function ajaxPage(curr) {
+        var status = $('input[name=status]:checked').val();
+        var time = $('input[name=time]:checked').val();
+        var title = $('input[name=title]').val();
+        $.getJSON('/corp/activity/index', 
+            {page: curr, status: status, time: time, title: title}, 
+            function(res) {
+                laypage({
+                    cont: 'page',
+                    pages: res.allpage,
+                    curr: res.nowpage,
+                    skin: '#5bc0de',
+                    jump: function(obj, first) {
+                        if (!first) {
+                           ajaxPage(obj.curr); 
+                        }
+                    }
+                });
+        });
+    }
+</script>
+</body>
+</html>
