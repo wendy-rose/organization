@@ -1,0 +1,37 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+#nav{
+	height: 35px;
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 90px;
+}
+
+#nav ul{
+	width: 960px;
+	height: 35px;
+	list-style: none;
+}
+
+#nav ul li{
+	float: left;
+	width: 100px;
+	height: 35px;
+	border: 0.5px solid #E0EEEE;
+	background: #fff;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+/*#nav ul li:hover{
+	background-color: #DA4453;
+}*/
+
+#nav ul li:active{
+	background-color: #DA4453;
+}

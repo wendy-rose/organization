@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/awesome-bootstrap-checkbox.css">
     <link rel="stylesheet" href="__STATIC__/lib/css/button.css"/>
     <link rel="stylesheet" href="__STATIC__/home/css/style.css"/>
+    <link rel="stylesheet" href="__STATIC__/home/css/corp.css"/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -46,42 +47,44 @@
         </div>
     </div>
 </nav>
-<div>
-	
+<div class="container">
+	<div id='nav'>
+		<ul>
+			<li>全部</li>
+			<li>体育竞技</li>
+			<li>公共关系</li>
+			<li>专业实践</li>
+			<li>理论研究</li>
+			<li>艺术特长</li>
+			<li>社会服务</li>
+			<li>科技创新</li>
+		</ul>
+	</div>
 </div>
 <script src="__STATIC__/lib/js/jquery.min.js"></script>
 <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
 <script src="__STATIC__/lib/js/jquery.tmpl.min.js"></script>
+<script src="__STATIC__/lib/js/jquery.color.js"></script>
 <script src="__STATIC__/lib/js/laypage.js"></script>
 <script src="__STATIC__/index/js/base.js"></script>
 <script type="text/javascript">
     function changeState(el) {
         if (el.readOnly) el.checked=el.readOnly=false;
         else if (!el.checked) el.readOnly=el.indeterminate=true;
-    }
-    $('#search-btn,input[name=status],input[name=time]').click(function(event) {
-        ajaxPage(1);
+    }  
+    $(function(){
+    	$(function(){
+    $("#nav ul li").animate(
+      {
+        backgroundColor:'#FF0000'
+      },1000
+    )
+  })
+
+    	// $('#nav ul li').hover(function() {
+    	// 	$(this).animate({backgroundColor:'#DA4453'});
+    	// });	
     });
-    function ajaxPage(curr) {
-        var status = $('input[name=status]:checked').val();
-        var time = $('input[name=time]:checked').val();
-        var title = $('input[name=title]').val();
-        $.getJSON('/corp/activity/index', 
-            {page: curr, status: status, time: time, title: title}, 
-            function(res) {
-                laypage({
-                    cont: 'page',
-                    pages: res.allpage,
-                    curr: res.nowpage,
-                    skin: '#5bc0de',
-                    jump: function(obj, first) {
-                        if (!first) {
-                           ajaxPage(obj.curr); 
-                        }
-                    }
-                });
-        });
-    }
 </script>
 </body>
 </html>
