@@ -1,8 +1,14 @@
-/* download by http://www.codefans.net */
 
-(function(jQuery){
+ /**
+ *  jQuery Color Animations
+ * @author 愚人码头
+ * 源自：jQuery UI    jquery.effects.core.js
+ *
+ */
 
-	// We override the animation for all of these color styles
+;(function(jQuery){
+
+	// 所有颜色样式
 	jQuery.each(['backgroundColor', 'borderBottomColor', 'borderLeftColor', 'borderRightColor', 'borderTopColor', 'color', 'outlineColor'], function(i,attr){
 		jQuery.fx.step[attr] = function(fx){
 			if ( fx.state == 0 ) {
@@ -21,12 +27,16 @@
 	// Color Conversion functions from highlightFade
 	// By Blair Mitchelmore
 	// http://jquery.offput.ca/highlightFade/
+    //一个JavaScript 数组，其中包含 0和255之间的三个数字， (ie [255,255,255]).
+    //An RGB 'function call syntax' string. either interger or percentage float form. (ie rgb(255,255,255) or rgb(100%,100%,100%))
+    //An RGB hex value. Either short or long form. (ie #FFF or #FFFFFF)
+    //A W3C standard colour name string as defined at W3Schools. (ie 'white', 'blue', 'red', 'black', et. al)
 
 	// Parse strings looking for color tuples [255,255,255]
 	function getRGB(color) {
 		var result;
 
-		// Check if we're already dealing with an array of colors
+		// 一个JavaScript 数组，其中包含 0和255之间的三个数字，例如： [255,255,255]
 		if ( color && color.constructor == Array && color.length == 3 )
 			return color;
 
@@ -49,7 +59,7 @@
 		// Otherwise, we're most likely dealing with a named color
 		return colors[jQuery.trim(color).toLowerCase()];
 	}
-	
+
 	function getColor(elem, attr) {
 		var color;
 
@@ -58,14 +68,14 @@
 
 			// Keep going until we find an element that has color, or we hit the body
 			if ( color != '' && color != 'transparent' || jQuery.nodeName(elem, "body") )
-				break; 
+				break;
 
 			attr = "backgroundColor";
 		} while ( elem = elem.parentNode );
 
 		return getRGB(color);
 	};
-	
+
 	// Some named colors to work with
 	// From Interface by Stefan Petre
 	// http://interface.eyecon.ro/
@@ -115,6 +125,5 @@
 		white:[255,255,255],
 		yellow:[255,255,0]
 	};
-	
-	
+
 })(jQuery);

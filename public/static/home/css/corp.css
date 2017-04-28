@@ -28,10 +28,19 @@
 	cursor: pointer;
 }
 
-/*#nav ul li:hover{
+#nav ul li:hover{
 	background-color: #DA4453;
-}*/
+}
 
-#nav ul li:active{
+#nav .navLi{
 	background-color: #DA4453;
+}
+
+#selectSearch{
+	margin-top: 20px;
+	margin-left: 90px;
+}
+
+#selectSearch label{
+	font-weight: normal;
 }
