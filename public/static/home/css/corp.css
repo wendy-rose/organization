@@ -45,3 +45,66 @@
 #selectSearch label{
 	font-weight: normal;
 }
+
+#content{
+	/*border: 1px solid black;*/
+	height: 100%;
+/*	background-color: red;*/
+	margin-right: 90px;
+	margin-left: 90px;
+	margin-top: 70px;
+}
+
+
+#content ul li{
+	width: 224px;
+	height: 258px;
+	border: 0.5px solid #E0EEEE;
+/*	text-align: center;*/
+	float: left;
+	cursor: pointer;
+	margin: 40px 7px;
+	background: #fff;
+}
+
+#content ul li img{
+	height: 80px;
+	width: 120px;
+	margin: 0 auto;
+	z-index: 1000;
+	margin-top: -20px;
+}
+
+#content ul li a{
+	text-decoration: none;
+	color: #000;
+	font-size: 15px;
+}
+
+#content ul li a:hover{
+	color: #DA4453;
+}
+
+#content ul li a:active{
+	color: #DA4453;
+}
+
+#content ul li a:visited{
+	color: #DA4453;
+}
+
+#content ul li p{
+	margin-top: 10px;
+	text-align: center;
+}
+
+#content ul li .info{
+	margin-top: 15px;
+}
+
+#content ul li span{
+	margin-left: 20px;
+	margin-right: 20px;
+	color: #999999;
+	/*margin: 20px 20px;*/
+}
