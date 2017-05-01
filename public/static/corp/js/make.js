@@ -54,8 +54,13 @@ $(function () {
 	}
 
     $('#addCorp').click(function() {
-    	$('#makeCorp').ajaxSubmit(function(reponse){
-    		console.log(reponse);
+    	$('#makeCorp').ajaxSubmit(function(response){
+    		if (response.success) {
+    			toastr.success(response.msg);
+    			window.location.reload();
+    		}else {
+    			toastr.error(reponse.msg);
+    		}
     	});
     });
 	
