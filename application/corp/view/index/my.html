@@ -18,7 +18,6 @@
     <!-- Theme style -->
     <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/user/css/user.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/corp/css/make.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -116,7 +115,7 @@
                         <i class="fa fa-user"></i> <span>个人信息</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{:Url('corp/index/make')}">
                         <i class="fa fa-wrench"></i> <span>创建社团</span>
                         <small class="badge pull-right bg-green">new</small>
@@ -134,7 +133,7 @@
                         <small class="badge pull-right bg-yellow">12</small>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{:Url('corp/index/my')}">
                         <i class="fa fa-group"></i> <span>社团组织</span>
                     </a>
@@ -149,11 +148,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                创建社团
+                社团组织
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>管理中心</a></li>
-                <li class="active">创建社团</li>
+                <li class="active">社团组织</li>
             </ol>
         </section>
 
@@ -167,56 +166,8 @@
             </div>
             <!-- /.row -->
             <div style="width: 100%;" class="connectedSortable">
-                <div class="center-block box-body no-padding" style="width: 50%;">
-                    <form action="{:Url('corp/index/make')}" method="post" id="makeCorp" name="makeCorp">
-                        <div class="form-group has-feedback center-block inputDiv">
-                            <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
-                            <input type="text" name="corpname" placeholder="社团名" class="form-control" required="required">
-                        </div>
-                        <div class="form-group has-feedback center-block inputDiv">
-                            <span class="glyphicon glyphicon-euro form-control-feedback"></span>
-                            <input type="text" name="univeristy" placeholder="学校" class="form-control" required="required">
-                        </div>
-                        <div class="form-group has-feedback center-block inputDiv">
-                            <span class="glyphicon glyphicon-tag form-control-feedback"></span>
-                            <input type="text" name="class" placeholder="专业班级" class="form-control" required="required">   
-                        </div>
-                         <div class="form-group has-feedback center-block inputDiv">
-                            <span class="glyphicon glyphicon-cog form-control-feedback"></span>
-                            <input type="text" name="number" placeholder="学号" class="form-control" required="required">
-                        </div>
-                        <div class="form-group has-feedback center-block inputDiv">
-                            <select name="belong" class="form-control">
-                                <optgroup label="隶属">
-                                    <option value="1">个人</option>
-                                    <option value="2">学院</option>
-                                    <option value="3">学校</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="corppic">
-                            <div class="corpDiv"  id="corpPicture">
-                                <img src="__STATIC__/lib/img/user.jpg">
-                            </div>
-                            <p class="text-center" style="color: red;">请点击上传社团图标，宽高不超过120*120，大小不超过2M</p>
-                        </div>
-                        <div class="form-group center-block">
-                            <textarea class="form-control" rows="7" placeholder="社团简单描述" required="required" name="description"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="attach" id="attach">
-                            <input type="file" id="uploadAttach" multiple="true">
-                            <span class="pull-left" style="color: red;margin-top: -38px;margin-left: 24%;">附件信息包括学生证照和社团申请证明</span>
-                            <div id="uploadContent">
-                            </div>
-                            <div id="queue"></div>
-                        </div>
-                    </form>
-                    <button class=" btn btn-info center-block" id="addCorp">
-                        <i class="fa fa-edit"></i>
-                            创建
-                    </button>
+                <div class="center-block box-body no-padding">
+                   
                 </div>
             </div>
         </section><!-- /.content -->
@@ -241,6 +192,5 @@
 <!-- AdminLTE App -->
 <script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
 <script src="__STATIC__/user/js/user.js" type="text/javascript"></script>
-<script src="__STATIC__/corp/js/make.js" type="text/javascript"></script>
 </body>
 </html>

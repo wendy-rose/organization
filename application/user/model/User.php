@@ -41,6 +41,15 @@ class User extends Model
         return null;
     }
 
+    public static function getUid()
+    {
+        if (Session::has('userInfo')){
+            $user = Session::get('userInfo');
+            return $user['userid'];
+        }
+        return null;
+    }
+
     public static function existEmail($emailAddress)
     {
         $email = static::get(['email' => $emailAddress]);

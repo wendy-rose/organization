@@ -1,5 +1,7 @@
 <?php
 
+namespace app\corp\validate;
+
 class Corp extends \think\Validate
 {
     protected $rule = [
@@ -8,7 +10,7 @@ class Corp extends \think\Validate
         'class' => 'require',
         'number' => 'require',
         'description' => 'require',
-        'corpic' => 'require',
+        'corppic' => 'require',
         'attach' => 'require'
     ];
 
@@ -18,7 +20,7 @@ class Corp extends \think\Validate
         'class.require' => '专业班级必填',
         'number.require' => '学号必填',
         'description.require' => '社团描述必填',
-        'copic.require' => '社团图标需上传',
+        'corppic.require' => '社团图标需上传',
         'attach.require' => '附件需上传'
     ];
 
