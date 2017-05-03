@@ -26,7 +26,6 @@ class Index extends Base
     {
         if (request()->isAjax()) {
             $fields = request()->post();
-            $userid = User::getAttribute('userid');
             $result = $this->validate($fields, 'Corp');
             if (true !== $result) {
                 return $this->ajaxReturn(false, $result);
@@ -40,7 +39,7 @@ class Index extends Base
                     $corp = Corp::getCorp($cid);
                     $deptid = Dept::addDept($cid, $corp['name'], $userid);
                     $pid = Position::addPositionDefault($cid);
-                    CorpNumber::addNumber($userid, $ussr['username'], $ussr['email'], $ussr['password'], $ussr['mobile'], $deptid, $pid);
+                    CorpNumber::addNumber($cid, $userid, $ussr['username'], $ussr['email'], $ussr['password'], $ussr['mobile'], $deptid, $pid);
                 });
                 return $this->ajaxReturn(true, Lang::get('Corp make success'));
             }

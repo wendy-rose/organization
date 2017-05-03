@@ -111,7 +111,7 @@ class User extends Model
         $high = Credit::getHighByNumber($user['credit']);
         $user['creditType'] = $creditType;
         $user['ratio'] = $user['credit']. '/'. $high;
-        $user['sorce'] = intval(($user['credit']/$high) * 100). '%';
+        $user['sorce'] = ($high == 0) ? '0%':intval(($user['credit']/$high) * 100). '%';
         return $user;
     }
 

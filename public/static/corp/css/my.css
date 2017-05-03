@@ -1,0 +1,71 @@
+.section
+{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.myCorp{
+	display: inline-block;
+	height: auto;
+}
+
+.myCorp ul li{
+	width: 224px;
+	height: 258px;
+	border: 1px solid gainsboro;
+	float: left;
+	cursor: pointer;
+	margin: 25px 15px;
+	background: .fff;
+	border-radius: 10px;
+}
+
+.myCorp ul li img{
+	height: 80px;
+	width: 120px;
+	margin: 0 auto;
+	z-index: 1000;
+	margin-top: -20px;
+}
+
+.myCorp ul li a{
+	text-decoration: none;
+	color: .000;
+	font-size: 15px;
+}
+
+.myCorp ul li a:hover{
+	color: .DA4453;
+}
+
+.myCorp ul li a:active{
+	color: .DA4453;
+}
+
+.myCorp ul li a:visited{
+	color: .DA4453;
+}
+
+.myCorp ul li p{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.myCorp ul li .info{
+	margin-top: 15px;
+}
+
+.myCorp ul li span{
+	margin-left: 20px;
+	margin-right: 20px;
+	color: .999999;
+	/*margin: 20px 20px;*/
+}
+
+.myCorp #enter{
+	margin-left: 10px;
+}
+
+.myCorp #exit{
+	margin-right: 10px;
+}

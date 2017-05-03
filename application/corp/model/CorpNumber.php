@@ -8,9 +8,10 @@ use think\Model;
 class CorpNumber extends Model
 {
 
-    public static function addNumber($uid, $username, $email, $password, $mobile, $did, $pid, $status = 0)
+    public static function addNumber($cid, $uid, $username, $email, $password, $mobile, $did, $pid, $status = 0)
     {
         $number = [
+            'cid' => $cid,
             'uid' => $uid,
             'username' => $username,
             'email' => $email,

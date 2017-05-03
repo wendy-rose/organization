@@ -5,3 +5,4 @@ thinkphp
 public/uploads/*
 public/avatar/*
 public/attach/*
+application/database.php
