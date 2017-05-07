@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>社团管理后台 | 社团管理</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
-    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css" />
     <!--Toastr-->
     <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/toastr.min.css">
     <!--Ztree-->
     <link href="__STATIC__/zTree/zTreeStyle.css" rel="stylesheet" type="text/css">
-    <!--datatables-->
-    <link rel="stylesheet" type="text/css" href="__STATIC__/datatables/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/select2.min.css">
     <!-- Theme style -->
-    <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+    <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="__STATIC__/user/css/user.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/corp/css/manager.css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,278 +24,285 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-blue">
-<!-- header logo: style can be found in header.less -->
-<header class="header">
-    <a href="index.html" class="logo">
-        <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        社团管理中心
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-        <div class="navbar-right" style="margin-right: 5%;">
-            <ul class="nav navbar-nav">
-                <!-- Messages: style can be found in dropdown.less-->
-                <li class="dropdown messages-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell"></i>
-                        <span class="label label-success">4</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-<!--左侧栏开始-->
-<div class="wrapper row-offcanvas row-offcanvas-left">
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="left-side sidebar-offcanvas">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="__STATIC__/lib/img/logo.png" class="img-circle" alt="User Image"/>
-                </div>
-                <div class="pull-left info">
-                    <p class="corpname">计科青协</p>
 
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
+<body class="skin-blue">
+    <!-- header logo: style can be found in header.less -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <!-- Add the class icon to your logo image or logo icon to add the margining -->
+            社团管理中心
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-right" style="margin-right: 5%;">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                    <span class="input-group-btn">
+        </nav>
+    </header>
+    <!--左侧栏开始-->
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="__STATIC__/lib/img/logo.png" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-left info">
+                        <p class="corpname">计科青协</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search..." />
+                        <span class="input-group-btn">
                             <button type='submit' name='seach' id='phone-name' class="btn btn-flat"><i
                                     class="fa fa-search"></i></button>
                         </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-home"></i> <span>社团管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{:Url('corp/dashboard/index')}"><i
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="fa fa-home"></i> <span>社团管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{:Url('corp/dashboard/index')}"><i
                                 class="fa fa-angle-double-right"></i>社团信息</a></li>
-                        <li><a href="{:Url('corp/dashboard/dept')}"><i class="fa fa-angle-double-right"></i>管理部门</a>
-                        </li>
-                        <li class="active"><a href="{:Url('corp/dashboard/manager')}"><i class="fa fa-angle-double-right"></i>管理人员</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-tasks"></i> <span>新闻管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>新闻发布</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>查看新闻</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>分类管理</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-magnet"></i> <span>活动管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>活动发布</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>报名模板</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>查看活动</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-trophy"></i> <span>资产管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>活动发布</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>报名模板</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>查看活动</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="pages/calendar.html">
-                        <i class="fa fa-user-md"></i> <span>会员管理</span>
-                        <small class="badge pull-right bg-red">3</small>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-
-    <!-- Right side column. Contains the navbar and content of the page -->
-    <aside class="right-side">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                管理人员
+                            <li class="active"><a href="{:Url('corp/dashboard/dept')}"><i class="fa fa-angle-double-right"></i>部门职位</a>
+                            </li>
+                            <li><a href="{:Url('corp/dashboard/manager')}"><i class="fa fa-angle-double-right"></i>管理人员</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-tasks"></i> <span>新闻管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>新闻发布</a></li>
+                            <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>查看新闻</a></li>
+                            <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>分类管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-magnet"></i> <span>活动管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>活动发布</a></li>
+                            <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>报名模板</a></li>
+                            <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>查看活动</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-trophy"></i> <span>资产管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i>活动发布</a></li>
+                            <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i>报名模板</a></li>
+                            <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i>查看活动</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="pages/calendar.html">
+                            <i class="fa fa-user-md"></i> <span>会员管理</span>
+                            <small class="badge pull-right bg-red">3</small>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                部门职位
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>管理中心</a></li>
-                <li class="active">管理人员</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <!-- top row -->
-            <div class="row">
-                <div class="col-xs-12 connectedSortable">
-
-                </div><!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <div style="width: 100%;" class="connectedSortable">
-                <div class="center-block box-body no-padding">
-                    <div>
-                        <button class="btn btn-info" id="addDeptUser">添加部门</button>
-                        <button class="btn btn-info">编辑部门</button>
-                        <button class="btn btn-info">删除社员</button>
-                        <div class="input-group pull-right" style="width: 30%">
-                            <input type="text" name="q" class="form-control" placeholder="手机号/姓名"/>
-                            <span class="input-group-btn">
-                                <button type='button' name='seach' id='search-btn' class="btn btn-flat"><i
-                                        class="fa fa-search"></i></button>
-                            </span>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i>管理中心</a></li>
+                    <li class="active">部门职位</li>
+                </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <!-- top row -->
+                <div class="row">
+                    <div class="col-xs-12 connectedSortable">
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <div style="width: 100%;" class="connectedSortable">
+                    <div class="center-block box-body no-padding">
+                        <div>
+                            <button class="btn btn-info" id="addDeptUser">添加部门</button>
+                            <button class="btn btn-info">编辑部门</button>
+                            <button class="btn btn-info">删除部门</button>
+                        </div>
+                        <div class="row no-padding connectedSortable" style="margin-top: 10px;">
+                            <div class="col-md-3" style="overflow: auto;border: 1px solid gainsboro">
+                                <ul id="tree" class="ztree"></ul>
+                            </div>
+                            <div class="col-md-9">
+                                <!--新增编辑管理部门人员-->
+                                <div id="deptUser" style="border: 1px solid gainsboro;">
+                                    <form class="form-horizontal" role="form" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                            <div class="col-md-2"></div>
+                                            <label for="username" class="col-md-2 control-label">部门</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="name" id="name" class="form-control" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-2"></div>
+                                            <label for="dept" class="col-md-2 control-label">上级部门</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" required="required" name="pid" id="pid">
+                                                    <option value="0">计科青协</option>
+                                                    <option value="1">数学辅导队</option>
+                                                    <option value="2">宣传部</option>
+                                                    <option value="3">项目统筹部</option>
+                                                    <option value="4">办公室</option>
+                                                    <option value="5">会长团</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-2"></div>
+                                            <label for="remark" class="col-md-2 control-label">备注</label>
+                                            <div class="col-md-4">
+                                                <textarea class="form-control" rows="4" name="remark" id="remark"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button class=" btn btn-info center-block" id="addOrEditDept">
+                                        <i class="fa fa-edit"></i> 保存
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row no-padding connectedSortable" style="margin-top: 10px;">
-                        <div class="col-md-3" style="overflow: auto;border: 1px solid gainsboro">
-                            <ul id="tree" class="ztree"></ul>
+                </div>
+            </section>
+            <section class="connectedSortable section">
+                <div class="box box-danger" id="loading-example">
+                    <div class="box-header">
+                        <div class="pull-right box-tools">
+                            <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
+                            <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                         </div>
-                        <div class="col-md-9">
-                            <div class="table-responsive" id="deptTreeUser" style="margin-top: -7px;">
-                                <table id="DataTable" class="display table table-striped table-bordered text-center">
+                        <i class="fa fa-edit"></i>
+                        <h3 class="box-title">职位管理</h3>
+                    </div>
+                    <div class="box-body no-padding myCorp" style="margin-left: 10px;margin-right: 10px;">
+                        <div style="margin-bottom: 10px;">
+                            <button class="btn btn-danger" id="addDeptUser">添加职位</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-hover text-center">
                                     <thead>
-                                    <tr>
-                                        <th><input type="checkbox" name="checklist" id="checkAll"></th>
-                                        <th>姓名</th>
-                                        <th>部门</th>
                                         <th>职位</th>
-                                        <th>手机号</th>
-                                        <th>邮箱</th>
+                                        <th>人数</th>
                                         <th>操作</th>
-                                    </tr>
                                     </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>会长</td>
+                                            <td>2</td>
+                                            <td>
+                                                <input type="button" name="editDept" class="btn btn-danger btn-sm" value="编辑" onclick="editDept(1)">
+                                                <input type="button" name="delDept" class="btn btn-danger btn-sm" value="删除" onclick="delDept(1)">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>副会长</td>
+                                            <td>2</td>
+                                            <td>
+                                                <input type="button" name="editDept" class="btn btn-danger btn-sm" value="编辑" onclick="editDept(1)">
+                                                <input type="button" name="delDept" class="btn btn-danger btn-sm" value="删除" onclick="delDept(1)">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>部长</td>
+                                            <td>2</td>
+                                            <td>
+                                                <input type="button" name="editDept" class="btn btn-danger btn-sm" value="编辑" onclick="editDept(1)">
+                                                <input type="button" name="delDept" class="btn btn-danger btn-sm" value="删除" onclick="delDept(1)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
-                            <!--新增编辑管理部门人员-->
-                            <div id="deptUser" style="border: 1px solid gainsboro" class="hidden">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <input type="hidden" name="userpic">
-                                        <div class="corpDiv" id="userpic" style="margin-top: 5px;">
-                                            <img src="__STATIC__/lib/img/logo.png">
+                            <div class="col-md-6">
+                                <div style="width: 50%;">
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="text" name="pname" class="form-control" placeholder="输入职位名">
                                         </div>
-                                        <p class="text-center" style="color: red;">请点击上传社员图片，宽高不超过120*120，大小不超过2M</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="username" class="col-md-2 control-label">姓名</label>
-                                        <div class="col-md-4">
-                                            <input type="text" name="username" id="username" class="form-control" required="required">
+                                        <div class="form-group">
+                                            <textarea class="form-control" cols="5" rows="5">备注</textarea>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="dept" class="col-md-2 control-label">部门</label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" required="required" name="dept" id="dept">
-                                                <option value="1">数学辅导队</option>
-                                                <option value="2">宣传部</option>
-                                                <option value="3">项目统筹部</option>
-                                                <option value="4">办公室</option>
-                                                <option value="5">会长团</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="position" class="col-md-2 control-label">职位</label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" required="required" name="position" id="position">
-                                                <option value="1">会长</option>
-                                                <option value="2">部长</option>
-                                                <option value="3">副部长</option>
-                                                <option value="4" selected="selected">普通社员</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="phone" class="col-md-2 control-label">手机号</label>
-                                        <div class="col-md-4">
-                                            <input type="text" name="phone" id="phone" class="form-control" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="email" class="col-md-2 control-label">邮箱</label>
-                                        <div class="col-md-4">
-                                            <input type="email" name="email" id="email" class="form-control" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-2"></div>
-                                        <label for="remark" class="col-md-2 control-label">备注</label>
-                                        <div class="col-md-4">
-                                            <textarea class="form-control" rows="4" name="remark" id="remark"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
-                                <button class=" btn btn-info center-block" id="addOrEditUser">
-                                    <i class="fa fa-edit"></i>
-                                    保存
-                                </button>
+                                        <button class="btn btn-danger center-block">保存</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section><!-- /.content -->
-    </aside><!-- /.right-side -->
-</div><!-- ./wrapper -->
-
-<!-- add new calendar event modal -->
-
-
-<!-- jQuery 2.0.2 -->
-<script src="__STATIC__/lib/js/jquery.min.js"></script>
-<!-- jQuery UI 1.10.3 -->
-<script src="__STATIC__/lib/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-<!-- Bootstrap -->
-<script src="__STATIC__/lib/js/bootstrap.min.js" type="text/javascript"></script>
-<!--Jquery Form-->
-<script src="__STATIC__/lib/js/jquery.form.js" type="text/javascript"></script>
-<!--Toastr-->
-<script src="__STATIC__/lib/js/toastr.min.js" type="text/javascript"></script>
-<!--zTree-->
-<script src="__STATIC__/zTree/jquery.ztree.core.min.js" type="text/javascript"></script>
-<!--datatables-->
-<script src="__STATIC__/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="__STATIC__/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-<!--Uploadify-->
-<script src="__STATIC__/lib/js/ajaxupload.js" type="text/javascript"></script>
-<!-- AdminLTE App -->
-<script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
-<script src="__STATIC__/corp/js/manager.js" type="text/javascript"></script>
+            </section>
+            <!-- /.content -->
+        </aside>
+        <!-- /.right-side -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- add new calendar event modal -->
+    <!-- jQuery 2.0.2 -->
+    <script src="__STATIC__/lib/js/jquery.min.js"></script>
+    <!-- jQuery UI 1.10.3 -->
+    <script src="__STATIC__/lib/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+    <!-- Bootstrap -->
+    <script src="__STATIC__/lib/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--Jquery Form-->
+    <script src="__STATIC__/lib/js/jquery.form.js" type="text/javascript"></script>
+    <!--Toastr-->
+    <script src="__STATIC__/lib/js/toastr.min.js" type="text/javascript"></script>
+    <!--zTree-->
+    <script src="__STATIC__/zTree/jquery.ztree.core.min.js" type="text/javascript"></script>
+    <script src="__STATIC__/lib/js/select2.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
+    <script src="__STATIC__/corp/js/dept.js" type="text/javascript"></script>
 </body>
+
 </html>

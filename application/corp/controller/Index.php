@@ -31,13 +31,14 @@ class Index extends Base
                 return $this->ajaxReturn(false, $result);
             }else{
                 Db::transaction(function(){
+                    $fields = request()->post();
                     $userid = User::getAttribute('userid');
                     $ussr = User::fetchUserByUid($userid);
                     $fields['createuid'] = $userid;
                     $fields['createtime'] = time();
                     $cid = Corp::addCorp($fields);
                     $corp = Corp::getCorp($cid);
-                    $deptid = Dept::addDept($cid, $corp['name'], $userid);
+                    $deptid = Dept::addDept($cid, $corp['corpname'], $userid);
                     $pid = Position::addPositionDefault($cid);
                     CorpNumber::addNumber($cid, $userid, $ussr['username'], $ussr['email'], $ussr['password'], $ussr['mobile'], $deptid, $pid);
                 });
@@ -144,6 +145,28 @@ class Index extends Base
 
     public function my()
     {
-        return $this->fetch();
+        if (request()->isAjax()){
+            $uid = User::getUid();
+
+        }else{
+            return $this->fetch();
+        }
+    }
+
+    public function getUser()
+    {
+        $user = [
+            ['id' => 1, 'text' => 'wendy'],
+            ['id' => 2, 'text' => 'wendy'],
+            ['id' => 3, 'text' => 'wendy'],
+            ['id' => 4, 'text' => 'wendy'],
+            ['id' => 5, 'text' => 'wendy'],
+            ['id' => 6, 'text' => 'wendy'],
+            ['id' => 1, 'text' => 'wendy'],
+            ['id' => 1, 'text' => 'wendy'],
+            ['id' => 1, 'text' => 'wendy'],
+            ['id' => 1, 'text' => 'wendy'],
+            ['id' => 1, 'text' => 'wendy'],
+        ];
     }
 }

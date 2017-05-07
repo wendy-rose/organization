@@ -19,8 +19,23 @@ class CorpNumber extends Model
             'mobile' => $mobile,
             'deptid' => $did,
             'pid' => $pid,
-            'status' => $status
+            'status' => $status,
+            'createtime' => time(),
         ];
         return Db::name('corp_number')->insertGetId($number);
+    }
+
+    public static function countNumberByCid($cid)
+    {
+        return Db::name('corp_number')->where('cid', $cid)->count();
+    }
+
+    public static function joinCorp($uid)
+    {
+        return Db::name('corp_number')->alias('cn')
+            ->field('cn.createtime,c.name.c.cid,c.belong')
+            ->join('__CORP__ c', 'cn.cid = c.cid')
+            ->where('cn.uid', $uid)
+            ->select();
     }
 }
