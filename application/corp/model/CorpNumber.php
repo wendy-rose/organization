@@ -30,12 +30,13 @@ class CorpNumber extends Model
         return Db::name('corp_number')->where('cid', $cid)->count();
     }
 
-    public static function joinCorp($uid)
+    public static function getJoinCorp($uid, $offset = 0, $limit = 6)
     {
         return Db::name('corp_number')->alias('cn')
             ->field('cn.createtime,c.name.c.cid,c.belong')
             ->join('__CORP__ c', 'cn.cid = c.cid')
             ->where('cn.uid', $uid)
+            ->page("{$offset}, {$limit}")
             ->select();
     }
 }

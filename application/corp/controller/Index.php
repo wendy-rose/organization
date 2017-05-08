@@ -147,7 +147,9 @@ class Index extends Base
     {
         if (request()->isAjax()){
             $uid = User::getUid();
-
+            $page = request()->get('page');
+            $myCorp = CorpNumber::getJoinCorp($uid, $page);
+            return $this->ajaxReturn(true, '', $myCorp, array('page' => $page));
         }else{
             return $this->fetch();
         }
