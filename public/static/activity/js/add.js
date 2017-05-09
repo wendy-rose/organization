@@ -11,7 +11,7 @@ $(function(){
     };
     var ue = UE.getEditor('content', ueOption);
 
-    $('#openapply').click(function(){
+    $('#openapply').onclick(function(){
     	alert(1);
     	var checked = $(this).is(':checked');
     	if (checked) {
