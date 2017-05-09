@@ -30,13 +30,18 @@ class CorpNumber extends Model
         return Db::name('corp_number')->where('cid', $cid)->count();
     }
 
-    public static function getJoinCorp($uid, $offset = 0, $limit = 6)
+    public static function getJoinCorp($uid, $offset = 0, $limit = 4)
     {
-        return Db::name('corp_number')->alias('cn')
-            ->field('cn.createtime,c.name.c.cid,c.belong')
-            ->join('__CORP__ c', 'cn.cid = c.cid')
+        $list =  Db::name('corp_number')->alias('cn')
+            ->field('cn.createtime,c.corpname,c.cid,cn.deptid,c.corppic,c.belong')
+            ->join('__CORP__ c', '`cn`.`cid` = `c`.`cid`')
             ->where('cn.uid', $uid)
             ->page("{$offset}, {$limit}")
             ->select();
+        $count = Db::name('corp_number')->alias('cn')
+            ->join('__CORP__ c', '`cn`.`cid` = `c`.`cid`')
+            ->where('cn.uid', $uid)
+            ->count();
+        return ['list' => $list, 'count' => ($count % 4 == 0) ? ($count / 4) : ceil($count/4)];
     }
 }

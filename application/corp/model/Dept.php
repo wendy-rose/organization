@@ -26,4 +26,13 @@ class Dept extends Model
     {
         return static::get(['cid' => $cid]);
     }
+
+    public static function getDeptName($deptid, $cid)
+    {
+        $where = [
+            'cid' => $cid,
+            'deptid' => $deptid,
+        ];
+        return Db::name('dept')->where($where)->value('name');
+    }
 }

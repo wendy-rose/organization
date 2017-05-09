@@ -11,9 +11,11 @@ use app\index\model\FileUpload;
 use app\index\util\AttachUtil;
 use app\index\util\StringUtil;
 use app\user\model\User;
+use app\corp\util\Corp as CorpUtil;
 use think\Db;
 use think\File;
 use think\Lang;
+use think\Url;
 
 class Index extends Base
 {
@@ -149,7 +151,17 @@ class Index extends Base
             $uid = User::getUid();
             $page = request()->get('page');
             $myCorp = CorpNumber::getJoinCorp($uid, $page);
-            return $this->ajaxReturn(true, '', $myCorp, array('page' => $page));
+            $corp = array();
+            if(!empty($myCorp['list'])) {
+                foreach ($myCorp['list'] as $value) {
+                    $value['name'] = Dept::getDeptName($value['deptid'], $value['cid']);
+                    $value['belong'] = CorpUtil::getCorpBelong($value['belong']);
+                    $value['createtime'] = date('Y-m-d', $value['createtime']);
+                    $value['url'] = Url::build('corp/index/detail', "cid={$value['cid']}");
+                    $corp[] = $value;
+                }
+            }
+            return $this->ajaxReturn(true, '', $corp, array('page' => $page, 'count' => $myCorp['count']));
         }else{
             return $this->fetch();
         }
