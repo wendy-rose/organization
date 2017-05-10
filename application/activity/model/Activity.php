@@ -10,4 +10,9 @@ class Activity extends Model
     {
 
     }
+
+    public static function getActivity($cid)
+    {
+
+    }
 }

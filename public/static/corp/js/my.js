@@ -1,4 +1,8 @@
 $(function() {
+    toastr.options = {
+        "timeOut": "1000"
+    };
+
     $('#rangtime').daterangepicker({
         autoUpdateInput: false,
         locale: {
@@ -16,7 +20,6 @@ $(function() {
         $.getJSON('/corp/index/my', {page: curr},
             function(res) {
                 var corpData = res.data;
-                console.log(corpData);
                 $("#corpList").find("li").remove(); 
                 $('#myCorpList').tmpl(corpData).appendTo('#corpList');
                 laypage({
@@ -33,3 +36,14 @@ $(function() {
             });
     }
 });
+
+function enterCorp(cid) {
+    window.location.href = '/corp/index/login?cid=' + cid;
+}
+
+function exitCorp(cid){
+    $.$.post('/corp/index/exitCorp', {cid : cid}, function(data, textStatus, xhr) {
+        toastr.success(data.msg);
+        ajaxPage(1);
+    });
+}

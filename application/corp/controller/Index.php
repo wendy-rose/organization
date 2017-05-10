@@ -12,9 +12,11 @@ use app\index\util\AttachUtil;
 use app\index\util\StringUtil;
 use app\user\model\User;
 use app\corp\util\Corp as CorpUtil;
+use Symfony\Component\DomCrawler\Field\InputFormField;
 use think\Db;
 use think\File;
 use think\Lang;
+use think\Session;
 use think\Url;
 
 class Index extends Base
@@ -165,6 +167,37 @@ class Index extends Base
         }else{
             return $this->fetch();
         }
+    }
+
+    public function login()
+    {
+        if (request()->isAjax()) {
+            $cid = request()->post('cid');
+            $email = request()->post('email');
+            $password = request()->post('password');
+            $number = CorpNumber::getNumber($cid, $email, $password);
+            if (!empty($number)){
+                $lang = '';
+                $isExist = true;
+                Session::set('number', $number);
+            }else{
+                $lang = Lang::get('Email or pasword is error');
+                $isExist = false;
+            }
+            return $this->ajaxReturn($isExist, $lang, [], ['url' => Url::build('corp/dashbord/index', "cid={$cid}")]);
+        }else{
+            $cid = request()->get('cid');
+            $corp = Corp::getCorp($cid);
+            return $this->fetch('login', $corp);
+        }
+    }
+
+    public function exitCorp()
+    {
+        $cid = request()->post('cid');
+        $uid = User::getUid();
+        CorpNumber::deleteNumber($cid, $uid);
+        return $this->ajaxReturn(true, Lang::get('Exit corp succuess'));
     }
 
     public function getUser()

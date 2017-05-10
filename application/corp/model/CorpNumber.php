@@ -30,7 +30,7 @@ class CorpNumber extends Model
         return Db::name('corp_number')->where('cid', $cid)->count();
     }
 
-    public static function getJoinCorp($uid, $offset = 0, $limit = 4)
+    public static function getJoinCorp($uid, $offset = 1, $limit = 4)
     {
         $list =  Db::name('corp_number')->alias('cn')
             ->field('cn.createtime,c.corpname,c.cid,cn.deptid,c.corppic,c.belong')
@@ -43,5 +43,24 @@ class CorpNumber extends Model
             ->where('cn.uid', $uid)
             ->count();
         return ['list' => $list, 'count' => ($count % 4 == 0) ? ($count / 4) : ceil($count/4)];
+    }
+
+    public static function getNumber($cid, $email, $password)
+    {
+        $where = [
+            'cid' => $cid,
+            'email' => $email,
+            'password' => md5($password),
+        ];
+        $number = Db::name('corp_number')->where($where)->find();
+        return $number;
+    }
+
+    public static function deleteNumber($cid, $uid)
+    {
+        Db::name('corp_number')->delete([
+            'cid' => $cid,
+            'uid' => $uid,
+        ]);
     }
 }

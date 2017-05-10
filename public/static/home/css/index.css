@@ -1,0 +1,74 @@
+#activity {
+    margin-top: -10px;
+}
+
+#activity ul li {
+    height: 135px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#activity ul li .corppic {
+    height: 100px;
+    width: 155px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+#activity ul li .act {
+    margin-left: 15px;
+    width: 30%;
+    height: 105px;
+    margin-top: 15px;
+}
+
+#activity ul li .pstyle {
+    font-size: 13px;
+    text-align: left;
+}
+
+#activity ul li .restday {
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: -40px;
+}
+
+#activity ul li .joinlike {
+    height: 105px;
+    width: 35%;
+    margin-top: 15px;
+}
+
+#activity ul li .joinlike p {
+    font-size: 13px;
+    text-align: center;
+}
+
+#activity ul li .joinlike .join {
+    width: 68px;
+    height: 105px;
+    border-radius: 5px;
+    border: 1px solid #E0EEEE;
+}
+
+#activity ul li .joinlike img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#activity ul li .joinlike .like {
+    width: 68px;
+    height: 105px;
+    margin-left: 15px;
+    border-radius: 5px;
+    border: 1px solid #E0EEEE;
+}
+
+#activity ul li .joinlike .buttonDiv {
+    height: 105px;
+    margin-right: 10px;
+}
+
+#activity ul li .joinlike button {
+    margin-top: 33px;
+}

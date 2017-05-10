@@ -1,301 +1,261 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>Community | Login</title>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css"/>
-
+    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css" />
     <!-- ace styles & button-->
-    <link rel="stylesheet" href="__STATIC__/lib/css/ace.min.css"/>
-    <link rel="stylesheet" href="__STATIC__/lib/css/button.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__STASTIC__/lib/css/ace-part2.min.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="__STATIC__/lib/css/ace-rtl.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__STATIC__/lib/css/ace-ie.min.css"/>
-    <![endif]-->
+    <link rel="stylesheet" href="__STATIC__/lib/css/ace.min.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/css/button.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/css/ace-rtl.min.css" />
     <link rel="stylesheet" href="__STATIC__/lib/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="__STATIC__/lib/css/xcConfirm.css">
     <!--Toastr-->
     <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/toastr.min.css">
-    <link rel="stylesheet" href="__STATIC__/user/css/login.css"/>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="__STATIC__/lib/js/html5shiv.min.js"></script>
-    <script src="__STATIC__/lib/js/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="__STATIC__/user/css/login.css" />
 </head>
+
 <body class="login-layout light-login">
-<div class="main-container">
-    <div class="main-content content-top">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container">
-                    <div class="center">
-                        <img class="img-responsiv center-block" src="__STATIC__/lib/img/logo.png"
-                             ondragstart="return false;">
-                    </div>
-
-                    <div class="space-6"></div>
-
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header blue lighter bigger">
+    <div class="main-container">
+        <div class="main-content content-top">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <img class="img-responsiv center-block" src="__STATIC__/lib/img/logo.png" ondragstart="return false;">
+                        </div>
+                        <div class="space-6"></div>
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
                                         <i class="ace-icon fa fa-coffee green"></i>
                                         个人登录
                                     </h4>
-
-                                    <div class="space-6"></div>
-
-                                    <form id="loginForm" action="{:Url('user/login/checkout')}" method="post"
-                                          class="form-horizontal">
-                                        <fieldset>
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" name="email"
+                                        <div class="space-6"></div>
+                                        <form id="loginForm" action="{:Url('user/login/checkout')}" method="post" class="form-horizontal">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="text" class="form-control" name="email"
                                                                    id="email" placeholder="邮箱"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                            </div>
-
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" name="password"
+                                                            <i class="ace-icon fa fa-user"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="password" class="form-control" name="password"
                                                                    id="password" placeholder="密码(6-16位)"/>
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </div>
-
-                                            <div class="space"></div>
-
-                                            <div class="clearfix">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" name="remember" value="1"/>
-                                                    <span class="lbl"> 记住</span>
-                                                </label>
-
-                                                <button type="submit" id="login"
-                                                        class="width-35 pull-right btn btn-sm btn-primary">
-                                                    <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">登录</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="space-4"></div>
-                                        </fieldset>
-                                    </form>
-
-                                    <div class="social-or-login center">
-                                        <span class="bigger-110">第三方登录</span>
+                                                            <i class="ace-icon fa fa-lock"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="space"></div>
+                                                <div class="clearfix">
+                                                    <label class="inline">
+                                                        <input type="checkbox" class="ace" name="remember" value="1" />
+                                                        <span class="lbl"> 记住</span>
+                                                    </label>
+                                                    <button type="submit" id="login" class="width-35 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-key"></i>
+                                                        <span class="bigger-110">登录</span>
+                                                    </button>
+                                                </div>
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        </form>
+                                        <div class="social-or-login center">
+                                            <span class="bigger-110">第三方登录</span>
+                                        </div>
+                                        <div class="space-6"></div>
+                                        <div class="social-login center">
+                                            <a class="btn btn-primary">
+                                                <i class="ace-icon fa fa-qq"></i>
+                                            </a>
+                                            <a class="btn btn-info">
+                                                <i class="ace-icon fa fa-weibo"></i>
+                                            </a>
+                                            <a class="btn btn-danger">
+                                                <i class="ace-icon fa fa-google-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
-
-                                    <div class="space-6"></div>
-
-                                    <div class="social-login center">
-                                        <a class="btn btn-primary">
-                                            <i class="ace-icon fa fa-qq"></i>
-                                        </a>
-
-                                        <a class="btn btn-info">
-                                            <i class="ace-icon fa fa-weibo"></i>
-                                        </a>
-
-                                        <a class="btn btn-danger">
-                                            <i class="ace-icon fa fa-google-plus"></i>
-                                        </a>
-                                    </div>
-                                </div><!-- /.widget-main -->
-
-                                <div class="toolbar clearfix">
-                                    <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            忘记密码
-                                        </a>
-                                    </div>
-
-                                    <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
+                                    <!-- /.widget-main -->
+                                    <div class="toolbar clearfix">
+                                        <div>
+                                            <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                                <i class="ace-icon fa fa-arrow-left"></i> 忘记密码
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="#" data-target="#signup-box" class="user-signup-link">
                                             注册
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.login-box -->
-
-                        <div id="forgot-box" class="forgot-box widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header red lighter bigger">
+                                <!-- /.widget-body -->
+                            </div>
+                            <!-- /.login-box -->
+                            <div id="forgot-box" class="forgot-box widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header red lighter bigger">
                                         <i class="ace-icon fa fa-key"></i>
                                         找回密码
                                     </h4>
-
-                                    <div class="space-6"></div>
-                                    <p>
-                                        输入您的电子邮件
-                                    </p>
-
-                                    <form id="findPassword" class="form-horizontal" action="{:Url('user/info/back')}" method="post">
-                                        <fieldset>
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control"
+                                        <div class="space-6"></div>
+                                        <p>
+                                            输入您的电子邮件
+                                        </p>
+                                        <form id="findPassword" class="form-horizontal" action="{:Url('user/info/back')}" method="post">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="email" class="form-control"
                                                                    placeholder="邮件" id="checkEmail" name="email"/>
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <span class="input-icon input-icon-right width-127">
+                                                            <i class="ace-icon fa fa-envelope"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="input-icon input-icon-right width-127">
                                                    <input type="text" class="width-127" placeholder="验证码" name="code">
                                                     <i class="ace-icon fa fa-qrcode"></i>
                                                 </span>
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger"
-                                                id="send">
-                                                    <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                    <span class="bigger-110" id="sendMsg">发送验证码</span>
-                                                </button>
-                                            </div>
-                                            <div class="form-group">
-                                                <span class="block input-icon input-icon-right">
+                                                    <button type="button" class="width-35 pull-right btn btn-sm btn-danger" id="send">
+                                                        <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                        <span class="bigger-110" id="sendMsg">发送验证码</span>
+                                                    </button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
                                                     <input type="password" class="form-control" placeholder="输入密码(6-16位)"
                                                            name="pwd"/>
                                                     <i class="ace-icon fa fa-lock"></i>
                                                 </span>
-                                            </div>
-                                            <div class="form-group">
-                                                <span class="block input-icon input-icon-right">
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
                                                     <input type="password" class="form-control" placeholder="确认密码"
                                                            name="repwd">
                                                     <i class="ace-icon fa fa-retweet"></i>
                                                 </span>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit"
-                                                        class="width-30 btn btn-danger btn-sm col-center-block">
-                                                    <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">提交</span>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div><!-- /.widget-main -->
-
-                                <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="width-30 btn btn-danger btn-sm col-center-block">
+                                                        <i class="ace-icon fa fa-key"></i>
+                                                        <span class="bigger-110">提交</span>
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <!-- /.widget-main -->
+                                    <div class="toolbar center">
+                                        <a href="#" data-target="#login-box" class="back-to-login-link">
                                         返回登录
                                         <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>
+                                    </div>
                                 </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.forgot-box -->
-
-                        <div id="signup-box" class="signup-box widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header green lighter bigger">
+                                <!-- /.widget-body -->
+                            </div>
+                            <!-- /.forgot-box -->
+                            <div id="signup-box" class="signup-box widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header green lighter bigger">
                                         <i class="ace-icon fa fa-users blue"></i>
                                         个人注册
                                     </h4>
-
-                                    <div class="space-6"></div>
-                                    <p>填写信息: </p>
-
-                                    <form id="registerFrom" class="form-horizontal" action="{:Url('user/register/index')}">
-                                        <fieldset>
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱"
+                                        <div class="space-6"></div>
+                                        <p>填写信息: </p>
+                                        <form id="registerFrom" class="form-horizontal" action="{:Url('user/register/index')}">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="email" class="form-control" placeholder="邮箱"
                                                             name="email" id="registerEmail"/>
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-                                            </div>
-
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名"
+                                                            <i class="ace-icon fa fa-envelope"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="text" class="form-control" placeholder="用户名"
                                                             name="username" id="registerName"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                            </div>
-
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control"
+                                                            <i class="ace-icon fa fa-user"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="password" class="form-control"
                                                                    placeholder="密码(6-16位)" name="password"
                                                             id="registerPwd"/>
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </div>
-
-                                            <div class="form-group">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control"
+                                                            <i class="ace-icon fa fa-lock"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="block input-icon input-icon-right">
+                                                            <input type="password" class="form-control"
                                                                    placeholder="确认密码" name="repassword"
                                                                    id="registerRepwd"/>
-															<i class="ace-icon fa fa-retweet"></i>
-														</span>
-                                            </div>
-                                            <div class="form-group">
-                                                 <span class="input-icon input-icon-right width-127">
+                                                            <i class="ace-icon fa fa-retweet"></i>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="input-icon input-icon-right width-127">
                                                    <input type="text" class="width-127" placeholder="验证码" name="captcha">
                                                     <i class="ace-icon fa fa-qrcode"></i>
                                                 </span>
-                                                <img class="img-responsive pull-right" id="imgCode" src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'"/>
-                                            </div>
-                                            <div class="space-24"></div>
-                                            <div class="clearfix">
-                                                <button type="reset" class="width-30 pull-left btn btn-sm">
-                                                    <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">重置</span>
-                                                </button>
-
-                                                <button type="submit"
-                                                        class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">注册</span>
-
-                                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
+                                                    <img class="img-responsive pull-right" id="imgCode" src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'" />
+                                                </div>
+                                                <div class="space-24"></div>
+                                                <div class="clearfix">
+                                                    <button type="reset" class="width-30 pull-left btn btn-sm">
+                                                        <i class="ace-icon fa fa-refresh"></i>
+                                                        <span class="bigger-110">重置</span>
+                                                    </button>
+                                                    <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
+                                                        <span class="bigger-110">注册</span>
+                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <div class="toolbar center">
+                                        <a href="#" data-target="#login-box" class="back-to-login-link">
+                                            <i class="ace-icon fa fa-arrow-left"></i> 返回登录
+                                        </a>
+                                    </div>
                                 </div>
-
-                                <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        <i class="ace-icon fa fa-arrow-left"></i>
-                                        返回登录
-                                    </a>
-                                </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.signup-box -->
-                    </div><!-- /.position-relative -->
-
-                    <!--<div class="navbar-fixed-top align-right" style="margin-top: 10px;margin-right: 30px;">-->
-                        <!--<button type="button" class="button btn-info button-pill button-small" id="person">个人登录</button>-->
-                        <!--<button type="button" class="button btn-info button-pill button-small" id="club">社团登录</button>-->
-                    <!--</div>-->
+                                <!-- /.widget-body -->
+                            </div>
+                            <!-- /.signup-box -->
+                        </div>
+                        <!-- /.position-relative -->
+                    </div>
                 </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.main-content -->
-</div><!-- /.main-container -->
-<!-- Mainly scripts -->
-<script src="__STATIC__/lib/js/jquery.min.js"></script>
-<script src="__STATIC__/lib/js/bootstrap.min.js"></script>
-<script src="__STATIC__/lib/js/bootstrapValidator.min.js"></script>
-<script src="__STATIC__/lib/js/jquery.bootstrap-growl.min.js"></script>
-<script src="__STATIC__/lib/js/xcConfirm.js"></script>
-<script src="__STATIC__/lib/js/toastr.min.js"></script>
-<script src="__STATIC__/user/js/login.js"></script>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.main-content -->
+    </div>
+    <!-- /.main-container -->
+    <!-- Mainly scripts -->
+    <script src="__STATIC__/lib/js/jquery.min.js"></script>
+    <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/lib/js/bootstrapValidator.min.js"></script>
+    <script src="__STATIC__/lib/js/jquery.bootstrap-growl.min.js"></script>
+    <script src="__STATIC__/lib/js/xcConfirm.js"></script>
+    <script src="__STATIC__/lib/js/toastr.min.js"></script>
+    <script src="__STATIC__/user/js/login.js"></script>
 </body>
+
 </html>
