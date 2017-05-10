@@ -16,8 +16,8 @@ class Activity extends Model
 
     }
 
-    public static function getActivity($cid, $)
+    public static function getActivity($cid, $page, $limit)
     {
-
+        
     }
 }
