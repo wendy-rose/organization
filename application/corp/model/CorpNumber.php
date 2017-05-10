@@ -8,6 +8,11 @@ use think\Model;
 class CorpNumber extends Model
 {
 
+    public static  function tableName()
+    {
+        return 'corp_number';
+    }
+
     public static function addNumber($cid, $uid, $username, $email, $password, $mobile, $did, $pid, $status = 0)
     {
         $number = [
@@ -22,12 +27,12 @@ class CorpNumber extends Model
             'status' => $status,
             'createtime' => time(),
         ];
-        return Db::name('corp_number')->insertGetId($number);
+        return Db::name(static::tableName())->insertGetId($number);
     }
 
     public static function countNumberByCid($cid)
     {
-        return Db::name('corp_number')->where('cid', $cid)->count();
+        return Db::name(static::tableName())->where('cid', $cid)->count();
     }
 
     public static function getJoinCorp($uid, $offset = 1, $limit = 4)
@@ -38,7 +43,7 @@ class CorpNumber extends Model
             ->where('cn.uid', $uid)
             ->page("{$offset}, {$limit}")
             ->select();
-        $count = Db::name('corp_number')->alias('cn')
+        $count = Db::name(static::tableName())->alias('cn')
             ->join('__CORP__ c', '`cn`.`cid` = `c`.`cid`')
             ->where('cn.uid', $uid)
             ->count();
@@ -52,13 +57,13 @@ class CorpNumber extends Model
             'email' => $email,
             'password' => md5($password),
         ];
-        $number = Db::name('corp_number')->where($where)->find();
+        $number = Db::name(static::tableName())->where($where)->find();
         return $number;
     }
 
     public static function deleteNumber($cid, $uid)
     {
-        Db::name('corp_number')->delete([
+        Db::name(static::tableName())->delete([
             'cid' => $cid,
             'uid' => $uid,
         ]);
