@@ -18,6 +18,9 @@ class Activity extends Base
     public function index()
     {
         $nowpage = request()->get('page');
+        $status = request()->get('status');
+        $time = request()->get('time');
+        $title = request()->get('tile');
         $array = [
             ['id' => 1, 'name' => 'wendy'],
             ['id' => 2, 'name' => 'rose'],

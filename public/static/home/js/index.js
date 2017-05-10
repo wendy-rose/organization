@@ -22,7 +22,7 @@ $(function() {
             },
             function(res) {
             	 var corpData = res.data;
-                $("#corpList").find("li").remove(); 
+                $("#activityList").find("li").remove(); 
                 $('#actTemplate').tmpl(corpData).appendTo('#activityList');
                 laypage({
                     cont: 'page',
