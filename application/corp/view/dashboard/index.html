@@ -58,10 +58,11 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{$corp.corppic}" class="img-circle" alt="User Image" />
+                        <img src="" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p class="corpname">{$corp.corpname}·{$number.username}</p>
+                        <p class="corpname"></p>
+                        <p id="userdept"></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         <input type="hidden" name="cid" value="{$corp.cid}">
                         <input type="hidden" name="uid" value="{$number.uid}">
@@ -162,13 +163,13 @@
                             <div class="form-group">
                                 <input type="hidden" name="corppic">
                                 <div class="corpDiv" id="corpPicture">
-                                    <img src="__STATIC__/lib/img/logo.png">
+                                    <img src="{$corp.corppic}">
                                 </div>
                                 <p class="text-center" style="color: red;">请点击上传社团图标，宽高不超过120*120，大小不超过2M</p>
                             </div>
                             <div class="form-group has-feedback center-block inputDiv">
                                 <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
-                                <input type="text" name="corpname" placeholder="社团名" class="form-control" required="required" value="计科青协" readonly="readonly">
+                                <input type="text" name="corpname" placeholder="社团名" class="form-control" required="required" value="{$corp.corpname}" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <script id="description" type="text/plain" style="width:100%;height:500px;"></script>

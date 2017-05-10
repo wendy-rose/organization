@@ -52,4 +52,16 @@ class StringUtil
     {
         return str_replace('\\', '/', $str);
     }
+
+    /**
+     * @param $array
+     * @param $columnName
+     * @return mixed
+     */
+    public static function getColumn($array, $columnName)
+    {
+        return array_map(function ($element) use ($columnName) {
+            return $element[$columnName];
+        }, $array);
+    }
 }

@@ -1,5 +1,5 @@
-$(function(){
-	var ueOption = {
+$(function() {
+    var ueOption = {
         serverUrl: '/index/index/ue',
         toolbars: [
             ['source', 'undo', 'redo', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'imagecenter', 'lineheight', 'rowspacingtop', 'rowspacingbottom', 'paragraph', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'time', 'date', 'simpleupload', 'insertimage', 'cleardoc']
@@ -11,15 +11,14 @@ $(function(){
     };
     var ue = UE.getEditor('content', ueOption);
 
-    $('#openapply').onclick(function(){
-    	alert(1);
-    	var checked = $(this).is(':checked');
-    	if (checked) {
-    		$('#begin').attr("disabled", false);
-    		$('#end').attr("disabled", false);
-    	}else {
-    		$('#begin').attr("disabled", true);
-    		$('#end').attr("disabled", true);
-    	}
+    $("#openapply").click(function() {
+        var checked = $(this).is(':checked');
+        if (checked) {
+            $('#begin').attr("disabled", false);
+            $('#end').attr("disabled", false);
+        } else {
+            $('#begin').attr("disabled", true);
+            $('#end').attr("disabled", true);
+        }
     });
 });

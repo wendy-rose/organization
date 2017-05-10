@@ -43,8 +43,10 @@ class Index extends Base
                     $cid = Corp::addCorp($fields);
                     $corp = Corp::getCorp($cid);
                     $deptid = Dept::addDept($cid, $corp['corpname'], $userid);
-                    $pid = Position::addPositionDefault($cid);
-                    CorpNumber::addNumber($cid, $userid, $ussr['username'], $ussr['email'], $ussr['password'], $ussr['mobile'], $deptid, $pid);
+                    Position::addPositionDefault($cid);
+                    $position = Position::getPositionByCid($cid);
+                    $pids = StringUtil::getColumn($position, 'pid');
+                    CorpNumber::addNumber($cid, $userid, $ussr['username'], $ussr['email'], $ussr['password'], $ussr['mobile'], $deptid, end($pids));
                 });
                 return $this->ajaxReturn(true, Lang::get('Corp make success'));
             }
@@ -179,12 +181,14 @@ class Index extends Base
             if (!empty($number)){
                 $lang = '';
                 $isExist = true;
+                $corp = Corp::getCorp($cid);
                 Session::set('number', $number);
+                Session::set('corp', $corp);
             }else{
                 $lang = Lang::get('Email or pasword is error');
                 $isExist = false;
             }
-            return $this->ajaxReturn($isExist, $lang, [], ['url' => Url::build('corp/dashbord/index', "cid={$cid}")]);
+            return $this->ajaxReturn($isExist, $lang, [], ['cid' => $cid]);
         }else{
             $cid = request()->get('cid');
             $corp = Corp::getCorp($cid);
@@ -198,6 +202,13 @@ class Index extends Base
         $uid = User::getUid();
         CorpNumber::deleteNumber($cid, $uid);
         return $this->ajaxReturn(true, Lang::get('Exit corp succuess'));
+    }
+
+    public function getCorp()
+    {
+        $corp = Session::get('corp');
+        $number = Session::get('number');
+        return $this->ajaxReturn(true, '', array_merge($corp, $number));
     }
 
     public function getUser()

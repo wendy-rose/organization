@@ -1,6 +1,19 @@
-.form-bg{
+body{
     background: #00b4ef;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.demo{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .form-horizontal{
     background: #fff;
     padding-bottom: 40px;
@@ -104,7 +117,6 @@
     text-transform: capitalize;
 }
 .form-horizontal .btn{
-    float: right;
     font-size: 14px;
     color: #fff;
     background: #00b4ef;
