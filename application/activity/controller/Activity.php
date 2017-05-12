@@ -9,6 +9,7 @@ class Activity extends Base
     {
         if (request()->isAjax()){
             $activity = request()->post();
+
             var_dump($activity);die;
         }else{
             return $this->fetch();

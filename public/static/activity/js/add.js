@@ -94,6 +94,32 @@ $(function() {
         function(start, end, label) {
             $('input[name="end"]').val(start.format('YYYY/MM/DD'));
         });
+    var map = new AMap.Map("amap", {
+        resizeEnable: true
+    });
+
+    $('#searchMap').click(function (e) {
+        var keyword = $('#mapAddress').val();
+        if (keyword == ''){
+            toastr.warning('请输入地址');
+            return false;
+        }
+        AMap.service(["AMap.PlaceSearch"], function () {
+            var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+                pageSize: 5,
+                pageIndex: 1,
+                city: "010", //城市
+                map: map//,
+                //panel: "panel"
+            });
+            //关键字查询
+            placeSearch.search(keyword);
+        });
+    });
+    AMap.event.addListener(map, 'click', function (e) {
+        console.log(e);
+        console.log(e.poi);
+    });
 
     $('#addActivity').click(function(event) {
         $('#addForm').ajaxSubmit(function(data){
