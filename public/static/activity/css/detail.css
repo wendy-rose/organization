@@ -1,0 +1,96 @@
+.pstyle{
+	text-align: left;
+	font-weight: normal;
+	margin-bottom: 50px;
+}
+
+.pstyle label{
+	font-weight: bold;
+}
+
+.join{
+	width: 68px;
+    height: 105px;
+    border-radius: 5px;
+    border: 1px solid #E0EEEE;
+}
+
+.like{
+	 width: 68px;
+    height: 105px;
+    margin-left: 15px;
+    border-radius: 5px;
+    border: 1px solid #E0EEEE;
+    cursor: pointer;
+}
+
+.joinlike img{
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#editor {
+    height: 91px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 95%;
+    margin-left: 22px;
+}
+
+#editor:focus {
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+
+#btn{
+	margin-left: 22px;
+	margin-top: 5px;
+}
+
+#commit{
+	margin-right: 22px;
+	margin-top: 5px;
+}
+#content{
+	margin-top: 20px;
+}
+
+#content ul{
+	margin: 0;
+	padding: 0;
+}
+
+#content ul li{
+	list-style-type: none;
+	height: 70px;
+	width: 95%;
+	margin-left: 22px;
+	margin-right: 22px;
+	border: 1px solid #E0EEEE;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+#content ul li img {
+	width: 56px;
+	height: 56px;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+#commitcontent{
+	margin-left:15px;
+	width: 75%;
+	height: 70px;
+	display: inline-block;
+	word-wrap: break-word;
+}

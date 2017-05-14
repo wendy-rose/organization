@@ -1,5 +1,5 @@
 $(function() {
-     toastr.options = {
+    toastr.options = {
         "timeOut": "1000"
     };
 
@@ -43,88 +43,106 @@ $(function() {
             singleDatePicker: true,
             showDropdowns: true,
             autoUpdateInput: false,
+            timePicker: true, //显示时间
+            timePicker24Hour: true, //24小时制
             locale: {
-                format: 'YYYY/MM/DD',
+                format: 'YYYY/MM/DD HH:mm',
                 applyLabel: '确定',
                 cancelLabel: '取消'
             }
         },
         function(start, end, label) {
-            $('input[name="starttime"]').val(start.format('YYYY/MM/DD'));
-        });
+            $('input[name="starttime"]').val(start.format('YYYY/MM/DD HH:mm'));
+        }
+    );
 
     $('input[name="endtime"]').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
             autoUpdateInput: false,
+            timePicker: true, //显示时间
+            timePicker24Hour: true, //24小时制
             locale: {
-                format: 'YYYY/MM/DD',
+                format: 'YYYY/MM/DD HH:mm',
                 applyLabel: '确定',
                 cancelLabel: '取消'
             }
         },
         function(start, end, label) {
-            $('input[name="endtime"]').val(start.format('YYYY/MM/DD'));
-        });
+            $('input[name="endtime"]').val(start.format('YYYY/MM/DD HH:mm'));
+        }
+    );
 
     $('input[name="begin"]').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
             autoUpdateInput: false,
+            timePicker: true, //显示时间
+            timePicker24Hour: true, //24小时制
             locale: {
-                format: 'YYYY/MM/DD',
+                format: 'YYYY/MM/DD HH:mm',
                 applyLabel: '确定',
                 cancelLabel: '取消'
             }
         },
         function(start, end, label) {
-            $('input[name="begin"]').val(start.format('YYYY/MM/DD'));
-        });
+            $('input[name="begin"]').val(start.format('YYYY/MM/DD HH:mm'));
+        }
+    );
 
     $('input[name="end"]').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
             autoUpdateInput: false,
+            timePicker: true, //显示时间
+            timePicker24Hour: true, //24小时制
             locale: {
-                format: 'YYYY/MM/DD',
+                format: 'YYYY/MM/DD HH:mm',
                 applyLabel: '确定',
                 cancelLabel: '取消'
             }
         },
         function(start, end, label) {
-            $('input[name="end"]').val(start.format('YYYY/MM/DD'));
-        });
-    var map = new AMap.Map("amap", {
-        resizeEnable: true
+            $('input[name="end"]').val(start.format('YYYY/MM/DD HH:mm'));
+        }
+    );
+
+    $('#getAddress').click(function(event) {
+        $('#address').val($('#mapAddress').val());
+        $('#myMap').modal('hide')
     });
 
-    $('#searchMap').click(function (e) {
-        var keyword = $('#mapAddress').val();
-        if (keyword == ''){
-            toastr.warning('请输入地址');
-            return false;
+    $("input[type='checkbox']").on('ifChanged', function(event) {
+        var checked = $(this).is(':checked');
+        if (checked) {
+            $('#begin,#end').attr('disabled', false);
+            $('#number').attr('disabled', false);
+            $('#begin,#end').attr('required', 'required');
+        } else {
+            $('#begin,#end').attr('disabled', true);
+            $('#number').attr('disabled', true);
+            $('#number').val("");
+            $('#begin,#end').val("");
+            $('#begin,#end').removeAttr('required');
         }
-        AMap.service(["AMap.PlaceSearch"], function () {
-            var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
-                pageSize: 5,
-                pageIndex: 1,
-                city: "010", //城市
-                map: map//,
-                //panel: "panel"
-            });
-            //关键字查询
-            placeSearch.search(keyword);
-        });
-    });
-    AMap.event.addListener(map, 'click', function (e) {
-        console.log(e);
-        console.log(e.poi);
     });
 
     $('#addActivity').click(function(event) {
-        $('#addForm').ajaxSubmit(function(data){
-            console.log(data);
+        $('#addForm').ajaxSubmit(function(data) {
+            if (data.success) {
+                toastr.success(data.msg);
+                window.location.reload();
+            }else {
+                toastr.warning(data.msg);
+            }
         });
         return false;
+    });
+
+    $.get('/corp/index/getCorp', function(response) {
+        var data = response.data;
+        $('.corpname').html(data.corpname);
+        $('#userdept').html(data.username);
+        $('.user-panel img').attr("src", data.corppic);
     });
 });

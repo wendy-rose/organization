@@ -20,7 +20,7 @@ _/_/_/_/    _/_/_/  _/    _/    _/_/_/    _/_/_/
 /*-----------------------------------------------------------------------------------*/
 
 body{
-	text-align: center;
+	/*text-align: center;*/
 	background: #dfe0e2 url(image/pattern.jpg) repeat;
 	font-family: 'Source Sans Pro', sans-serif;
 }
@@ -31,9 +31,9 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-p{
+/*p{
 	font-size: 1.2em;
-}
+}*/
 
 .lead{
 	font-weight: 300;

@@ -53,4 +53,22 @@ class Activity
         }
         return $rangeTime;
     }
+
+    public static function getTypeText($status)
+    {
+        $statusText = self::allTypes();
+        return isset($statusText[$status]) ? $statusText[$status] : '其他';
+    }
+
+    public static function allTypes()
+    {
+        return [
+            1 => '体育竞技',
+            2 => '专业竞赛',
+            3 => '技能拓展',
+            4 => '娱乐活动',
+            5 => '思想教育',
+            -1 => '其他',
+        ];
+    }
 }

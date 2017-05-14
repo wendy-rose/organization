@@ -22,4 +22,9 @@ class Corp extends Model
     {
         return Db::name(self::tableName())->where('cid', $cid)->find();
     }
+
+    public static function getCorpNameByCid($cid)
+    {
+        return Db::name(self::tableName())->where('cid', '=', $cid)->value('corpname');
+    }
 }

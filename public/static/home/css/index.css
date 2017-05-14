@@ -6,6 +6,7 @@
     height: 135px;
     margin: 0px;
     padding: 0px;
+    border-radius: 10px;
 }
 
 #activity ul li .corppic {
@@ -62,13 +63,14 @@
     margin-left: 15px;
     border-radius: 5px;
     border: 1px solid #E0EEEE;
+    cursor: pointer;
 }
 
 #activity ul li .joinlike .buttonDiv {
     height: 105px;
-    margin-right: 10px;
+    margin-right: 20%;
 }
 
 #activity ul li .joinlike button {
-    margin-top: 33px;
+    margin-top: 33px;  
 }
