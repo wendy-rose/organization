@@ -57,7 +57,7 @@ $(function() {
         $('#makeCorp').ajaxSubmit(function(response) {
             if (response.success) {
                 toastr.success(response.msg);
-                window.location.reload();
+                window.location.href = '/corp/index/my';
             } else {
                 toastr.error(reponse.msg);
             }

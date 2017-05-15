@@ -24,7 +24,7 @@ class Position extends Model
 
     public static function getPositionByCid($cid)
     {
-        return static::get(['cid' => $cid]);
+        return Db::name(self::tableName())->where(['cid' => $cid])->select();
     }
 
     public static function getPositionName($cid, $pid)
