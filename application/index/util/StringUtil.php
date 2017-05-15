@@ -50,7 +50,7 @@ class StringUtil
      */
     public static function changeBackslash($str)
     {
-        return str_replace('\\', '/', $str);
+        return str_replace('\\', DIRECTORY_SEPARATOR, $str);
     }
 
     /**

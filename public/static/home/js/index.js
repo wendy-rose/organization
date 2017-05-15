@@ -54,7 +54,7 @@ $(function() {
         $('#ajaxApply').ajaxSubmit(function(data){
             if (data.success) {
                 toastr.success(data.msg);
-                $('#myModal').modal('hide')
+                $('#myModal').modal('hide');
             }
         });
     });

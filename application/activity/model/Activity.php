@@ -43,4 +43,16 @@ class Activity extends Model
     {
         return Db::name(self::tableName())->where(['aid' => $aid])->find();
     }
+
+    public static function addCountLikes($aid)
+    {
+        $likes = Db::name(self::tableName())->where(['aid' => $aid])->value('likes');
+        return Db::name(self::tableName())->where(['aid' => $aid])->update(['likes' => $likes + 1]);
+    }
+
+    public static function resetCountLikes($aid)
+    {
+        $likes = Db::name(self::tableName())->where(['aid' => $aid])->value('likes');
+        return Db::name(self::tableName())->where(['aid' => $aid])->update(['likes' => $likes - 1]);
+    }
 }

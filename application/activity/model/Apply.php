@@ -28,4 +28,9 @@ class Apply extends Model
     {
         return Db::name(self::tableName())->insertGetId($data);
     }
+
+    public static function delApply($aid, $cid)
+    {
+        return Db::name(self::tableName())->where(['cid' => $cid, 'aid' => $aid])->delete();
+    }
 }

@@ -27,12 +27,13 @@ $(function() {
     });
 
     var uploadOption = {
-        action: '/corp/index/UploadCorp',
+        action: '/activity/activity/upload',
         name: 'corpImg',
         autoSubmit: true,
         onComplete: function(file, response) {
             response = JSON.parse(response);
             $('input[name = actpic]').val(response.thumb);
+            $('#imagename').text(response.imgname);
             toastr.success("上传成功");
         }
     };

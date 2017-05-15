@@ -58,6 +58,7 @@ class Index extends Base
     public function UploadCorp()
     {
         $corpImg = request()->file('corpImg');
+        $info = $corpImg->getInfo();
         $validate = ['size'=>2048000,'ext'=>'jpg,png,jpeg'];
         $fileUpload = new FileUpload($corpImg);
         $filePath = $fileUpload->upload($validate);
@@ -68,7 +69,8 @@ class Index extends Base
         $thumbPath = $fileUpload->thumb();
         echo json_encode(array(
             'success' => true,
-            'thumb' => $thumbPath
+            'thumb' => $thumbPath,
+            'imgname' => $info['name'],
         ));
         exit();
     }

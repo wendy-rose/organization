@@ -87,7 +87,8 @@ class User extends Model
             'email' => $userInfo['email'],
             'username' => $userInfo['username'],
             'password' => md5($userInfo['password']),
-            'status' => 1
+            'status' => 1,
+            'avatar' => '/avatar/default.jpg',
         ));
         return $result > 0 ? true  : false;
     }

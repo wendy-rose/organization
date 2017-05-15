@@ -80,7 +80,7 @@
 	border-radius: 10px;
 }
 
-#content ul li img {
+#content ul li #avt {
 	width: 56px;
 	height: 56px;
     margin-top: 7px;

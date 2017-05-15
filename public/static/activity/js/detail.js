@@ -1,4 +1,9 @@
 $(function() {
+
+    toastr.options = {
+        "timeOut": "1000"
+    };
+
     $("#editor").emoji({
         button: "#btn",
         showTab: false,
@@ -120,5 +125,104 @@ $(function() {
                 50: "OK"
             }
         }]
+    });
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    ajaxPage(1);
+
+    function ajaxPage(curr) {
+        $.getJSON('/activity/commit/getList', {
+                page: curr,
+                aid: getUrlParam('aid')
+            },
+            function(res) {
+                var corpData = res.data;
+                $("#commitList").find("li").remove();
+                $('#commitTemplate').tmpl(corpData).appendTo('#commitList');
+                laypage({
+                    cont: 'page',
+                    pages: res.allpage,
+                    curr: res.nowpage,
+                    skin: '#5bc0de',
+                    jump: function(obj, first) {
+                        if (!first) {
+                            ajaxPage(obj.curr);
+                        }
+                    }
+                });
+            }
+        );
+    }
+
+    $('#commit').click(function() {
+        var content = $('#editor').html();
+        if (content == '') {
+            toastr.warning('评论内容不能为空');
+            return false;
+        }
+        var cid = $('input[name=cid]').val();
+        var aid = $('input[name=aid]').val();
+        $.post('/activity/commit/add', { content: content, cid: cid, aid: aid }, function(data, textStatus, xhr) {
+            if (data.success) {
+                ajaxPage(1);
+                $('#editor').html("");
+            } else {
+                toastr.error('评论失败');
+            }
+        });
+    });
+
+    $('#addLike').click(function(event) {
+        var params = $(this).data('param');
+        $.post('/activity/activity/like', params, function(data) {
+            if (data.success) {
+                $('#addLike').addClass('hidden');
+                $('#resetLike').removeClass('hidden');
+            } else {
+                toastr.error('点赞失败');
+            }
+        });
+    });
+
+    $('#resetLike').click(function(event) {
+        var params = $(this).data('param');
+        $.post('/activity/activity/resetLike', params, function(data) {
+            if (data.success) {
+                $('#addLike').removeClass('hidden');
+                $('#resetLike').addClass('hidden');
+            } else {
+                toastr.error('取消点赞失败');
+            }
+        });
+    });
+
+    $('#resetApply').click(function(event){
+        var params = $(this).data('param');
+        $.post('/activity/activity/resetApply', params, function(data, textStatus, xhr) {
+            if (data.success) {
+                $(this).removeClass("hidden");
+                $('#addApply').addClass("hidden");
+            }else{
+                toastr.error('取消报名失败');
+            }
+        });
+    });
+    
+    $('#applyActivity').click(function(event) {
+        $('#ajaxApply').ajaxSubmit(function(data){
+            if (data.success) {
+                toastr.success(data.msg);
+                $('#myModal').modal('hide');
+                $('#resetApply').addClass("hidden");
+            }else{
+                toastr.error('报名失败');
+            }
+        });
     });
 });

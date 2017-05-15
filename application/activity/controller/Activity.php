@@ -5,10 +5,12 @@ use app\activity\model\Apply;
 use app\activity\model\Like;
 use app\corp\model\Corp;
 use app\index\controller\Base;
+use app\index\model\FileUpload;
 use app\user\model\User;
 use think\Session;
 use app\activity\model\Activity as ActvityModel;
 use app\activity\util\Activity as ActvityUtil;
+use think\View;
 
 class Activity extends Base
 {
@@ -64,7 +66,12 @@ class Activity extends Base
                         $list['desc'] = (round(($oldrest/$allrest), 2) * 100). '%';
                         $restdys = ceil(($list['end']-time()) / 86400);
                         $list['restdys'] = '剩'. $restdys. '天';
-                        $list['apply'] = true;
+                        $isApply = Apply::isApply($list['cid'], $list['aid'], $uid);
+                        if ($isApply){
+                            $list['apply'] = true;
+                        }else {
+                            $list['apply'] = false;
+                        }
                     }elseif ($list['begin'] > time()){
                         $list['desc'] = '0%';
                         $list['restdys'] = '未开始';
@@ -98,6 +105,7 @@ class Activity extends Base
     {
         $aid = request()->get('aid');
         $activity = ActvityModel::getActivityByAid($aid);
+        $uid = User::getUid();
         if ($activity['openapply'] == 1){
             if ($activity['begin']< time() && $activity['end'] >time()) {
                 $oldrest = ceil((time()-$activity['begin']) / 86400);
@@ -105,15 +113,24 @@ class Activity extends Base
                 $activity['desc'] = (round(($oldrest/$allrest), 2) * 100). '%';
                 $restdys = ceil(($activity['end']-time()) / 86400);
                 $activity['restdys'] = '剩'. $restdys. '天';
-                $activity['apply'] = true;
+                $isApply = Apply::isApply($activity['cid'], $activity['aid'], $uid);
+                if ($isApply){
+                    $activity['apply'] = false;
+                    $activity['isrest'] = true;
+                }else {
+                    $activity['apply'] = true;
+                    $activity['isrest'] = false;
+                }
             }elseif ($activity['begin'] > time()){
                 $activity['desc'] = '0%';
                 $activity['restdys'] = '未开始';
                 $activity['apply'] = false;
+                $activity['isrest'] = false;
             }elseif ($activity['end'] < time()) {
                 $activity['desc'] = '0%';
                 $activity['restdys'] = '已过期';
                 $activity['apply'] = false;
+                $activity['isrest'] = false;
             }
             $activity['begin'] = date('Y-m-d H:i', $activity['begin']);
             $activity['end'] = date('Y-m-d H:i', $activity['end']);
@@ -128,7 +145,26 @@ class Activity extends Base
         $activity['corpname'] = Corp::getCorpNameByCid($activity['cid']);
         $activity['type'] = ActvityUtil::getTypeText($activity['type']);
         $activity['number'] = empty($activity['number']) ? '不限' : $activity['number'];
-        return $this->fetch('detail', ['activity' => $activity]);
+        $activity['islike'] = Like::isLike($uid, $activity['aid']);
+        $view = new View([
+            // 模板引擎类型 支持 php think 支持扩展
+            'type'         => 'Think',
+            // 模板路径
+            'view_path'    => '',
+            // 模板后缀
+            'view_suffix'  => 'html',
+            // 模板文件名分隔符
+            'view_depr'    => DS,
+            // 模板引擎普通标签开始标记
+            'tpl_begin'    => '<{',
+            // 模板引擎普通标签结束标记
+            'tpl_end'      => '}>',
+            // 标签库标签开始标记
+            'taglib_begin' => '<{',
+            // 标签库标签结束标记
+            'taglib_end'   => '}>',
+        ]);
+        return $view->fetch('detail', ['activity' => $activity]);
     }
 
     public function like()
@@ -136,6 +172,7 @@ class Activity extends Base
         $aid = request()->post('aid');
         $uid = User::getUid();
         Like::addLike($aid, $uid);
+        ActvityModel::addCountLikes($aid);
         return $this->ajaxReturn(true, '点赞成功', ['like'=> Like::countLikeByAid($aid)]);
     }
 
@@ -144,6 +181,7 @@ class Activity extends Base
         $aid = request()->post('aid');
         $uid = User::getUid();
         Like::resetLike($uid, $aid);
+        ActvityModel::resetCountLikes($aid);
         return $this->ajaxReturn(true, '取消点赞成功', ['like' =>  Like::countLikeByAid($aid)]);
     }
     public function apply()
@@ -165,5 +203,36 @@ class Activity extends Base
             $lang = '';
         }
         return $this->ajaxReturn($isApply, $lang);
+    }
+
+    public function search()
+    {
+        return $this->fetch();
+    }
+
+    public function upload()
+    {
+        $corpImg = request()->file('corpImg');
+        $info = $corpImg->getInfo();
+        $validate = ['size'=>2048000,'ext'=>'jpg,png,jpeg'];
+        $fileUpload = new FileUpload($corpImg);
+        $filePath = $fileUpload->upload($validate);
+        if (substr($filePath, 0, 1) != '/') {
+            return $this->ajaxReturn(false, $filePath);
+        }
+        echo json_encode(array(
+            'success' => true,
+            'thumb' => $filePath,
+            'imgname' => $info['name'],
+        ));
+        exit();
+    }
+
+    public function resetApply()
+    {
+        $aid = request()->post('aid');
+        $cid = request()->post('cid');
+        Apply::delApply($aid, $cid);
+        return $this->ajaxReturn(true, '取消报名成功');
     }
 }
