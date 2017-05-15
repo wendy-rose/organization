@@ -17,10 +17,10 @@ $(function() {
     ajaxPage(1);
 
     function ajaxPage(curr) {
-        $.getJSON('/corp/index/my', {page: curr},
+        $.getJSON('/corp/index/my', { page: curr },
             function(res) {
                 var corpData = res.data;
-                $("#corpList").find("li").remove(); 
+                $("#corpList").find("li").remove();
                 $('#myCorpList').tmpl(corpData).appendTo('#corpList');
                 laypage({
                     cont: 'myCorpPage',
@@ -33,16 +33,18 @@ $(function() {
                         }
                     }
                 });
-            });
+            }
+        );
     }
 });
 
 function enterCorp(cid) {
-    window.location.href = '/corp/index/login?cid=' + cid;
+    var url = '/corp/index/login?cid=' + cid;
+    window.open(url, '_blank');
 }
 
-function exitCorp(cid){
-    $.$.post('/corp/index/exitCorp', {cid : cid}, function(data, textStatus, xhr) {
+function exitCorp(cid) {
+    $.$.post('/corp/index/exitCorp', { cid: cid }, function(data, textStatus, xhr) {
         toastr.success(data.msg);
         ajaxPage(1);
     });

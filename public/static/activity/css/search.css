@@ -3,12 +3,7 @@
 }
 
 #content{
-	/*border: 1px solid black;*/
 	height: 100%;
-/*	background-color: red;*/
-/*	margin-right: 90px;
-	margin-left: 90px;
-	margin-top: 70px;*/
 }
 
 
@@ -18,7 +13,7 @@
 	border: 1px solid #E0EEEE;
 	float: left;
 	cursor: pointer;
-	margin: 40px 7px;
+	margin: 40px 5px;
 	background: #fff;
 	border-radius: 10px;
 	border-bottom: 20px;
@@ -60,8 +55,7 @@
 }
 
 #content ul li span{
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
 	color: #999999;
-	/*margin: 20px 20px;*/
 }

@@ -132,7 +132,7 @@ $(function() {
         $('#addForm').ajaxSubmit(function(data) {
             if (data.success) {
                 toastr.success(data.msg);
-                window.location.reload();
+                window.location.href='/activity/activity/search';
             }else {
                 toastr.warning(data.msg);
             }

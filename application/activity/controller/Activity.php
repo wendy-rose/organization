@@ -68,9 +68,9 @@ class Activity extends Base
                         $list['restdys'] = '剩'. $restdys. '天';
                         $isApply = Apply::isApply($list['cid'], $list['aid'], $uid);
                         if ($isApply){
-                            $list['apply'] = true;
-                        }else {
                             $list['apply'] = false;
+                        }else {
+                            $list['apply'] = true;
                         }
                     }elseif ($list['begin'] > time()){
                         $list['desc'] = '0%';
@@ -138,6 +138,7 @@ class Activity extends Base
             $activity['desc'] = '0%';
             $activity['restdys'] = '';
             $activity['apply'] = false;
+            $activity['isrest'] = false;
         }
         $activity['createtime'] = date('Y-m-d H:i', $activity['createtime']);
         $activity['endtime'] = date('Y-m-d H:i', $activity['endtime']);
@@ -207,7 +208,30 @@ class Activity extends Base
 
     public function search()
     {
-        return $this->fetch();
+        if (request()->isAjax()){
+            $request = request()->get();
+            $corp = Session::get('corp');
+            $lists = ActvityModel::getPublishActivity($corp['cid'], $request['type'], $request['status'], $request['title'], $request['likes'], $request['page']);
+            $return = [];
+            $time = time();
+            if (!empty($lists['list'])){
+                foreach ($lists['list'] as $list){
+                    $list['countApply'] = Apply::countApply($corp['cid'], $list['aid']);
+                    if ($list['starttime'] <= $time && $time <= $list['endtime']){
+                        $list['status'] = '进行中';
+                    }elseif($time < $list['starttime']){
+                        $list['status'] = '未开始';
+                    }elseif ($time > $list['endtime']){
+                        $list['status'] = '已结束';
+                    }
+                    $list['starttime'] = date('Y-m-d H:i', $list['starttime']);
+                    $return[] = $list;
+                }
+            }
+            return $this->ajaxReturn(true, '', $return, ['count' => $lists['count'], 'page' => $request['page']]);
+        }else{
+           return $this->fetch();
+        }
     }
 
     public function upload()
@@ -234,5 +258,68 @@ class Activity extends Base
         $cid = request()->post('cid');
         Apply::delApply($aid, $cid);
         return $this->ajaxReturn(true, '取消报名成功');
+    }
+
+    public function del()
+    {
+        $aid = request()->post('aid');
+        ActvityModel::del($aid);
+        return $this->ajaxReturn(true, '删除成功');
+    }
+
+    public function edit()
+    {
+        if (request()->isAjax()){
+            $activity = request()->post();
+            $corp = Session::get('corp');
+            $activity['starttime'] = strtotime($activity['starttime']);
+            $activity['endtime'] = strtotime($activity['endtime']);
+            if ($activity['starttime'] < time()){
+                return $this->ajaxReturn(false, '活动开始时间不能少于当前时间');
+            }
+            if ($activity['starttime'] > $activity['endtime']){
+                return $this->ajaxReturn(false, '开始时间不能大于结束时间');
+            }
+            if (isset($activity['openapply'])) {
+                $activity['begin'] = strtotime($activity['begin']);
+                $activity['end'] = strtotime($activity['end']);
+                if ($activity['begin'] > $activity['end']){
+                    return $this->ajaxReturn(false, '报名开始时间不能大于报名结束时间');
+                }
+                if ($activity['begin'] > $activity['starttime'] || $activity['end'] > $activity['starttime']) {
+                    return $this->ajaxReturn(false, '报名开始结束时间不能大于活动开始时间');
+                }
+            }
+            $activity['updatetime'] = time();
+            $activity['cid'] = $corp['cid'];
+            $activity['uid'] = User::getUid();
+            unset($activity['corpImg']);
+            ActvityModel::editActivity($activity['aid'], $activity);
+            return $this->ajaxReturn(true, '编辑成功');
+        }else{
+            $aid = request()->get('aid');
+            $activity = ActvityModel::getActivityByAid($aid);
+            return $this->fetch('edit', $activity);
+        }
+    }
+
+    public function number()
+    {
+        if (request()->isAjax()){
+            $page = request()->get('page');
+            $status = request()->get('status');
+            $aid = request()->get('aid');
+            $apply = array();
+            $lists = Apply::getApplyByAid($aid, $status, $page);
+            if (!empty($lists['list'])){
+                foreach ($lists['list'] as $list){
+                    $list['createtime'] = date('Y-m-d H:i', $list['createtime']);
+                    $apply[] = $list;
+                }
+            }
+            return $this->ajaxReturn(true, '', $apply, ['count' => $lists['count'], 'page' => $page]);
+        }else{
+            return $this->fetch('number', ['aid' => request()->get('aid')]);
+        }
     }
 }
