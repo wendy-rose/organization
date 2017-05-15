@@ -40,7 +40,7 @@ CREATE TABLE `club_activity` (
   `contact` varchar(255) NOT NULL COMMENT '联系人',
   `phone` varchar(255) NOT NULL COMMENT '联系人电话',
   PRIMARY KEY (`aid`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_apply
@@ -57,7 +57,7 @@ CREATE TABLE `club_apply` (
   `aid` int(11) NOT NULL,
   `cid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_attach
@@ -69,7 +69,7 @@ CREATE TABLE `club_attach` (
   `attachurl` varchar(255) NOT NULL,
   `attachicon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`attachid`)
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_corp
@@ -90,7 +90,7 @@ CREATE TABLE `club_corp` (
   `belong` tinyint(2) NOT NULL COMMENT '1表示个人2表示学院3表示学校',
   `createtime` int(10) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`cid`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_corp_number
@@ -109,7 +109,7 @@ CREATE TABLE `club_corp_number` (
   `cid` int(11) NOT NULL COMMENT '社团id',
   `createtime` int(11) NOT NULL COMMENT '加入时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_credit
@@ -121,7 +121,7 @@ CREATE TABLE `club_credit` (
   `low` int(255) DEFAULT NULL,
   `high` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_credit_log
@@ -133,7 +133,7 @@ CREATE TABLE `club_credit_log` (
   `type` int(11) NOT NULL COMMENT '类型，1表示登录，2表示报名活动，3表示评论，4表示加入社团，5表示注册',
   `time` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_dept
@@ -149,7 +149,7 @@ CREATE TABLE `club_dept` (
   `pid` int(11) NOT NULL COMMENT '上级部门id',
   `remark` varchar(255) NOT NULL COMMENT '备注',
   PRIMARY KEY (`deptid`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_like
@@ -160,7 +160,7 @@ CREATE TABLE `club_like` (
   `uid` int(11) NOT NULL COMMENT '用户id',
   `aid` int(11) NOT NULL COMMENT '活动id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_position
@@ -171,7 +171,7 @@ CREATE TABLE `club_position` (
   `name` varchar(255) NOT NULL COMMENT '职位名称',
   `cid` int(11) NOT NULL COMMENT '社团id',
   PRIMARY KEY (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for club_template_field
@@ -203,7 +203,7 @@ CREATE TABLE `club_user` (
   `money` int(255) DEFAULT '0' COMMENT '金钱值',
   `donation` int(255) DEFAULT '0' COMMENT '贡献值',
   PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for person
@@ -221,4 +221,4 @@ CREATE TABLE `person` (
   `createtime` datetime DEFAULT NULL COMMENT '创建日期',
   `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -30,6 +30,9 @@ class FileUpload extends Model implements Upload
     public function thumb()
     {
         $image = Image::open($this->file);
+        if (!is_dir(ROOT_PATH. 'public'. DS. 'avatar')){
+            mkdir(ROOT_PATH. 'public'. DS. 'avatar', 777);
+        }
         $imagePath = DS. 'avatar'. DS. md5(time()). '.'. $image->type();
         $image->thumb(120, 120)->save(ROOT_PATH. 'public'. $imagePath);
         return $this->changeBackslash($imagePath);
@@ -47,6 +50,6 @@ class FileUpload extends Model implements Upload
      */
     private function changeBackslash($str)
     {
-        return str_replace('\\', '/', $str);
+        return str_replace('\\', DIRECTORY_SEPARATOR, $str);
     }
 }
