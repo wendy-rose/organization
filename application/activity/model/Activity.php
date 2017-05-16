@@ -99,4 +99,9 @@ class Activity extends Model
     {
         return Db::name(self::tableName())->where(['aid' => $aid])->value($field);
     }
+
+    public static function countActivityByCid($cid)
+    {
+        return Db::name(self::tableName())->where(['cid' => $cid])->count();
+    }
 }

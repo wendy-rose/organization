@@ -1,6 +1,7 @@
 <?php
 namespace app\corp\controller;
 
+use app\activity\model\Activity;
 use app\corp\model\Attach;
 use app\corp\model\Corp;
 use app\corp\model\CorpNumber;
@@ -12,18 +13,50 @@ use app\index\util\AttachUtil;
 use app\index\util\StringUtil;
 use app\user\model\User;
 use app\corp\util\Corp as CorpUtil;
-use Symfony\Component\DomCrawler\Field\InputFormField;
 use think\Db;
 use think\File;
 use think\Lang;
 use think\Session;
 use think\Url;
+use think\View;
 
 class Index extends Base
 {
     public function index()
     {
-        return $this->fetch();
+        if (request()->isAjax()){
+            $request = request()->get();
+            $lists = Corp::getCorpList($request['type'], $request['num'], $request['belong'], $request['corpname'], $request['page']);
+            $return = array();
+            if (!empty($lists['list'])){
+                foreach ($lists['list'] as $list){
+                    $list['createtime'] = date('Y-m-d');
+                    $list['belong'] = CorpUtil::getCorpBelong($list['belong']);
+                    $return[] = $list;
+                }
+            }
+            return $this->ajaxReturn(true, '', $return, ['allpage' => $lists['count'], 'nowpage' => $request['page']]);
+        }else{
+            $view = new View([
+                // 模板引擎类型 支持 php think 支持扩展
+                'type'         => 'Think',
+                // 模板路径
+                'view_path'    => '',
+                // 模板后缀
+                'view_suffix'  => 'html',
+                // 模板文件名分隔符
+                'view_depr'    => DS,
+                // 模板引擎普通标签开始标记
+                'tpl_begin'    => '<{',
+                // 模板引擎普通标签结束标记
+                'tpl_end'      => '}>',
+                // 标签库标签开始标记
+                'taglib_begin' => '<{',
+                // 标签库标签结束标记
+                'taglib_end'   => '}>',
+            ]);
+            return $view->fetch();
+        }
     }
 
     public function make()
@@ -41,6 +74,7 @@ class Index extends Base
                     $fields['createuid'] = $userid;
                     $fields['createtime'] = time();
                     $cid = Corp::addCorp($fields);
+                    Corp::updateNumByCid($cid);
                     $corp = Corp::getCorp($cid);
                     $deptid = Dept::addDept($cid, $corp['corpname'], $userid);
                     Position::addPositionDefault($cid);
@@ -215,6 +249,80 @@ class Index extends Base
 
     public function detail()
     {
-        return $this->fetch();
+        $cid = request()->get('cid');
+        $corp= Corp::getCorp($cid);
+        $corp['count'] = Activity::countActivityByCid($cid);
+        $corp['createtime'] = date('Y-m-d', $corp['createtime']);
+        $corp['belongText'] = CorpUtil::getCorpBelong($corp['belong']);
+        return $this->fetch('detail', $corp);
+    }
+
+    public function getOrg()
+    {
+        $cid = request()->get('cid');
+        $depts = Dept::getDeptByCid($cid);
+        $deptLists = [];
+        foreach ($depts as $dept){
+            $deptLists[] = [
+                'id' => $dept['deptid'],
+                'pid' => $dept['pid'],
+                'name' => $dept['name'],
+            ];
+        }
+        $this->returnArray($deptLists);
+    }
+
+    private function returnArray($result){
+
+        $newResult = array();
+        if( !empty($result) ){
+
+            foreach ($result as $k => $v) {
+
+                $arrTep = $v;
+                $arrTep['childrens'] = array();
+
+                //父类ID是0时，代表没有父类ID，为根节点
+                if( 0 == $v['pid'] ){
+                    $newResult[] = $arrTep;
+                    continue;
+                }
+
+                if( 0 != $v['pid']){
+                    //添加不入数组中的子节点，可能是没有父类节点，那么将其当成根节点
+                    if(false === $this->updateArray($newResult, $arrTep) ){
+                        $arrTep = array('id'=> $arrTep['id'], 'pid'=>0, 'name'=>$arrTep['name'], 'childrens'=>array($arrTep));
+                        $newResult[] = $arrTep;
+                    }
+
+                }
+            }
+        }
+        //测试数组是否生成树形数组
+        //return $newResult;
+        echo json_encode($newResult);
+    }
+
+    private function updateArray( &$newResult, $arrTep ){
+
+        if( !empty($newResult) ){
+            foreach ($newResult as $k => $v) {
+                //查询当前节点的id是否与新的树形数组的id一致，如果是，那么将当前节点存放在树形数组的childrens字段中
+                if( $v['id'] == $arrTep['pid']){
+
+                    $newResult[$k]['childrens'][] = $arrTep;
+                    return true;
+
+                }elseif( !empty($v['childrens']) ){
+                    //递归调用，查询树形数组的子节点与当前节点的关系
+                    if(true === $this->updateArray( $newResult[$k]['childrens'], $arrTep )){
+                        return true;
+                    }
+
+                }
+
+            }
+        }
+        return false;
     }
 }

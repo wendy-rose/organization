@@ -58,17 +58,16 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="" class="img-circle" alt="User Image" />
+                        <img src="" class="img-circle" alt="User Image" src="{$corp.corppic}" />
                     </div>
                     <div class="pull-left info">
                         <p class="corpname"></p>
-                        <p id="userdept"></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         <input type="hidden" name="cid" value="{$corp.cid}">
                         <input type="hidden" name="uid" value="{$number.uid}">
                     </div>
                 </div>
-<!-- search form -->
+                <!-- search form -->
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="Search..." />
@@ -158,23 +157,55 @@
                 <!-- /.row -->
                 <div style="width: 100%;" class="connectedSortable">
                     <div class="center-block box-body no-padding" style="width: 50%;">
-                        <form action="{:Url('corp/dashboard/index')}" method="post" id="makeCorp" name="makeCorp">
+                        <form action="{:Url('corp/dashboard/index')}" method="post" id="makeCorp" name="makeCorp" class="form-horizontal">
+                            <input type="hidden" name="cid" value="{$corp.cid}">
                             <div class="form-group">
-                                <input type="hidden" name="corppic">
+                                <input type="hidden" name="corppic" value="{$corp.corppic}">
                                 <div class="corpDiv" id="corpPicture">
                                     <img src="{$corp.corppic}">
                                 </div>
                                 <p class="text-center" style="color: red;">请点击上传社团图标，宽高不超过120*120，大小不超过2M</p>
                             </div>
-                            <div class="form-group has-feedback center-block inputDiv">
-                                <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
-                                <input type="text" name="corpname" placeholder="社团名" class="form-control" required="required" value="{$corp.corpname}" readonly="readonly">
+                            <div class="form-group center-block">
+                                <label class="control-label col-md-3">社团名</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="corpname" class="form-control" required="required" value="{$corp.corpname}" readonly="readonly">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group center-block">
+                                <label class="control-label col-md-3">现任领导</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="leader" class="form-control" required="required" value="{$corp.leader}">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group center-block">
+                                <label class="control-label col-md-3">联系人</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="contact" class="form-control" required="required" value="{$corp.contact}">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group center-block">
+                                <label class="control-label col-md-3">联系地址</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="address" class="form-control" required="required" value="{$corp.address}">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group center-block">
+                                <label class="control-label col-md-3">联系方式</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="method" class="form-control" required="required" value="{$corp.method}" placeholder="邮箱或手机号">
+                                </div>
+                                <div class="col-md-3"></div>
                             </div>
                             <div class="form-group">
                                 <script id="description" type="text/plain" style="width:100%;height:500px;"></script>
                             </div>
                         </form>
-                        <button class=" btn btn-info center-block" id="addCorp">
+                        <button class=" btn btn-info center-block" id="editCorp" onclick="submitCorp()">
                             <i class="fa fa-edit"></i> 提交
                         </button>
                     </div>
@@ -203,8 +234,56 @@
     <script src="__STATIC__/ueditor1433/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
-    <script src="__STATIC__/corp/js/base.js" type="text/javascript"></script>
-    <script src="__STATIC__/corp/js/edit.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+        toastr.options = {
+            "timeOut": "1000"
+        };
+        $.get('/corp/index/getCorp', function(response) {
+            var data = response.data;
+            $('.corpname').html(data.corpname);
+            $('.user-panel img').attr("src", data.corppic);
+        });
+        var uploadOption = {
+            action: '/corp/index/UploadCorp',
+            name: 'corpImg',
+            autoSubmit: true,
+            onComplete: function(file, response) {
+                response = JSON.parse(response);
+                if (response.success) {
+                    var image = $('<img src="' + response.thumb + '">');
+                    $('#corpPicture').empty().html(image);
+                    $('input[name=corppic]').val(response.thumb);
+                } else {
+                    toastr.warning(response.msg);
+                }
+            }
+        };
+        var oAjaxUpload = new AjaxUpload('#corpPicture', uploadOption);
+        var ueOption = {
+            serverUrl: '/index/index/ue',
+            toolbars: [
+                ['source', 'undo', 'redo', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'imagecenter', 'lineheight', 'rowspacingtop', 'rowspacingbottom', 'paragraph', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'time', 'date', 'simpleupload', 'insertimage', 'cleardoc']
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true,
+            allowDivTransToP: false
+        };
+        var ue = UE.getEditor('description', ueOption);
+        ue.addListener("ready", function() {
+            ue.setContent('{$corp.description}');
+        });
+    });
+
+
+    function submitCorp() {
+        $('#makeCorp').ajaxSubmit(function(data) {
+            if (data.success) {
+                window.location.reload();
+            }
+        });
+    }
+    </script>
 </body>
 
 </html>

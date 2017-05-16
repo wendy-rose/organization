@@ -68,4 +68,10 @@ class CorpNumber extends Model
             'uid' => $uid,
         ]);
     }
+
+    public static function isExistByUidAndCid($uid, $cid)
+    {
+        $number = Db::name(self::tableName())->where(['uid' => $uid, 'cid' => $cid])->find();
+        return empty($number) ? false : true;
+    }
 }

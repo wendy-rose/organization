@@ -134,6 +134,23 @@ $(function() {
         return null; //返回参数值
     }
 
+      function isNull(value) {
+        return (value == "" || value == undefined || value == null) ? true : false;
+    }
+
+    $.get("/user/index/start.html", function(data) {
+        var result = data.data.data;
+        if (data.success) {
+            var user = result.user;
+            if (!isNull(user.avatar)) {
+                $('#avatar').attr('src', user.avatar);
+            }
+        } else {
+            toastr.warning(data.msg);
+            window.location = '/user/login/index.html';
+        }
+    });
+
     ajaxPage(1);
 
     function ajaxPage(curr) {

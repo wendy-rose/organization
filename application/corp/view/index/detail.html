@@ -1,74 +1,130 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>Community | Activity</title>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="__STATIC__/lib/fonts/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="__STATIC__/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/fonts/fonts.googleapis.com.css" />
     <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/awesome-bootstrap-checkbox.css">
-    <link rel="stylesheet" href="__STATIC__/lib/css/button.css"/>
-    <link rel="stylesheet" href="__STATIC__/home/css/style.css"/>
-    <link rel="stylesheet" href="__STATIC__/home/css/corp.css"/>
+    <link rel="stylesheet" href="__STATIC__/lib/css/button.css" />
+    <link rel="stylesheet" href="__STATIC__/lib/css/jquery.jOrgChart.css" />
+    <link rel="stylesheet" href="__STATIC__/home/css/style.css" />
+    <link rel="stylesheet" href="__STATIC__/home/css/corp.css" />
 </head>
+
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header" style="margin-left: 10%;">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="__STATIC__/lib/img/logo1.png" ondragstart="return false;" style="margin-top: -15px;opacity: 0.95;"></a>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header" style="margin-left: 10%;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="__STATIC__/lib/img/logo1.png" ondragstart="return false;" style="margin-top: -15px;opacity: 0.95;"></a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse pull-left">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{:Url('home/index/index')}">活动</a>
+                    </li>
+                    <li>
+                        <a href="{:Url('corp/index/index')}">社团</a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{:Url('user/index/index')}">管理</a></li>
+                            <li><a href="{:Url('user/login/logon')}">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse pull-right" style="margin-right: 10%;">
+                <img class="img-responsive img-circle pull-left" src="__STATIC__/lib/img/user.jpg" ondragstart="return false;" id="avatar">
+            </div>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse pull-left">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="{:Url('home/index/index')}">活动</a>
-                </li>
-                <li>
-                    <a href="{:Url('corp/index/index')}">社团</a>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{:Url('user/index/index')}">管理</a></li>
-                        <li><a href="{:Url('user/login/logon')}">退出</a></li>
-                    </ul>
-                </li>
-            </ul>
+    </nav>
+    <div style="height: 500px;margin-top:25px;width: 1000px;margin-left: auto;margin-right: auto;">
+        <div class="center-block text-center">
+            <img src="__STATIC__/lib/img/nobg_big.jpg">
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right" style="margin-right: 10%;">
-            <img class="img-responsive img-circle pull-left" src="__STATIC__/lib/img/user.jpg" ondragstart="return false;" id="avatar">
+        <div style="height: 60px;margin-top: -60px;">
+            <span style="color: #fff;margin-left: 250px;"><label style="font-size: 30px;font-weight: bold;">{$corpname}</label>&nbsp;&nbsp;<label>{$belongText}</label></span>
+        </div>
+        <div style="height: 180px;width: 180px;border-radius: 90px;z-index: 10000;margin-top: -150px;margin-left: 40px;">
+            <img src="{$corppic}" style="height: 180px;width: 180px;" class="img-responsive img-circle">
+        </div>
+        <div style="height: 60px;margin-top: -30px;background-color: #fff;">
+            <button class="btn btn-danger" style="margin-top: 13px;margin-left: 700px;">加入我们</button>
+            <div style="width: 180px;height: 60px;" class="pull-right">
+                <div class="pull-left text-center" style="width: 55px;height: 60px;">
+                    <p style="margin-top: 5px;">{$num}</p>
+                    <p>社员</p>
+                </div>
+                <div class="pull-left text-center" style="width: 55px;height: 60px;margin-left: 7.5px;">
+                    <p style="margin-top: 5px;">{$count}</p>
+                    <p>活动</p>
+                </div>
+                <div class="pull-right text-center" style="width: 55px;height: 60px;">
+                    <p style="margin-top: 5px;">0</p>
+                    <p>活跃</p>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 10px;border: 1px solid #E0EEEE;background-color: #fff;">
+            <div style="height: 40px;border-bottom: 1px solid #E0EEEE;">
+                <h4 style="line-height: 40px;margin-left: 20px;">社团简介</h4>
+            </div>
+            <div id="description" class="center-block" style="margin-top: 5px;margin-left: 20px;">
+                <div style="margin-bottom: 30px;">
+                    <p>【现任领导】</p>
+                    <p>{$leader}</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p>【创建时间】</p>
+                    <p>{$createtime}</p>
+                </div>
+                <div style="margin-bottom: 30px;" ">
+                    <p>【联系方式】</p>
+                    <p>联系人：{$contact}</p>
+                    <p>地址：{$address}</p>
+                    <p>手机号或邮箱：{$method}</p>
+                </div>
+                <div style="margin-bottom: 30px; "">
+                    <p>【简介】</p>
+                    <div>
+                        {$description}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 10px;border: 1px solid #E0EEEE;background-color: #fff;">
+            <div style="height: 40px;border-bottom: 1px solid #E0EEEE;">
+                <h4 style="line-height: 40px;margin-left: 20px;">社团架构</h4>
+            </div>
+            <div style="margin-left: auto;margin-right: auto;margin-top: 5px;">
+                <div id="jOrgChart" class="center-block">
+                </div>
+            </div>
         </div>
     </div>
-</nav>
-<div style="height: 500px;background-color: red;margin-top:78px;width: 1000px;margin-left: auto;margin-right: auto;">
-    <div class="center-block text-center">
-         <img src="__STATIC__/lib/img/nobg_big.jpg">
-    </div>
-    <div style="height: 60px;position: relative;top: -60px;background-color: blue;">
-        
-    </div>
-    <div style="height: 180px;width: 180px;border-radius: 90px;background-color: black;z-index: 10000;">
-        
-    </div>
-</div>
-<script src="__STATIC__/lib/js/jquery.min.js"></script>
-<script src="__STATIC__/lib/js/bootstrap.min.js"></script>
-<script src="__STATIC__/lib/js/jquery.tmpl.min.js"></script>
-<script src="__STATIC__/lib/js/laypage.js"></script>
-<script src="__STATIC__/index/js/base.js"></script>
-<script src="__STATIC__/home/js/corp.js"></script>
-<script type="text/javascript">
+    <script src="__STATIC__/lib/js/jquery.min.js"></script>
+    <script src="__STATIC__/lib/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/lib/js/jquery.jOrgChart.js"></script>
+    <script src="__STATIC__/index/js/base.js"></script>
+    <script src="__STATIC__/corp/js/detail.js"></script>
+    <script type="text/javascript">
     function changeState(el) {
-        if (el.readOnly) el.checked=el.readOnly=false;
-        else if (!el.checked) el.readOnly=el.indeterminate=true;
+        if (el.readOnly) el.checked = el.readOnly = false;
+        else if (!el.checked) el.readOnly = el.indeterminate = true;
     }
-</script>
+    </script>
 </body>
+
 </html>

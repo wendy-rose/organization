@@ -4,8 +4,5 @@ $(function(){
         $('.corpname').html(data.corpname);
         $('#userdept').html(data.username);
         $('.user-panel img').attr("src", data.corppic);
-        ue.addListener("ready", function(){
-            ue.setContent(data.description);
-        });
     });
 });

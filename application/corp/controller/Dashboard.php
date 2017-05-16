@@ -14,7 +14,11 @@ class Dashboard extends Controller
     public function index()
     {
         if (request()->isAjax()) {
-
+            $request = request()->post();
+            $request['description'] = $request['editorValue'];
+            unset($request['editorValue']);
+            Corp::updateCorpByCid($request['cid'], $request);
+            return ['success' => true, 'msg' => '保存成功'];
         }else{
             $cid = request()->get('cid');
             if (empty($cid)) {
@@ -37,4 +41,5 @@ class Dashboard extends Controller
     {
         return $this->fetch();
     }
+
 }
