@@ -14,7 +14,7 @@ $(function() {
     
     obj.ajaxPage = function(curr) {
         var params = {
-            'status': $('select[name=status]').val(),
+            'status': $('#status').val(),
             'title': $('#title').val(),
             'time': $('input[type=radio]:checked').val(),
             'page': curr
@@ -57,12 +57,12 @@ $(function() {
         obj.ajaxPage(1);
     });
 
-    $('input[type=radio]').on('ifChanged', function(event) {
+    $('input[type=radio]').on('ifChecked', function(event) {
         obj.ajaxPage(1);
     });
 
     $('#applyActivity').click(function(){
-        $('#ajaxApply').ajaxSumbit(function(data){
+        $('#ajaxApply').ajaxSubmit(function(data){
             if (data.success) {
                 $('#myApply').modal('hide');
                 obj.success(data.msg);
@@ -73,9 +73,9 @@ $(function() {
     });
 
     $('#callApply').click(function(){
-        $('#ajaxCall').ajaxSumbit(function(data){
+        $('#ajaxCall').ajaxSubmit(function(data){
             if (data.success) {
-                $('#callApply').modal('hide');
+                $('#callApplyModal').modal('hide');
                 obj.success(data.msg);
             }else {
                 obj.success("催办失败");
@@ -87,19 +87,20 @@ $(function() {
 function apply(aid){
 	$.post('/activity/apply/getMyApply', {aid: aid}, function(data, textStatus, xhr) {
         $('#ajaxApply input, #ajaxApply textarea').val();
+        $('ajaxApply').find('div').remove();
 		$('#applyTemplate').tmpl(data.data).appendTo('#ajaxApply');
         $('#myApply').modal('show');
 	});
 }
 
 function call(aid, cid){
-     $('#callApply').modal('show');
+     $('#callApplyModal').modal('show');
      $('#ajaxCall input[name=cid]').val(cid);
      $('#ajaxCall input[name=aid]').val(aid);
 }
 
 function searchReason(aid){
-    $('#callApply').modal('show');
+    $('#backReason').modal('show');
     $.post('/activity/apply/getMyApply', {aid: aid}, function(data, textStatus, xhr) {
         $('#reason').val(data.data.reason);
     });

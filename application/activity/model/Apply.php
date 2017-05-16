@@ -86,7 +86,7 @@ class Apply extends Model
             }
         }
         if (!empty($status)){
-            $query->where(['status' => $status]);
+            $query->where(['cn.status' => $status]);
         }
         if (!empty($title)){
             $query->where('c.title', 'like', "%{$title}%");

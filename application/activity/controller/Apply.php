@@ -66,7 +66,7 @@ class Apply extends Base
                 foreach ($lists['list'] as $list){
                     $list['starttime'] = date('Y-m-d H:i', $list['starttime']);
                     $list['endtime'] = date('Y-m-d H:i', $list['endtime']);
-                    $list['status'] = ApplyUtil::getStatusText($list['status']);
+                    $list['statusText'] = ApplyUtil::getStatusText($list['status']);
                     $apply[] = $list;
                 }
             }
@@ -105,7 +105,8 @@ class Apply extends Base
     public function editApply()
     {
         $request = request()->post();
+        $request['status'] = 3;
         ApplyModel::editMyApply($request);
-        return $this->ajaxReturn(true, '报名成功');
+        return $this->ajaxReturn(true, '正在审核中');
     }
 }

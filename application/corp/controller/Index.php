@@ -213,20 +213,8 @@ class Index extends Base
         return $this->ajaxReturn(true, '', array_merge($corp, $number));
     }
 
-    public function getUser()
+    public function detail()
     {
-        $user = [
-            ['id' => 1, 'text' => 'wendy'],
-            ['id' => 2, 'text' => 'wendy'],
-            ['id' => 3, 'text' => 'wendy'],
-            ['id' => 4, 'text' => 'wendy'],
-            ['id' => 5, 'text' => 'wendy'],
-            ['id' => 6, 'text' => 'wendy'],
-            ['id' => 1, 'text' => 'wendy'],
-            ['id' => 1, 'text' => 'wendy'],
-            ['id' => 1, 'text' => 'wendy'],
-            ['id' => 1, 'text' => 'wendy'],
-            ['id' => 1, 'text' => 'wendy'],
-        ];
+        return $this->fetch();
     }
 }

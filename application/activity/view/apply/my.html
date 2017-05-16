@@ -61,10 +61,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{:Url('home/index/index')}" class="btn btn-default btn-flat">返回首页</a>
+                                    <a href="<{:Url('home/index/index')}>" class="btn btn-default btn-flat">返回首页</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{:Url('user/login/logon')}" class="btn btn-default btn-flat">退出登录</a>
+                                    <a href="<{:Url('user/login/logon')}>" class="btn btn-default btn-flat">退出登录</a>
                                 </div>
                             </li>
                         </ul>
@@ -103,14 +103,14 @@
                 </form>
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
+               <ul class="sidebar-menu">
                     <li>
-                        <a href="{:Url('user/index/index')}">
+                        <a href="<{:Url('user/index/index')}>">
                             <i class="fa fa-user"></i> <span>个人信息</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{:Url('corp/index/make')}">
+                        <a href="<{:Url('corp/index/make')}>">
                             <i class="fa fa-wrench"></i> <span>创建社团</span>
                             <small class="badge pull-right bg-green">new</small>
                         </a>
@@ -122,13 +122,13 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="{:Url('activity/apply/my')}">
-                            <i class="fa fa-bullhorn"></i> <span>我的活动</span>
+                        <a href="<{:Url('activity/apply/my')}>">
+                            <i class="fa fa-bullhorn"></i> <span>报名活动</span>
                             <small class="badge pull-right bg-yellow">12</small>
                         </a>
                     </li>
                     <li>
-                        <a href="{:Url('corp/index/my')}">
+                        <a href="<{:Url('corp/index/my')}>">
                             <i class="fa fa-group"></i> <span>社团组织</span>
                         </a>
                     </li>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="form-group" style="margin-left: 50px;">
                             <label>审核状态：</label>
-                            <select name="status">
+                            <select name="status" id="status">
                                 <option value="0">不限</option>
                                 <option value="3">未审核</option>
                                 <option value="1">被退回</option>
@@ -220,14 +220,16 @@
                             </div>
                             <div class="info">
                                 <span>状态</span>
-                                <span class="pull-right">${status}</span>
+                                <span class="pull-right">${statusText}</span>
                             </div>
                             <div style="margin-top: 20px;">
-                                {{if status == 3}}
-                                <button class="btn btn-info pull-left text-center" onclick="call(${aid}, ${cid})">催办</button>
-                                {{else status == 1}}
+                                {{if (status == 3)}}
+                                     <button class="btn btn-info center-block" onclick="call(${aid}, ${cid})">催办</button>
+                                {{else}}
+                                {{if (status == 1)}}
                                 <button class="btn btn-danger pull-left" onclick="apply(${aid}, ${cid})">报名</button>
                                 <button class="btn btn-danger pull-right" onclick="searchReason(${aid})">原因</button>
+                                {{/if}}
                                 {{/if}}
                             </div>
                         </li>
@@ -246,7 +248,7 @@
                     </div>
                     <div class="modal-body">
                         <div style="width: 70%;margin: 0 auto;">
-                            <form class="form-horizontal" role="form" id="ajaxApply" action="<{:Url('activity/activity/editApply')}>" method="post">
+                            <form class="form-horizontal" role="form" id="ajaxApply" action="<{:Url('activity/apply/editApply')}>" method="post">
                             </form>
                         </div>
                     </div>
@@ -275,7 +277,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">手机号</label>
                 <div class="col-md-10">
-                    <input type="text" name="mobile" class="form-control" required="required" value="mobile">
+                    <input type="text" name="mobile" class="form-control" required="required" value="${mobile}">
                 </div>
             </div>
             <div class="form-group">
@@ -293,7 +295,7 @@
             <input type="hidden" name="aid" value="${aid}">
             <input type="hidden" name="cid" value="${cid}">
         </script>
-        <div class="modal fade" id="callApply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="callApplyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -301,9 +303,9 @@
                         <h4 class="modal-title" id="myModalLabel">催办内容</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="ajaxCall" action="<{:Url('activity/new/add')}>" method="post">
+                        <form id="ajaxCall" action="<{:Url('activity/info/add')}>" method="post">
                             <div class="form-group">
-                                <textarea cols="20" rows="10" name="reason" class="form-control" id="reason"></textarea>
+                                <textarea cols="20" rows="10" name="content" class="form-control" id="content"></textarea>
                             </div>
                             <input type="hidden" name="aid" value="${aid}">
                             <input type="hidden" name="cid" value="${cid}">

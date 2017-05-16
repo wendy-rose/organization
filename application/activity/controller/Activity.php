@@ -188,6 +188,7 @@ class Activity extends Base
     public function apply()
     {
         $apply = request()->post();
+        $apply['uid'] =  User::getUid();
         Apply::addApply($apply);
         return $this->ajaxReturn(true, '正在审核中');
     }
