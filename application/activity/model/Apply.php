@@ -70,4 +70,47 @@ class Apply extends Model
     {
         return Db::name(self::tableName())->field('realname,project,mobile,email,createtime,remark')->where(['aid' => $aid])->select();
     }
+
+    public static function getApplyList($uid, $status, $time, $title, $page=1, $limit=5)
+    {
+        $query = Db::name(self::tableName())->alias('cn')
+            ->join('__ACTIVITY__ c', '`cn`.`aid` = `c`.`aid`')
+            ->where('cn.uid', $uid);
+        if (!empty($time)){
+            if ($time == 1){
+                $query->where('c.endtime', '<', time());
+            }elseif ($time == 2){
+                $query->where('c.starttime', '<=', time())->where('c.endtime', '>=', time());
+            }else{
+                $query->where('c.endtime', '>=', time());
+            }
+        }
+        if (!empty($status)){
+            $query->where(['status' => $status]);
+        }
+        if (!empty($title)){
+            $query->where('c.title', 'like', "%{$title}%");
+        }
+        $queryClone = clone $query;
+        $list =  $query->field('c.starttime,c.endtime,c.aid,c.actpic,c.title,c.cid,cn.status')
+            ->page("{$page}, {$limit}")
+            ->select();
+        $count = $queryClone->count();
+        return ['list' => $list, 'count' => ($count % $limit == 0) ? ($count / $limit) : ceil($count/$limit)];
+    }
+
+    public static function getMyApplyByAid($aid, $uid)
+    {
+        return Db::name(self::tableName())->where(['aid' => $aid, 'uid' => $uid])->find();
+    }
+
+    public static function editMyApply($data)
+    {
+        return Db::name(self::tableName())->where(['aid' => $data['aid'], 'cid' => $data['cid']])->update($data);
+    }
+
+    public static function getApplyById($id)
+    {
+        return Db::name(self::tableName())->where(['id' => $id])->find();
+    }
 }

@@ -15,6 +15,7 @@
     <!-- Theme style -->
     <link href="__STATIC__/lib/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="__STATIC__/user/css/user.css">
+    <link href="__STATIC__/activity/css/search.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="skin-blue">
@@ -161,42 +162,32 @@
                             <label>状态：</label>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" value="0" name="status" checked="checked">全部
+                                    <input type="radio" value="0" name="time" checked="checked">全部
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" value="1" name="status">已结束
+                                    <input type="radio" value="1" name="time">已结束
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" value="2" name="status">进行中
+                                    <input type="radio" value="2" name="time">进行中
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" value="3" name="status">未开始
+                                    <input type="radio" value="3" name="time">未开始
                                 </label>
                             </div>
                         </div>
                         <div class="form-group" style="margin-left: 50px;">
-                            <label>分类：</label>
-                            <select name="type">
+                            <label>审核状态：</label>
+                            <select name="status">
                                 <option value="0">不限</option>
-                                <option value="1">体育竞技</option>
-                                <option value="2">专业竞赛</option>
-                                <option value="3">技能拓展</option>
-                                <option value="4">娱乐活动</option>
-                                <option value="5">思想教育</option>
-                                <option value="-1">其他</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="margin-left: 50px;">
-                            <label>点赞数：</label>
-                            <select name="likes">
-                                <option value="0">从高到低</option>
-                                <option value="1">从低到高</option>
+                                <option value="3">未审核</option>
+                                <option value="1">被退回</option>
+                                <option value="2">已通过</option>
                             </select>
                         </div>
                         <div class="form-group" style="margin-left: 50px;">
@@ -211,10 +202,144 @@
                         </div>
                     </form>
                 </div>
+                <div style="margin-top: 50px;" id="content">
+                    <ul style="list-style: none;text-align: left;" id="searchContent">
+                    </ul>
+                    <div id="searchPage"></div>
+                    <script id="searchTemplate" type="text/x-jquery-tmpl">
+                        <li>
+                            <img src="${actpic}" class="img-rounded img-responsive">
+                            <p><a href="/activity/activity/detail?aid=${aid}">${title}</a></p>
+                            <div class="info">
+                                <span>开始时间</span>
+                                <span class="pull-right">${starttime}</span>
+                            </div>
+                            <div class="info">
+                                <span>结束时间</span>
+                                <span class="pull-right">${endtime}</span>
+                            </div>
+                            <div class="info">
+                                <span>状态</span>
+                                <span class="pull-right">${status}</span>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                {{if status == 3}}
+                                <button class="btn btn-info pull-left text-center" onclick="call(${aid}, ${cid})">催办</button>
+                                {{else status == 1}}
+                                <button class="btn btn-danger pull-left" onclick="apply(${aid}, ${cid})">报名</button>
+                                <button class="btn btn-danger pull-right" onclick="searchReason(${aid})">原因</button>
+                                {{/if}}
+                            </div>
+                        </li>
+                    </script>
+                </div>
                 <!-- /.row -->
             </section>
             <!-- /.content -->
         </aside>
+        <div class="modal fade" id="myApply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-left" id="myModalLabel">填写报名信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="width: 70%;margin: 0 auto;">
+                            <form class="form-horizontal" role="form" id="ajaxApply" action="<{:Url('activity/activity/editApply')}>" method="post">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="applyActivity">重新报名</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <script id="applyTemplate" type="text/x-jquery-tmpl">
+            <div class="form-group">
+                <label class="control-label col-md-2">真实名</label>
+                <div class="col-md-10">
+                    <input type="text" name="realname" class="form-control" required="required" value="${realname}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">班级</label>
+                <div class="col-md-10">
+                    <input type="text" name="project" class="form-control" required="required" value="${project}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">手机号</label>
+                <div class="col-md-10">
+                    <input type="text" name="mobile" class="form-control" required="required" value="mobile">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">邮箱</label>
+                <div class="col-md-10">
+                    <input type="text" name="email" class="form-control" required="required" value="${email}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">备注</label>
+                <div class="col-md-10">
+                    <textarea rows="5" cols="50" class="form-control" name="remark">${remark}</textarea>
+                </div>
+            </div>
+            <input type="hidden" name="aid" value="${aid}">
+            <input type="hidden" name="cid" value="${cid}">
+        </script>
+        <div class="modal fade" id="callApply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">催办内容</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="ajaxCall" action="<{:Url('activity/new/add')}>" method="post">
+                            <div class="form-group">
+                                <textarea cols="20" rows="10" name="reason" class="form-control" id="reason"></textarea>
+                            </div>
+                            <input type="hidden" name="aid" value="${aid}">
+                            <input type="hidden" name="cid" value="${cid}">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="callApply">确定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <div class="modal fade" id="backReason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">退回理由</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <textarea cols="20" rows="10" name="reason" class="form-control" required="required" id="reason"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
         <!-- /.right-side -->
     </div>
     <!-- ./wrapper -->
@@ -233,6 +358,7 @@
     <!-- AdminLTE App -->
     <script src="__STATIC__/lib/js/app.js" type="text/javascript"></script>
     <script src="__STATIC__/user/js/user.js" type="text/javascript"></script>
+    <script src="__STATIC__/activity/js/my.js" type="text/javascript"></script>
 </body>
 
 </html>

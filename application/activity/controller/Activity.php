@@ -189,7 +189,7 @@ class Activity extends Base
     {
         $apply = request()->post();
         Apply::addApply($apply);
-        return $this->ajaxReturn(true, '报名成功');
+        return $this->ajaxReturn(true, '正在审核中');
     }
 
     public function isApply()
